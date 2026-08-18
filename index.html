@@ -3,48 +3,247 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pádel Infantil Jemenuño</title>
+<title>PÁDEL INFANTIL JEMENUÑO V1.1</title>
+
 <style>
-:root{--b:#102b57;--g:#64b526;--bg:#f5f7fa;--l:#dce3eb}
+:root{
+ --navy:#102b57;
+ --green:#64b526;
+ --light:#f5f7fa;
+ --line:#dce3eb;
+}
+
 *{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:#172033}
-header{background:linear-gradient(135deg,#102b57,#183c72);color:#fff;padding:18px 14px;position:sticky;top:0;z-index:5}
-h1{margin:0;font-size:22px}
-header p{margin:5px 0 0;font-size:12px;opacity:.85}
-nav{display:flex;gap:6px;overflow:auto;margin-top:14px}
-nav button{border:1px solid #ffffff44;background:#ffffff12;color:#fff;border-radius:9px;padding:9px 11px;font-weight:700;white-space:nowrap}
-.on{background:var(--g)!important;border-color:var(--g)!important}
-main{max-width:1100px;margin:auto;padding:12px}
-.view{display:none}
-.view.on{display:block}
-.card{background:#fff;border:1px solid var(--l);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px #102b5710}
-h2{color:var(--b);font-size:19px;margin:0 0 10px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px}
-label{display:block;font-size:11px;font-weight:700;color:#526174;margin-bottom:4px}
-input,select{width:100%;padding:9px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;font-size:14px}
-button{cursor:pointer}
-.btn{border:0;border-radius:9px;padding:9px 12px;font-weight:700;background:var(--b);color:#fff}
-.green{background:var(--g)}
-.red{background:#d94848}
-.light{background:#edf2f7;color:var(--b)}
-.actions{display:flex;gap:7px;flex-wrap:wrap}
-.hint,.small{font-size:11px;color:#66758a}
-.empty{text-align:center;padding:20px;color:#718096}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th,td{padding:8px 6px;border-bottom:1px solid var(--l);text-align:left}
-th{background:#f8fafc;color:#526174}
-.num{text-align:center;font-weight:800}
-.total{font-size:17px;color:var(--b)}
-.score{width:70px;text-align:center}
-.badge{display:inline-block;background:#e9f5dd;color:#397c14;border-radius:99px;padding:3px 7px;font-size:10px;font-weight:800}
-.matches{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:9px}
-.match{border:1px solid var(--l);border-radius:11px;padding:11px}
-.gold{background:#fff9df}
-.silver{background:#f5f7fa}
-.bronze{background:#fff3e8}
+
+body{
+ margin:0;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+ background:var(--light);
+ color:#172033;
+}
+
+header{
+ background:linear-gradient(135deg,#102b57,#183c72);
+ color:#fff;
+ padding:18px 14px;
+ position:sticky;
+ top:0;
+ z-index:5;
+}
+
+header h1{
+ margin:0;
+ font-size:22px;
+}
+
+header p{
+ margin:5px 0 0;
+ font-size:12px;
+ opacity:.85;
+}
+
+.version{
+ font-size:10px;
+ opacity:.65;
+ margin-top:5px;
+}
+
+nav{
+ display:flex;
+ gap:6px;
+ overflow:auto;
+ margin-top:14px;
+}
+
+nav button{
+ border:1px solid #ffffff44;
+ background:#ffffff12;
+ color:#fff;
+ border-radius:9px;
+ padding:9px 11px;
+ font-weight:700;
+ white-space:nowrap;
+}
+
+nav button.active{
+ background:var(--green);
+ border-color:var(--green);
+}
+
+main{
+ max-width:1100px;
+ margin:auto;
+ padding:12px;
+}
+
+.view{
+ display:none;
+}
+
+.view.active{
+ display:block;
+}
+
+.card{
+ background:#fff;
+ border:1px solid var(--line);
+ border-radius:14px;
+ padding:14px;
+ margin-bottom:12px;
+ box-shadow:0 2px 8px #102b5710;
+}
+
+h2{
+ color:var(--navy);
+ font-size:19px;
+ margin:0 0 10px;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+ gap:9px;
+}
+
+label{
+ display:block;
+ font-size:11px;
+ font-weight:700;
+ color:#526174;
+ margin-bottom:4px;
+}
+
+input,
+select{
+ width:100%;
+ padding:9px;
+ border:1px solid #cbd5e1;
+ border-radius:8px;
+ background:#fff;
+ font-size:14px;
+}
+
+button{
+ cursor:pointer;
+}
+
+.btn{
+ border:0;
+ border-radius:9px;
+ padding:9px 12px;
+ font-weight:700;
+ background:var(--navy);
+ color:#fff;
+}
+
+.btn.green{
+ background:var(--green);
+}
+
+.btn.red{
+ background:#d94848;
+}
+
+.btn.light{
+ background:#edf2f7;
+ color:var(--navy);
+}
+
+.actions{
+ display:flex;
+ gap:7px;
+ flex-wrap:wrap;
+}
+
+.hint,
+.small{
+ font-size:11px;
+ color:#66758a;
+}
+
+.empty{
+ text-align:center;
+ padding:20px;
+ color:#718096;
+}
+
+table{
+ width:100%;
+ border-collapse:collapse;
+ font-size:12px;
+}
+
+th,
+td{
+ padding:8px 6px;
+ border-bottom:1px solid var(--line);
+ text-align:left;
+}
+
+th{
+ background:#f8fafc;
+ color:#526174;
+}
+
+.num{
+ text-align:center;
+ font-weight:800;
+}
+
+.total{
+ font-size:17px;
+ color:var(--navy);
+}
+
+.score-input{
+ width:70px;
+ text-align:center;
+}
+
+.badge{
+ display:inline-block;
+ background:#e9f5dd;
+ color:#397c14;
+ border-radius:99px;
+ padding:3px 7px;
+ font-size:10px;
+ font-weight:800;
+}
+
+.matches{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+ gap:9px;
+}
+
+.match{
+ border:1px solid var(--line);
+ border-radius:11px;
+ padding:11px;
+}
+
+.rank1{
+ background:#fff9df;
+}
+
+.rank2{
+ background:#f5f7fa;
+}
+
+.rank3{
+ background:#fff3e8;
+}
+
 @media(max-width:600px){
- table{font-size:11px}
- main{padding:8px}
+
+ table{
+  font-size:11px;
+ }
+
+ main{
+  padding:8px;
+ }
+
 }
 </style>
 </head>
@@ -52,62 +251,123 @@ th{background:#f8fafc;color:#526174}
 <body>
 
 <header>
-<h1>🎾 PÁDEL INFANTIL · JEMENUÑO</h1>
-<p>Habilidades · parejas · torneo · clasificación</p>
+
+<h1>🎾 PÁDEL INFANTIL JEMENUÑO V1.1</h1>
+
+<p>
+Habilidades · parejas · torneo · clasificación
+</p>
+
+<div class="version">
+V1.1 · clasificación por parejas · preparada para GitHub Pages
+</div>
 
 <nav>
-<button class="on" data-v="participantes">Participantes</button>
-<button data-v="parejas">Parejas</button>
-<button data-v="habilidades">Habilidades</button>
-<button data-v="torneo">Torneo</button>
-<button data-v="clasificacion">Clasificación</button>
+
+<button
+class="active"
+data-view="participantes">
+Participantes
+</button>
+
+<button
+data-view="parejas">
+Parejas
+</button>
+
+<button
+data-view="habilidades">
+Habilidades
+</button>
+
+<button
+data-view="torneo">
+Torneo
+</button>
+
+<button
+data-view="clasificacion">
+Clasificación
+</button>
+
 </nav>
+
 </header>
+
 
 <main>
 
-<section id="participantes" class="view on">
+
+<!-- PARTICIPANTES -->
+
+<section
+id="participantes"
+class="view active">
 
 <div class="card">
+
 <h2>👥 Participantes</h2>
 
 <p class="hint">
 Las 8 parejas están precargadas. Puedes cambiar cualquier participante de pareja.
 </p>
 
-<div id="people"></div>
+<div id="participantsTable"></div>
+
 </div>
 
+
 <div class="card">
+
 <div class="actions">
 
-<button class="btn light" onclick="add()">+ Participante</button>
+<button
+class="btn green"
+onclick="addParticipant()">
++ Participante
+</button>
 
-<button class="btn light" onclick="saveCopy()">
+<button
+class="btn light"
+onclick="exportData()">
 💾 Guardar copia
 </button>
 
-<button class="btn light" onclick="document.getElementById('file').click()">
-📂 Recuperar
+<button
+class="btn light"
+onclick="document.getElementById('importFile').click()">
+📂 Recuperar copia
 </button>
 
-<input id="file"
+<input
+id="importFile"
 type="file"
 accept=".json"
-hidden
-onchange="loadCopy(this.files[0])">
+style="display:none"
+onchange="importData(this.files[0])">
 
-<button class="btn red" onclick="resetAll()">
+<button
+class="btn red"
+onclick="resetAll()">
 Borrar todo
 </button>
 
 </div>
+
+<p class="hint">
+La copia permite recuperar el torneo si cambias de dispositivo o borras los datos del navegador.
+</p>
+
 </div>
 
 </section>
 
 
-<section id="parejas" class="view">
+<!-- PAREJAS -->
+
+<section
+id="parejas"
+class="view">
 
 <div class="card">
 
@@ -115,60 +375,81 @@ Borrar todo
 
 <p class="hint">
 Parejas 1-4 = Grupo A · Parejas 5-8 = Grupo B.
-Puedes mover jugadores en cualquier momento.
+Puedes cambiar los participantes en cualquier momento.
 </p>
 
-<div id="pairs"></div>
+<div id="pairsEditor"></div>
 
 </div>
 
 </section>
 
 
-<section id="habilidades" class="view">
+<!-- HABILIDADES -->
+
+<section
+id="habilidades"
+class="view">
 
 <div class="card">
 
 <h2>🎯 Pruebas de habilidad</h2>
 
 <p class="hint">
-Toques máx. 5 · Pared máx. 6 · Colocamos máx. 7,5 · Globo máx. 7,5.
-La prueba de red es de pareja.
+Introduce directamente los puntos obtenidos.
 </p>
 
-<div id="skills"></div>
+<div id="skillsTable"></div>
 
 </div>
 
 </section>
 
 
-<section id="torneo" class="view">
+<!-- TORNEO -->
+
+<section
+id="torneo"
+class="view">
 
 <div class="card">
 
 <h2>🏆 Fase de grupos</h2>
 
 <p class="hint">
-Victoria = 2 puntos · derrota = 1.
-Introduce 2-0, 2-1, 0-2 o 1-2.
+8 parejas · 2 grupos de 4 · 3 partidos por pareja.
+Victoria = 2 puntos · derrota = 1 punto.
+Introduce el resultado: 2-0, 2-1, 0-2 o 1-2.
 </p>
 
 <div class="grid">
 
 <div>
+
 <label>Grupo</label>
 
-<select id="group" onchange="renderMatches()">
-<option>A</option>
-<option>B</option>
+<select
+id="selectedGroup"
+onchange="renderMatches()">
+
+<option value="A">
+Grupo A
+</option>
+
+<option value="B">
+Grupo B
+</option>
+
 </select>
 
 </div>
 
 </div>
 
-<div id="matches" class="matches"></div>
+<div
+id="matches"
+class="matches">
+</div>
 
 </div>
 
@@ -179,10 +460,13 @@ Introduce 2-0, 2-1, 0-2 o 1-2.
 
 <p class="hint">
 1ºA vs 2ºB y 1ºB vs 2ºA.
-Ganador 3 puntos · perdedor 1.
+Ganador = 3 puntos · perdedor = 1 punto.
 </p>
 
-<div id="semis" class="matches"></div>
+<div
+id="semis"
+class="matches">
+</div>
 
 </div>
 
@@ -192,7 +476,7 @@ Ganador 3 puntos · perdedor 1.
 <h2>🏆 Gran final</h2>
 
 <p class="hint">
-Ganador 6 puntos · perdedor 2.
+Ganador = 6 puntos · perdedor = 2 puntos.
 </p>
 
 <div id="final"></div>
@@ -202,14 +486,20 @@ Ganador 6 puntos · perdedor 2.
 </section>
 
 
-<section id="clasificacion" class="view">
+<!-- CLASIFICACION -->
+
+<section
+id="clasificacion"
+class="view">
 
 <div class="card">
 
 <h2>📊 Clasificación general por parejas</h2>
 
 <p class="hint">
-TOTAL = habilidades individuales de ambos + prueba de pareja + puntos del torneo como pareja.
+La clasificación es por parejas.
+Se suman las habilidades individuales de los dos jugadores,
+la prueba de pareja y los puntos obtenidos por la pareja en el torneo.
 </p>
 
 <div id="ranking"></div>
@@ -218,279 +508,436 @@ TOTAL = habilidades individuales de ambos + prueba de pareja + puntos del torneo
 
 </section>
 
+
 </main>
 
 
 <script>
 
-const KEY='padelJemenuno2026';
 
-const defs=[
-['toques',5],
-['pared',6],
-['coloca',7.5],
-['globo',7.5],
-['red',10]
+/* ================================
+   CONFIGURACIÓN
+================================ */
+
+const STORAGE_KEY="padelJemenuno2026";
+
+
+const skillDefs=[
+
+ {
+  key:"toques",
+  name:"Toques",
+  max:5
+ },
+
+ {
+  key:"pared",
+  name:"Pared",
+  max:6
+ },
+
+ {
+  key:"coloca",
+  name:"Colocamos",
+  max:7.5
+ },
+
+ {
+  key:"globo",
+  name:"Globo",
+  max:7.5
+ },
+
+ {
+  key:"red",
+  name:"Red",
+  max:10
+ }
+
 ];
 
-const initial=[
-['Héctor','Mario'],
-['Rodrigo','Marta'],
-['Iria','Marina'],
-['Iñigo','Miguel'],
-['Alex','Guille'],
-['Marco','Iker'],
-['Naia','Candela'],
-['Xabier','Timur']
+
+const PRELOADED_PAIRS=[
+
+ ["Héctor","Mario"],
+
+ ["Rodrigo","Marta"],
+
+ ["Iria","Marina"],
+
+ ["Iñigo","Miguel"],
+
+ ["Alex","Guille"],
+
+ ["Marco","Iker"],
+
+ ["Naia","Candela"],
+
+ ["Xabier","Timur"]
+
 ];
 
 
-let S=JSON.parse(localStorage.getItem(KEY)||'null')||{
-people:[],
-matches:{},
-semis:{},
-final:null
+/* ================================
+   ESTADO
+================================ */
+
+let state=
+JSON.parse(
+ localStorage.getItem(STORAGE_KEY)||"null"
+)
+||
+{
+ participants:[],
+ matches:{},
+ semis:{},
+ final:null
 };
 
 
-if(!S.people.length){
+/* ================================
+   PRECARGA
+================================ */
 
-initial.forEach((pair,i)=>{
+function ensurePreloaded(){
 
-pair.forEach((name,j)=>{
+ if(state.participants.length>0){
+  return;
+ }
 
-S.people.push({
+ PRELOADED_PAIRS.forEach(
+  (pair,pairIndex)=>{
 
-id:Date.now()+i*10+j,
+   pair.forEach(
+    (name,playerIndex)=>{
 
-name:name,
+     state.participants.push({
 
-pair:i+1,
+      id:
+       Date.now()+
+       pairIndex*10+
+       playerIndex,
 
-s:{
-toques:0,
-pared:0,
-coloca:0,
-globo:0,
-red:0
+      name:name,
+
+      pair:pairIndex+1,
+
+      skills:{
+       toques:0,
+       pared:0,
+       coloca:0,
+       globo:0,
+       red:0
+      }
+
+     });
+
+    }
+   );
+
+  }
+ );
+
+ save();
+
 }
 
-});
 
-});
-
-});
-
-save();
-
-}
-
+/* ================================
+   GUARDAR
+================================ */
 
 function save(){
 
-localStorage.setItem(KEY,JSON.stringify(S));
+ localStorage.setItem(
+  STORAGE_KEY,
+  JSON.stringify(state)
+ );
 
 }
 
 
-function e(x){
+/* ================================
+   ESCAPE HTML
+================================ */
 
-return String(x??'').replace(
-/[&<>"']/g,
-m=>({
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-'"':'&quot;',
-"'":'&#039;'
-}[m])
-);
+function esc(value){
 
-}
+ return String(value??"")
+ .replace(
+  /[&<>"']/g,
+  function(match){
 
+   return {
 
-function ps(){
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
 
-return [...new Set(
-S.people
-.map(x=>+x.pair)
-.filter(Boolean)
-)].sort((a,b)=>a-b);
+   }[match];
 
-}
-
-
-function members(p){
-
-return S.people.filter(x=>+x.pair===p);
+  }
+ );
 
 }
 
 
-function ind(p){
+/* ================================
+   PAREJAS
+================================ */
 
-return defs
-.filter(x=>x[0]!='red')
-.reduce(
-(t,d)=>t+(+p.s[d[0]]||0),
-0
-);
+function pairs(){
 
-}
-
-
-function red(p){
-
-return members(p)
-.reduce(
-(m,x)=>Math.max(m,+x.s.red||0),
-0
-);
-
-}
-
-
-function pairTotal(p){
-
-return members(p)
-.reduce((t,x)=>t+ind(x),0)
-+
-red(p)
-+
-tournament(p);
+ return [
+  ...new Set(
+   state.participants
+   .map(
+    p=>+p.pair
+   )
+   .filter(
+    p=>p>0
+   )
+  )
+ ]
+ .sort(
+  (a,b)=>a-b
+ );
 
 }
 
 
-function add(){
+function participantsOfPair(pair){
 
-if(S.people.length>=16){
-
-alert('Máximo 16 participantes.');
-
-return;
-
-}
-
-S.people.push({
-
-id:Date.now(),
-
-name:'',
-
-pair:1,
-
-s:{
-toques:0,
-pared:0,
-coloca:0,
-globo:0,
-red:0
-}
-
-});
-
-save();
-
-render();
+ return state.participants.filter(
+  p=>+p.pair===+pair
+ );
 
 }
 
 
-function person(id,k,v){
+/* ================================
+   PARTICIPANTES
+================================ */
 
-let p=S.people.find(x=>x.id==id);
+function addParticipant(){
 
-if(!p)return;
+ if(state.participants.length>=16){
 
-if(k=='pair'){
+  alert(
+   "Máximo 16 participantes."
+  );
 
-p.pair=+v;
+  return;
 
-}else{
+ }
 
-p[k]=v;
+ state.participants.push({
 
-}
+  id:Date.now(),
 
-save();
+  name:"",
 
-render();
+  pair:1,
 
-}
+  skills:{
+   toques:0,
+   pared:0,
+   coloca:0,
+   globo:0,
+   red:0
+  }
 
+ });
 
-function score(id,k,v){
+ save();
 
-let p=S.people.find(x=>x.id==id);
-
-let d=defs.find(x=>x[0]==k);
-
-p.s[k]=Math.max(
-0,
-Math.min(
-d[1],
-parseFloat(v)||0
-)
-);
-
-save();
-
-render();
+ renderAll();
 
 }
 
 
-function people(){
+function updateParticipant(
+ id,
+ field,
+ value
+){
 
-if(!S.people.length)
+ const participant=
+ state.participants.find(
+  p=>p.id===id
+ );
 
-return '<div class="empty">Sin participantes</div>';
+ if(!participant){
+  return;
+ }
+
+ if(field==="pair"){
+
+  participant.pair=+value;
+
+ }else{
+
+  participant[field]=value;
+
+ }
+
+ save();
+
+ renderAll();
+
+}
 
 
-return `
-<table>
+/* ================================
+   PUNTOS INDIVIDUALES
+================================ */
+
+function skillTotal(participant){
+
+ return skillDefs
+ .filter(
+  skill=>skill.key!=="red"
+ )
+ .reduce(
+  (total,skill)=>
+   total+
+   (+participant.skills[skill.key]||0),
+  0
+ );
+
+}
+
+
+function pairSkill(pair){
+
+ return participantsOfPair(pair)
+ .reduce(
+  (maximum,participant)=>
+   Math.max(
+    maximum,
+    +participant.skills.red||0
+   ),
+  0
+ );
+
+}
+
+
+function updateSkill(
+ id,
+ key,
+ value
+){
+
+ const participant=
+ state.participants.find(
+  p=>p.id===id
+ );
+
+ if(!participant){
+  return;
+ }
+
+ const definition=
+ skillDefs.find(
+  s=>s.key===key
+ );
+
+ let number=
+ parseFloat(value)||0;
+
+ number=
+ Math.max(
+  0,
+  Math.min(
+   definition.max,
+   number
+  )
+ );
+
+ participant.skills[key]=number;
+
+ save();
+
+ renderAll();
+
+}
+
+
+/* ================================
+   TABLA PARTICIPANTES
+================================ */
+
+function renderParticipants(){
+
+ if(
+  state.participants.length===0
+ ){
+
+  document.getElementById(
+   "participantsTable"
+  ).innerHTML=
+   '<div class="empty">Añade participantes.</div>';
+
+  return;
+
+ }
+
+
+ const rows=
+ state.participants
+ .map(
+  (p,index)=>`
 
 <tr>
-<th>#</th>
-<th>Nombre</th>
-<th>Pareja</th>
-</tr>
-
-${
-S.people.map((p,i)=>`
-
-<tr>
-
-<td>${i+1}</td>
 
 <td>
+${index+1}
+</td>
+
+<td>
+
 <input
-value="${e(p.name)}"
-onchange="person(${p.id},'name',this.value)"
->
+value="${esc(p.name)}"
+placeholder="Nombre"
+onchange="
+updateParticipant(
+ ${p.id},
+ 'name',
+ this.value
+)
+">
+
 </td>
 
 <td>
 
 <select
-onchange="person(${p.id},'pair',this.value)"
->
+onchange="
+updateParticipant(
+ ${p.id},
+ 'pair',
+ this.value
+)
+">
 
 ${
-Array.from(
-{length:8},
-(_,n)=>`
+ Array.from(
+  {length:8},
+  (_,index)=>`
 
 <option
-value="${n+1}"
-${p.pair==n+1?'selected':''}
+value="${index+1}"
+${+p.pair===index+1?"selected":""}
 >
-P${n+1} · ${n<4?'A':'B'}
+Pareja ${index+1} ·
+Grupo ${index<4?"A":"B"}
 </option>
 
 `
-).join('')
+ ).join("")
 }
 
 </select>
@@ -499,8 +946,35 @@ P${n+1} · ${n<4?'A':'B'}
 
 </tr>
 
-`).join('')
-}
+`
+ )
+ .join("");
+
+
+ document.getElementById(
+  "participantsTable"
+ ).innerHTML=
+
+`
+<table>
+
+<thead>
+
+<tr>
+
+<th>#</th>
+<th>Nombre</th>
+<th>Pareja</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${rows}
+
+</tbody>
 
 </table>
 `;
@@ -508,67 +982,133 @@ P${n+1} · ${n<4?'A':'B'}
 }
 
 
+/* ================================
+   EDITOR PAREJAS
+================================ */
+
 function renderPairs(){
 
-document.getElementById('pairs').innerHTML=
+ const html=
+ Array.from(
+  {length:8},
+  (_,index)=>{
 
-Array.from({length:8},(_,i)=>{
+   const pair=index+1;
 
-let p=i+1;
+   const members=
+    participantsOfPair(pair);
 
-let m=members(p);
-
-return `
+   return `
 
 <div class="card">
 
-<b>Pareja ${p}</b>
+<div>
+
+<strong>
+Pareja ${pair}
+</strong>
 
 <span class="badge">
-Grupo ${p<=4?'A':'B'}
+Grupo ${pair<=4?"A":"B"}
 </span>
+
+</div>
 
 <div
 class="grid"
-style="margin-top:8px"
+style="margin-top:10px"
 >
-
-${
-[0,1].map((slot)=>`
 
 <div>
 
 <label>
-Jugador ${slot+1}
+Jugador 1
 </label>
 
 <select
-onchange="moveTo(${p},this.value,${slot})"
+onchange="
+setPairMember(
+ ${pair},
+ this.value
+)
+"
 >
 
 <option value="">
-—
+— Vacío —
 </option>
 
 ${
-S.people.map(x=>`
+ state.participants
+ .map(
+  participant=>`
 
 <option
-value="${x.id}"
-${m[slot]?.id===x.id?'selected':''}
+value="${participant.id}"
+${
+ members[0] &&
+ members[0].id===participant.id
+ ?"selected"
+ :""
+}
 >
-${e(x.name)||'Sin nombre'}
+${esc(participant.name)||"Sin nombre"}
 </option>
 
-`).join('')
+`
+ )
+ .join("")
 }
 
 </select>
 
 </div>
 
-`).join('')
+
+<div>
+
+<label>
+Jugador 2
+</label>
+
+<select
+onchange="
+setPairMember(
+ ${pair},
+ this.value
+)
+"
+>
+
+<option value="">
+— Vacío —
+</option>
+
+${
+ state.participants
+ .map(
+  participant=>`
+
+<option
+value="${participant.id}"
+${
+ members[1] &&
+ members[1].id===participant.id
+ ?"selected"
+ :""
 }
+>
+${esc(participant.name)||"Sin nombre"}
+</option>
+
+`
+ )
+ .join("")
+}
+
+</select>
+
+</div>
 
 </div>
 
@@ -576,294 +1116,464 @@ ${e(x.name)||'Sin nombre'}
 
 `;
 
-}).join('');
+  }
+ ).join("");
+
+
+ document.getElementById(
+  "pairsEditor"
+ ).innerHTML=html;
 
 }
 
 
-function moveTo(pair,id){
+function setPairMember(
+ pair,
+ participantId
+){
 
-let p=S.people.find(x=>x.id==id);
+ const participant=
+ state.participants.find(
+  p=>String(p.id)===String(participantId)
+ );
 
-if(p){
+ if(!participant){
+  return;
+ }
 
-p.pair=pair;
+ participant.pair=pair;
 
-save();
+ save();
 
-render();
+ renderAll();
 
 }
 
-}
 
+/* ================================
+   HABILIDADES
+================================ */
 
 function renderSkills(){
 
-document.getElementById('skills').innerHTML=
+ if(
+  state.participants.length===0
+ ){
+
+  document.getElementById(
+   "skillsTable"
+  ).innerHTML=
+   '<div class="empty">Primero añade participantes.</div>';
+
+  return;
+
+ }
+
+
+ const headers=
+ skillDefs
+ .map(
+  skill=>`
+
+<th>
+
+${skill.name}
+
+<br>
+
+<span class="small">
+Máx. ${skill.max}
+</span>
+
+</th>
 
 `
-<table>
+ )
+ .join("");
 
-<tr>
 
-<th>Jugador</th>
-
-${
-defs.map(d=>`
-<th>
-${d[0]}
-<br>
-máx ${d[1]}
-</th>
-`).join('')
-}
-
-<th>Total</th>
-
-</tr>
-
-${
-S.people.map(p=>`
+ const rows=
+ state.participants
+ .map(
+  participant=>`
 
 <tr>
 
 <td>
 
-<b>
-${e(p.name)||'Sin nombre'}
-</b>
+<strong>
+${esc(participant.name)||"Sin nombre"}
+</strong>
 
 <br>
 
 <span class="small">
-P${p.pair}
+Pareja ${participant.pair}
 </span>
 
 </td>
 
+
 ${
-defs.map(d=>`
+ skillDefs
+ .map(
+  skill=>`
 
 <td class="num">
 
 <input
-class="score"
+class="score-input"
 type="number"
 min="0"
-max="${d[1]}"
+max="${skill.max}"
 step="0.5"
-value="${p.s[d[0]]||0}"
-onchange="score(${p.id},'${d[0]}',this.value)"
->
+value="${participant.skills[skill.key]||0}"
+onchange="
+updateSkill(
+ ${participant.id},
+ '${skill.key}',
+ this.value
+)
+">
 
 </td>
 
-`).join('')
+`
+ )
+ .join("")
 }
+
 
 <td class="num total">
 
-${ind(p).toFixed(1)}
+${skillTotal(participant).toFixed(1)}
 
 </td>
 
 </tr>
 
-`).join('')
-}
+`
+ )
+ .join("");
+
+
+ document.getElementById(
+  "skillsTable"
+ ).innerHTML=
+
+`
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Participante
+</th>
+
+${headers}
+
+<th>
+Total individual
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${rows}
+
+</tbody>
 
 </table>
 
 <p class="hint">
 
-Introduce en “Toques” directamente los puntos obtenidos:
-1, 3 o 5.
-
-La prueba de red cuenta una sola vez para la pareja.
+La prueba "Peloteamos en la red" es una prueba de pareja
+y cuenta una sola vez en la clasificación de la pareja.
 
 </p>
-
 `;
 
 }
 
 
-function groupPairs(g){
+/* ================================
+   PARTIDOS
+================================ */
 
-return ps().filter(
-p=>g=='A'?p<=4:p>=5
-);
+function matchKey(a,b){
 
-}
-
-
-function key(a,b){
-
-return [
-Math.min(a,b),
-Math.max(a,b)
-].join('-');
+ return [
+  Math.min(a,b),
+  Math.max(a,b)
+ ].join("-");
 
 }
 
 
-function setMatch(a,b,v){
+function groupPairs(group){
 
-v=String(v||'').trim();
+ return pairs().filter(
+  pair=>
+   group==="A"
+   ?pair<=4
+   :pair>=5
+ );
 
-let k=key(a,b);
+}
 
-if(!v){
 
-delete S.matches[k];
-
-}else{
-
-let m=v.match(/^([012])-([012])$/);
-
-if(
-!m ||
-+m[1]==+m[2] ||
-Math.max(+m[1],+m[2])!=2
+function setMatch(
+ a,
+ b,
+ score
 ){
 
-alert(
-'Usa 2-0, 2-1, 0-2 o 1-2'
-);
+ score=
+ String(score||"").trim();
 
-return;
-
-}
-
-S.matches[k]={
-
-a:+m[1],
-
-b:+m[2],
-
-winner:+m[1]>+m[2]?a:b
-
-};
-
-}
-
-save();
-
-render();
-
-}
+ const key=
+ matchKey(a,b);
 
 
-function gpoints(p){
+ if(!score){
 
-let t=0;
+  delete state.matches[key];
 
-Object.entries(S.matches)
-.forEach(([k,m])=>{
+ }else{
 
-let [a,b]=k.split('-').map(Number);
+  const match=
+   score.match(
+    /^([012])-([012])$/
+   );
 
-if(a==p||b==p){
+  if(
+   !match ||
+   +match[1]===+match[2] ||
+   Math.max(
+    +match[1],
+    +match[2]
+   )!==2
+  ){
 
-t+=m.winner==p?2:1;
+   alert(
+    "Resultado no válido. Usa 2-0, 2-1, 0-2 o 1-2."
+   );
 
-}
+   return;
 
-});
-
-return t;
-
-}
+  }
 
 
-function standings(g){
+  const scoreA=+match[1];
 
-return groupPairs(g)
+  const scoreB=+match[2];
 
-.map(p=>({
 
-p:p,
+  state.matches[key]={
 
-pts:gpoints(p)
+   aScore:scoreA,
 
-}))
+   bScore:scoreB,
 
-.sort(
-(a,b)=>
-b.pts-a.pts ||
-a.p-b.p
-);
+   winner:
+    scoreA>scoreB
+    ?a
+    :b
+
+  };
+
+ }
+
+
+ save();
+
+ renderAll();
 
 }
 
+
+/* ================================
+   PUNTOS GRUPOS
+================================ */
+
+function groupPoints(pair){
+
+ let points=0;
+
+
+ Object.entries(
+  state.matches
+ )
+ .forEach(
+  ([key,match])=>{
+
+   const [a,b]=
+    key.split("-").map(Number);
+
+
+   if(
+    a===pair ||
+    b===pair
+   ){
+
+    points+=
+     match.winner===pair
+     ?2
+     :1;
+
+   }
+
+  }
+ );
+
+
+ return points;
+
+}
+
+
+/* ================================
+   CLASIFICACIÓN GRUPOS
+================================ */
+
+function standings(group){
+
+ return groupPairs(group)
+ .map(
+  pair=>({
+
+   pair:pair,
+
+   points:
+    groupPoints(pair)
+
+  })
+ )
+ .sort(
+  (a,b)=>
+   b.points-a.points ||
+   a.pair-b.pair
+ );
+
+}
+
+
+/* ================================
+   MOSTRAR PARTIDOS
+================================ */
 
 function renderMatches(){
 
-let g=document.getElementById('group').value;
+ const group=
+  document.getElementById(
+   "selectedGroup"
+  ).value;
 
-let arr=groupPairs(g);
 
-let out='';
+ const groupPairList=
+  groupPairs(group);
 
-for(
-let i=0;
-i<arr.length;
-i++
-){
 
-for(
-let j=i+1;
-j<arr.length;
-j++
-){
+ let html="";
 
-let a=arr[i];
 
-let b=arr[j];
+ for(
+  let i=0;
+  i<groupPairList.length;
+  i++
+ ){
 
-let m=S.matches[key(a,b)];
+  for(
+   let j=i+1;
+   j<groupPairList.length;
+   j++
+  ){
 
-let v=m
-?`${m.a}-${m.b}`
-:'';
+   const a=
+    groupPairList[i];
 
-out+=`
+   const b=
+    groupPairList[j];
+
+   const key=
+    matchKey(a,b);
+
+   const match=
+    state.matches[key];
+
+   const value=
+    match
+    ?`${match.aScore}-${match.bScore}`
+    :"";
+
+
+   html+=`
 
 <div class="match">
 
-<b>
-P${a} vs P${b}
-</b>
+<strong>
+Pareja ${a} vs Pareja ${b}
+</strong>
 
 <div class="small">
 
-${members(a)
-.map(x=>e(x.name))
-.join(' + ')}
+${
+ participantsOfPair(a)
+ .map(
+  p=>esc(p.name)||"Sin nombre"
+ )
+ .join(" + ")
+}
 
-·
+&nbsp; — &nbsp;
 
-${members(b)
-.map(x=>e(x.name))
-.join(' + ')}
+${
+ participantsOfPair(b)
+ .map(
+  p=>esc(p.name)||"Sin nombre"
+ )
+ .join(" + ")
+}
 
 </div>
 
+
 <div
-style="display:flex;gap:7px;margin-top:7px"
+style="
+display:flex;
+gap:8px;
+align-items:center;
+margin-top:8px;
+"
 >
 
 <input
-class="score"
+class="score-input"
 placeholder="2-1"
-value="${v}"
-onchange="setMatch(${a},${b},this.value)"
+value="${value}"
+onchange="
+setMatch(
+ ${a},
+ ${b},
+ this.value
+)
+"
 >
 
 <button
 class="btn light"
-onclick="setMatch(${a},${b},'')"
+onclick="
+setMatch(
+ ${a},
+ ${b},
+ ''
+)
+"
 >
 Borrar
 </button>
@@ -874,187 +1584,144 @@ Borrar
 
 `;
 
-}
+  }
 
-}
-
-document.getElementById('matches').innerHTML=
-
-out ||
-
-'<div class="empty">
-No hay parejas suficientes.
-</div>';
-
-}
+ }
 
 
-function semiPts(p){
-
-let t=0;
-
-Object.entries(S.semis)
-.forEach(([k,w])=>{
-
-let [a,b]=k.split('-').map(Number);
-
-if(a==p||b==p){
-
-t+=+w==p?3:1;
-
-}
-
-});
-
-return t;
+ document.getElementById(
+  "matches"
+ ).innerHTML=
+  html ||
+  '<div class="empty">Necesitas tener las parejas asignadas.</div>';
 
 }
 
 
-function winners(){
+/* ================================
+   SEMIFINALES
+================================ */
 
-return Object.values(S.semis)
-.filter(Boolean)
-.map(Number);
+function semiPoints(pair){
+
+ let points=0;
+
+
+ Object.entries(
+  state.semis
+ )
+ .forEach(
+  ([key,winner])=>{
+
+   const [a,b]=
+    key.split("-").map(Number);
+
+
+   if(
+    a===pair ||
+    b===pair
+   ){
+
+    points+=
+     +winner===pair
+     ?3
+     :1;
+
+   }
+
+  }
+ );
+
+
+ return points;
 
 }
 
 
-function tournament(p){
+function semiWinners(){
 
-let t=
-gpoints(p)
-+
-semiPts(p);
-
-if(
-S.final &&
-winners().includes(p)
-){
-
-t+=
-+S.final==p
-?6
-:2;
-
-}
-
-return t;
+ return Object.values(
+  state.semis
+ )
+ .filter(Boolean)
+ .map(Number);
 
 }
 
 
 function renderSemis(){
 
-let a=standings('A');
+ const a=
+  standings("A");
 
-let b=standings('B');
-
-let m=
-a.length>1 &&
-b.length>1
-?
-[
-[a[0].p,b[1].p],
-[b[0].p,a[1].p]
-]
-:
-[];
-
-let out=m.map((x,i)=>{
-
-let k=key(x[0],x[1]);
-
-let w=S.semis[k]||'';
-
-return `
-
-<div class="match">
-
-<b>
-Semifinal ${i+1}:
-P${x[0]} vs P${x[1]}
-</b>
-
-<select
-onchange="
-S.semis['${k}']=this.value?+this.value:null;
-S.final=null;
-save();
-render();
-"
->
-
-<option value="">
-Pendiente
-</option>
-
-<option
-value="${x[0]}"
-${w==x[0]?'selected':''}
->
-Gana P${x[0]}
-</option>
-
-<option
-value="${x[1]}"
-${w==x[1]?'selected':''}
->
-Gana P${x[1]}
-</option>
-
-</select>
-
-</div>
-
-`;
-
-}).join('');
-
-document.getElementById('semis').innerHTML=
-
-out ||
-
-'<div class="empty">
-Completa los grupos para generar las semifinales.
-</div>';
-
-}
+ const b=
+  standings("B");
 
 
-function renderFinal(){
+ let pairings=[];
 
-let w=winners();
 
-if(w.length<2){
+ if(
+  a.length>=2 &&
+  b.length>=2
+ ){
 
-document.getElementById('final').innerHTML=
+  pairings=[
 
-'<div class="empty">
-Completa las semifinales.
-</div>';
+   [
+    a[0].pair,
+    b[1].pair
+   ],
 
-return;
+   [
+    b[0].pair,
+    a[1].pair
+   ]
 
-}
+  ];
 
-let [a,b]=w;
+ }
 
-document.getElementById('final').innerHTML=
 
-`
+ let html="";
+
+
+ pairings.forEach(
+  (match,index)=>{
+
+   const a=match[0];
+
+   const b=match[1];
+
+   const key=
+    matchKey(a,b);
+
+   const winner=
+    state.semis[key]||"";
+
+
+   html+=`
 
 <div class="match">
 
-<b>
-Final: P${a} vs P${b}
-</b>
+<strong>
+Semifinal ${index+1}:
+Pareja ${a} vs Pareja ${b}
+</strong>
 
 <select
+style="margin-top:8px"
 onchange="
-S.final=this.value?+this.value:null;
+state.semis['${key}']=
+this.value
+?+this.value
+:null;
+
+state.final=null;
+
 save();
-render();
+
+renderAll();
 "
 >
 
@@ -1064,16 +1731,112 @@ Pendiente
 
 <option
 value="${a}"
-${S.final==a?'selected':''}
+${+winner===a?"selected":""}
 >
-Gana P${a}
+Gana Pareja ${a}
 </option>
 
 <option
 value="${b}"
-${S.final==b?'selected':''}
+${+winner===b?"selected":""}
 >
-Gana P${b}
+Gana Pareja ${b}
+</option>
+
+</select>
+
+</div>
+
+`;
+
+  }
+ );
+
+
+ document.getElementById(
+  "semis"
+ ).innerHTML=
+  html ||
+  '<div class="empty">Completa la fase de grupos.</div>';
+
+}
+
+
+/* ================================
+   FINAL
+================================ */
+
+function renderFinal(){
+
+ const winners=
+  semiWinners();
+
+
+ if(
+  winners.length<2
+ ){
+
+  document.getElementById(
+   "final"
+  ).innerHTML=
+   '<div class="empty">Completa las dos semifinales.</div>';
+
+  return;
+
+ }
+
+
+ const a=winners[0];
+
+ const b=winners[1];
+
+ const current=
+  state.final||"";
+
+
+ document.getElementById(
+  "final"
+ ).innerHTML=
+
+`
+
+<div class="match">
+
+<strong>
+Gran final:
+Pareja ${a} vs Pareja ${b}
+</strong>
+
+<select
+style="margin-top:8px"
+onchange="
+state.final=
+this.value
+?+this.value
+:null;
+
+save();
+
+renderAll();
+"
+>
+
+<option value="">
+Pendiente
+</option>
+
+<option
+value="${a}"
+${+current===a?"selected":""}
+>
+Gana Pareja ${a} · 6 puntos
+</option>
+
+<option
+value="${b}"
+${+current===b?"selected":""}
+>
+Gana Pareja ${b} · 6 puntos
 </option>
 
 </select>
@@ -1085,125 +1848,281 @@ Gana P${b}
 }
 
 
+/* ================================
+   PUNTOS TORNEO
+================================ */
+
+function tournamentPoints(pair){
+
+ let points=
+  groupPoints(pair)
+  +
+  semiPoints(pair);
+
+
+ if(
+  state.final
+ ){
+
+  const semifinalWinners=
+   semiWinners();
+
+
+  if(
+   semifinalWinners.includes(pair)
+  ){
+
+   points+=
+    +state.final===pair
+    ?6
+    :2;
+
+  }
+
+ }
+
+
+ return points;
+
+}
+
+
+/* ================================
+   TOTAL DE PAREJA
+================================ */
+
+function pairTotal(pair){
+
+ const members=
+  participantsOfPair(pair);
+
+
+ /*
+    IMPORTANTE:
+
+    Cada jugador suma sus propias
+    pruebas individuales.
+
+    Después se añade una sola vez
+    la prueba de pareja.
+
+    Finalmente se añaden los puntos
+    conseguidos por la pareja
+    durante el torneo.
+ */
+
+
+ const individualSkills=
+  members.reduce(
+   (total,participant)=>
+    total+
+    skillTotal(participant),
+   0
+  );
+
+
+ const pairSkillPoints=
+  pairSkill(pair);
+
+
+ const tournament=
+  tournamentPoints(pair);
+
+
+ return(
+  individualSkills+
+  pairSkillPoints+
+  tournament
+ );
+
+}
+
+
+/* ================================
+   CLASIFICACIÓN
+================================ */
+
 function renderRanking(){
 
-let r=
+ const ranking=
+  pairs()
+  .map(
+   pair=>({
 
-ps().map(p=>({
+    pair:pair,
 
-p:p,
+    members:
+     participantsOfPair(pair),
 
-total:pairTotal(p),
+    individualSkills:
+     participantsOfPair(pair)
+     .reduce(
+      (total,participant)=>
+       total+
+       skillTotal(participant),
+      0
+     ),
 
-skills:
-members(p)
-.reduce(
-(t,x)=>t+ind(x),
-0
-),
+    pairSkill:
+     pairSkill(pair),
 
-red:red(p),
+    tournament:
+     tournamentPoints(pair),
 
-tour:tournament(p)
+    total:
+     pairTotal(pair)
 
-}))
-
-.sort(
-(a,b)=>
-b.total-a.total ||
-a.p-b.p
-);
+   })
+  )
+  .sort(
+   (a,b)=>
+    b.total-a.total ||
+    a.pair-b.pair
+  );
 
 
-document.getElementById('ranking').innerHTML=
+ if(
+  ranking.length===0
+ ){
 
-`
+  document.getElementById(
+   "ranking"
+  ).innerHTML=
+   '<div class="empty">No hay parejas.</div>';
 
-<table>
+  return;
 
-<tr>
+ }
 
-<th>#</th>
 
-<th>Pareja</th>
-
-<th>Habilidades</th>
-
-<th>Prueba pareja</th>
-
-<th>Torneo</th>
-
-<th>TOTAL</th>
-
-</tr>
-
-${
-r.map((x,i)=>`
+ const rows=
+  ranking
+  .map(
+   (row,index)=>`
 
 <tr
 class="${
-i==0
-?'gold'
-:i==1
-?'silver'
-:i==2
-?'bronze'
-:''
+ index===0
+ ?"rank1"
+ :index===1
+ ?"rank2"
+ :index===2
+ ?"rank3"
+ :""
 }"
 >
 
 <td>
-<b>${i+1}</b>
+
+<strong>
+${index+1}
+</strong>
+
 </td>
+
 
 <td>
 
-<b>
-P${x.p}
-</b>
+<strong>
+Pareja ${row.pair}
+</strong>
 
 <br>
 
 <span class="small">
 
 ${
-members(x.p)
-.map(y=>e(y.name)||'Sin nombre')
-.join(' – ')
+ row.members
+ .map(
+  p=>esc(p.name)||"Sin nombre"
+ )
+ .join(" – ")
 }
 
 </span>
 
 </td>
 
-<td class="num">
-
-${x.skills.toFixed(1)}
-
-</td>
 
 <td class="num">
 
-${x.red.toFixed(1)}
+${row.individualSkills.toFixed(1)}
 
 </td>
+
 
 <td class="num">
 
-${x.tour}
+${row.pairSkill.toFixed(1)}
 
 </td>
+
+
+<td class="num">
+
+${row.tournament}
+
+</td>
+
 
 <td class="num total">
 
-${x.total.toFixed(1)}
+${row.total.toFixed(1)}
 
 </td>
 
 </tr>
 
-`).join('')
-}
+`
+  )
+  .join("");
+
+
+ document.getElementById(
+  "ranking"
+ ).innerHTML=
+
+`
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+#
+</th>
+
+<th>
+Pareja
+</th>
+
+<th>
+Habilidades individuales
+</th>
+
+<th>
+Prueba pareja
+</th>
+
+<th>
+Torneo
+</th>
+
+<th>
+TOTAL
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${rows}
+
+</tbody>
 
 </table>
 
@@ -1212,132 +2131,184 @@ ${x.total.toFixed(1)}
 }
 
 
-function render(){
+/* ================================
+   COPIA DE SEGURIDAD
+================================ */
 
-document.getElementById('people').innerHTML=people();
+function exportData(){
 
-renderPairs();
+ const blob=
+  new Blob(
+   [
+    JSON.stringify(
+     state,
+     null,
+     2
+    )
+   ],
+   {
+    type:"application/json"
+   }
+  );
 
-renderSkills();
 
-renderMatches();
+ const link=
+  document.createElement("a");
 
-renderSemis();
 
-renderFinal();
+ link.href=
+  URL.createObjectURL(blob);
 
-renderRanking();
+
+ link.download=
+  "padel-jemenuno-copia.json";
+
+
+ link.click();
+
+
+ URL.revokeObjectURL(
+  link.href
+ );
+
+}
+
+
+function importData(file){
+
+ if(!file){
+  return;
+ }
+
+
+ const reader=
+  new FileReader();
+
+
+ reader.onload=
+  function(){
+
+   try{
+
+    const data=
+     JSON.parse(
+      reader.result
+     );
+
+
+    if(
+     !data.participants
+    ){
+
+     throw new Error();
+
+    }
+
+
+    state=data;
+
+    save();
+
+    renderAll();
+
+    alert(
+     "Torneo recuperado correctamente."
+    );
+
+   }catch(error){
+
+    alert(
+     "La copia no es válida."
+    );
+
+   }
+
+  };
+
+
+ reader.readAsText(file);
 
 }
 
 
-function saveCopy(){
-
-let a=document.createElement('a');
-
-let b=new Blob(
-[
-JSON.stringify(S,null,2)
-],
-{
-type:'application/json'
-}
-);
-
-a.href=URL.createObjectURL(b);
-
-a.download='padel-jemenuno-copia.json';
-
-a.click();
-
-}
-
-
-function loadCopy(f){
-
-if(!f)return;
-
-let r=new FileReader();
-
-r.onload=()=>{
-
-try{
-
-let x=JSON.parse(r.result);
-
-if(!x.people)
-throw 0;
-
-S=x;
-
-save();
-
-render();
-
-alert('Copia recuperada.');
-
-}
-
-catch(e){
-
-alert('Copia no válida.');
-
-}
-
-};
-
-r.readAsText(f);
-
-}
-
+/* ================================
+   BORRAR TODO
+================================ */
 
 function resetAll(){
 
-if(
-confirm('¿Borrar todo?')
-){
+ if(
+  confirm(
+   "¿Borrar todos los participantes, puntos y resultados?"
+  )
+ ){
 
-localStorage.removeItem(KEY);
+  localStorage.removeItem(
+   STORAGE_KEY
+  );
 
-location.reload();
+  location.reload();
 
-}
-
-}
-
-
-document
-.querySelectorAll('nav button')
-.forEach(b=>
-
-b.onclick=()=>{
-
-document
-.querySelectorAll('nav button')
-.forEach(x=>
-x.classList.remove('on')
-);
-
-document
-.querySelectorAll('.view')
-.forEach(x=>
-x.classList.remove('on')
-);
-
-b.classList.add('on');
-
-document
-.getElementById(b.dataset.v)
-.classList.add('on');
-
-render();
+ }
 
 }
 
+
+/* ================================
+   NAVEGACIÓN
+================================ */
+
+document
+.querySelectorAll("nav button")
+.forEach(
+ button=>{
+
+  button.onclick=
+   function(){
+
+    document
+    .querySelectorAll("nav button")
+    .forEach(
+     b=>b.classList.remove("active")
+    );
+
+
+    document
+    .querySelectorAll(".view")
+    .forEach(
+     view=>view.classList.remove("active")
+    );
+
+
+    button.classList.add(
+     "active"
+    );
+
+
+    document
+    .getElementById(
+     button.dataset.view
+    )
+    .classList.add(
+     "active"
+    );
+
+
+    renderAll();
+
+   };
+
+ }
 );
 
 
-render();
+/* ================================
+   RENDER INICIAL
+================================ */
+
+ensurePreloaded();
+
+renderAll();
 
 </script>
 
