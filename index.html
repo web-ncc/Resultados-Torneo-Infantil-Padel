@@ -1,462 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PÁDEL INFANTIL JEMENUÑO V1.6</title>
-
-<style>
-:root{
- --navy:#102b57;
- --green:#64b526;
- --light:#f5f7fa;
- --line:#dce3eb;
-}
-
-*{box-sizing:border-box}
-
-body{
- margin:0;
- font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
- background:var(--light);
- color:#172033
-}
-
-header{
- background:linear-gradient(135deg,#102b57,#183c72);
- color:#fff;
- padding:22px 18px 18px;
- position:sticky;
- top:0;
- z-index:5
-}
-
-header h1{
- margin:0;
- font-size:23px
-}
-
-header p{
- margin:5px 0 0;
- opacity:.85;
- font-size:13px
-}
-
-.version{
- font-size:10px;
- opacity:.65;
- margin-top:5px
-}
-
-nav{
- display:flex;
- gap:7px;
- overflow:auto;
- margin-top:15px
-}
-
-nav button{
- background:#ffffff12;
- color:#fff;
- border:1px solid #ffffff33;
- border-radius:10px;
- padding:10px 13px;
- font-weight:700;
- cursor:pointer;
- white-space:nowrap
-}
-
-nav button.active{
- background:var(--green);
- border-color:var(--green)
-}
-
-main{
- max-width:1150px;
- margin:auto;
- padding:16px
-}
-
-.view{display:none}
-.view.active{display:block}
-
-.card{
- background:#fff;
- border:1px solid var(--line);
- border-radius:15px;
- padding:16px;
- margin-bottom:14px;
- box-shadow:0 2px 8px #102b570b
-}
-
-h2{
- margin:0 0 12px;
- color:var(--navy);
- font-size:20px
-}
-
-h3{
- margin:16px 0 8px;
- color:var(--navy);
- font-size:16px
-}
-
-label{
- font-size:12px;
- font-weight:700;
- color:#526174;
- display:block;
- margin-bottom:4px
-}
-
-input,select{
- width:100%;
- padding:10px;
- border:1px solid #cbd5e1;
- border-radius:9px;
- font-size:15px;
- background:#fff
-}
-
-table{
- width:100%;
- border-collapse:collapse;
- font-size:13px
-}
-
-th,td{
- padding:9px 7px;
- border-bottom:1px solid var(--line);
- text-align:left
-}
-
-th{
- color:#526174;
- background:#f8fafc;
- position:sticky;
- top:117px
-}
-
-.num{
- text-align:center;
- font-weight:800
-}
-
-.total{
- font-size:18px;
- color:var(--navy)
-}
-
-.btn{
- border:0;
- border-radius:10px;
- padding:10px 13px;
- font-weight:700;
- cursor:pointer;
- background:var(--navy);
- color:#fff
-}
-
-.btn.green{background:var(--green)}
-.btn.red{background:#d94848}
-.btn.light{
- background:#edf2f7;
- color:var(--navy)
-}
-
-.actions{
- display:flex;
- gap:8px;
- flex-wrap:wrap
-}
-
-.hint{
- font-size:12px;
- color:#66758a
-}
-
-.empty{
- padding:25px;
- text-align:center;
- color:#718096
-}
-
-.score-input{
- width:75px;
- text-align:center;
- padding:7px
-}
-
-.match-grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
- gap:10px
-}
-
-.match{
- border:1px solid var(--line);
- border-radius:12px;
- padding:12px
-}
-
-.match strong{
- color:var(--navy)
-}
-
-.small{
- font-size:11px;
- color:#6b7280
-}
-
-.team-name{
- font-weight:800;
- color:var(--navy);
- font-size:15px
-}
-
-.group-ranking{
- margin-top:18px;
- border-top:2px solid var(--line);
- padding-top:12px
-}
-
-.group-ranking h3{
- margin-top:0
-}
-
-.position{
- width:32px;
- text-align:center;
- font-weight:800
-}
-
-.rank1{background:#fff9df}
-.rank2{background:#f5f7fa}
-.rank3{background:#fff3e8}
-
-.tie-break{
- margin-top:9px;
- padding:10px;
- background:#fff9df;
- border:1px solid #f0d878;
- border-radius:10px
-}
-
-.tie-break-title{
- font-size:12px;
- font-weight:800;
- color:#8a6500;
- margin-bottom:5px
-}
-
-@media(max-width:650px){
-
- main{padding:10px}
-
- header{padding:16px 12px}
-
- th{top:113px}
-
- table{font-size:12px}
-
- .score-input{width:62px}
-
-}
-</style>
-</head>
-
-<body>
-
-<header>
-
-<h1>🎾 PÁDEL INFANTIL JEMENUÑO V1.6</h1>
-
-<p>
-Control de habilidades · parejas · torneo · clasificación general
-</p>
-
-<div class="version">
-V1.6 · corrección de resultados pendientes y puntos antiguos
-</div>
-
-<nav>
-
-<button class="active" data-view="participantes">
-Participantes
-</button>
-
-<button data-view="habilidades">
-Habilidades
-</button>
-
-<button data-view="torneo">
-Torneo
-</button>
-
-<button data-view="clasificacion">
-Clasificación
-</button>
-
-</nav>
-
-</header>
-
-<main>
-
-<section id="participantes" class="view active">
-
-<div class="card">
-
-<div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-
-<h2>👥 Participantes y parejas</h2>
-
-<button class="btn green" onclick="addParticipant()">
-+ Participante
-</button>
-
-</div>
-
-<p class="hint">
-Crea hasta 16 participantes y asigna cada uno a una de las 8 parejas.
-Los datos se guardan automáticamente en este dispositivo.
-</p>
-
-<div id="participantsTable"></div>
-
-</div>
-
-<div class="card">
-
-<button class="btn red" onclick="resetAll()">
-Borrar todo
-</button>
-
-</div>
-
-</section>
-
-
-<section id="habilidades" class="view">
-
-<div class="card">
-
-<h2>🎯 Pruebas de habilidad</h2>
-
-<p class="hint">
-Introduce directamente los puntos obtenidos.
-</p>
-
-<div id="skillsTable"></div>
-
-</div>
-
-</section>
-
-
-<section id="torneo" class="view">
-
-<div class="card">
-
-<h2>🏆 Fase de grupos</h2>
-
-<p class="hint">
-
-8 parejas · 2 grupos de 4 · cada pareja juega 3 partidos.
-
-<br><br>
-
-Introduce el resultado del partido:
-<strong>2-0, 2-1, 0-2 o 1-2</strong>.
-
-<br><br>
-
-Si el partido termina <strong>2-1 o 1-2</strong>,
-aparecerá automáticamente el campo para introducir
-el <strong>tie-break a 5 puntos</strong>.
-
-</p>
-
-<div>
-
-<label>Grupo</label>
-
-<select id="selectedGroup" onchange="renderMatches()">
-
-<option value="A">Grupo A</option>
-<option value="B">Grupo B</option>
-
-</select>
-
-</div>
-
-<div id="matches"></div>
-
-<div id="groupRanking"></div>
-
-</div>
-
-
-<div class="card">
-
-<h2>🥇 Semifinales</h2>
-
-<p class="hint">
-1ºA vs 2ºB y 1ºB vs 2ºA.
-Ganador = 3 puntos · perdedor = 1 punto.
-</p>
-
-<div id="semis"></div>
-
-</div>
-
-
-<div class="card">
-
-<h2>🏆 Gran final</h2>
-
-<p class="hint">
-Ganador = 6 puntos · perdedor = 2 puntos.
-</p>
-
-<div id="final"></div>
-
-</div>
-
-</section>
-
-
-<section id="clasificacion" class="view">
-
-<div class="card">
-
-<h2>📊 Clasificación general</h2>
-
-<p class="hint">
-
-<strong>
-Clasificación exclusivamente por parejas.
-</strong>
-
-<br><br>
-
-Se suman las habilidades individuales de los dos jugadores,
-la prueba de pareja y todos los puntos obtenidos en el torneo.
-
-</p>
-
-<div id="ranking"></div>
-
-</div>
-
-</section>
-
-</main>
-
-
 <script>
 
+/* =========================================================
+   PÁDEL INFANTIL JEMENUÑO V1.7
+   LIMPIEZA ÚNICA DE RESULTADOS ANTIGUOS DEL TORNEO
+   ========================================================= */
+
 const KEY="padelJemenuno2026";
+
+/* ---------------------------------------------------------
+   DATOS DE LAS PRUEBAS
+   --------------------------------------------------------- */
 
 const skillDefs=[
 
@@ -493,149 +46,68 @@ const skillDefs=[
 ];
 
 
+/* ---------------------------------------------------------
+   CARGA DE DATOS EXISTENTES
+   --------------------------------------------------------- */
+
 let state=
-JSON.parse(
- localStorage.getItem(KEY)||"null"
-)
-||
-{
- participants:[],
- matches:{},
- semis:{},
- final:null
-};
+ JSON.parse(
+  localStorage.getItem(KEY)||"null"
+ )
+ ||
+ {
+  participants:[],
+  matches:{},
+  semis:{},
+  final:null
+ };
 
 
-/*
-====================================================
-NORMALIZACIÓN DE DATOS
-====================================================
+/* ---------------------------------------------------------
+   V1.7
+   BORRAR SOLO LOS RESULTADOS DEL TORNEO ANTIGUO
+   ---------------------------------------------------------
 
-No borra participantes ni habilidades.
+   IMPORTANTE:
+   NO borra participantes.
+   NO borra nombres.
+   NO borra parejas.
+   NO borra habilidades.
 
-Solo evita que resultados antiguos o incompletos
-puedan sumar puntos si ya no corresponden a
-partidos válidos entre las parejas actuales.
-*/
+   Solo elimina:
+   - partidos
+   - semifinales
+   - final
 
-function cleanStoredResults(){
+   La operación se ejecuta UNA SOLA VEZ.
+   --------------------------------------------------------- */
 
- if(!state.matches){
-  state.matches={};
- }
+const V17_RESET_KEY="padelJemenuno2026_v17_reset";
 
- if(!state.semis){
-  state.semis={};
- }
+if(
+ !localStorage.getItem(V17_RESET_KEY)
+){
 
- /*
-  Solo mantenemos resultados de partidos donde
-  ambas parejas existen actualmente y tienen
-  exactamente dos jugadores.
- */
- Object.keys(state.matches).forEach(key=>{
+ state.matches={};
+ state.semis={};
+ state.final=null;
 
-  const parts=
-   key.split("-").map(Number);
+ localStorage.setItem(
+  KEY,
+  JSON.stringify(state)
+ );
 
-  if(parts.length!==2){
-   delete state.matches[key];
-   return;
-  }
-
-  const a=parts[0];
-  const b=parts[1];
-
-  const aMembers=
-   participantsOfPair(a);
-
-  const bMembers=
-   participantsOfPair(b);
-
-  /*
-   Si una de las parejas ya no existe o no tiene
-   dos participantes, ese resultado antiguo no
-   puede afectar a la clasificación.
-  */
-  if(
-   aMembers.length!==2 ||
-   bMembers.length!==2
-  ){
-   delete state.matches[key];
-   return;
-  }
-
-  const match=state.matches[key];
-
-  /*
-   El formato antiguo numérico se conserva
-   correctamente si todavía corresponde a una
-   pareja válida.
-  */
-  if(typeof match==="number"){
-
-   if(match!==a && match!==b){
-    delete state.matches[key];
-    return;
-   }
-
-   return;
-  }
-
-  /*
-   Un resultado nuevo solo puede ser 2-0,
-   2-1, 0-2 o 1-2.
-  */
-  if(
-   !match ||
-   !(
-    (
-     match.aGames===2 &&
-     (match.bGames===0 || match.bGames===1)
-    )
-    ||
-    (
-     match.bGames===2 &&
-     (match.aGames===0 || match.aGames===1)
-    )
-   )
-  ){
-
-   delete state.matches[key];
-   return;
-
-  }
-
-  /*
-   Si no es 2-1 / 1-2 no debe existir tie-break.
-  */
-  if(
-   !(
-    (
-     match.aGames===2 &&
-     match.bGames===1
-    )
-    ||
-    (
-     match.aGames===1 &&
-     match.bGames===2
-    )
-   )
-  ){
-
-   match.tieBreak=null;
-
-  }
-
- });
-
-
- save();
+ localStorage.setItem(
+  V17_RESET_KEY,
+  "done"
+ );
 
 }
 
 
-/* GUARDAR */
+/* ---------------------------------------------------------
+   GUARDAR
+   --------------------------------------------------------- */
 
 function save(){
 
@@ -647,7 +119,9 @@ function save(){
 }
 
 
-/* ESCAPE */
+/* ---------------------------------------------------------
+   ESCAPAR HTML
+   --------------------------------------------------------- */
 
 function esc(s){
 
@@ -668,7 +142,9 @@ function esc(s){
 }
 
 
-/* PAREJAS */
+/* ---------------------------------------------------------
+   PAREJAS
+   --------------------------------------------------------- */
 
 function pairs(){
 
@@ -728,7 +204,9 @@ function pairLabel(pair){
 }
 
 
-/* PARTICIPANTES */
+/* ---------------------------------------------------------
+   PARTICIPANTES
+   --------------------------------------------------------- */
 
 function addParticipant(){
 
@@ -786,13 +264,6 @@ function updateParticipant(
   ?+val
   :val;
 
- /*
-  Al cambiar una pareja, los resultados antiguos
-  pueden dejar de corresponder a ese enfrentamiento.
-  Se limpian únicamente los resultados afectados.
- */
- cleanStoredResults();
-
  save();
  renderAll();
 
@@ -805,8 +276,6 @@ function removeParticipant(id){
  state.participants.filter(
   x=>x.id!==id
  );
-
- cleanStoredResults();
 
  save();
  renderAll();
@@ -928,7 +397,9 @@ ${rows}
 }
 
 
-/* HABILIDADES */
+/* ---------------------------------------------------------
+   HABILIDADES
+   --------------------------------------------------------- */
 
 function updateSkill(
  id,
@@ -986,12 +457,6 @@ function skillTotal(p){
 
 function pairSkill(pair){
 
- /*
-  La prueba de pareja cuenta una sola vez.
-  Si hay dos jugadores, utilizamos el valor de
-  la prueba de pareja asociado a cualquiera de ellos.
-  Normalmente ambos tendrán el mismo valor.
- */
  return participantsOfPair(pair)
  .reduce(
   (total,p)=>
@@ -1119,9 +584,7 @@ ${head}
 </thead>
 
 <tbody>
-
 ${rows}
-
 </tbody>
 
 </table>
@@ -1138,7 +601,9 @@ y cuenta una sola vez.
 }
 
 
-/* GRUPOS */
+/* ---------------------------------------------------------
+   PARTIDOS
+   --------------------------------------------------------- */
 
 function groupPairs(group){
 
@@ -1172,15 +637,7 @@ function getMatch(a,b){
 
  if(!old)return null;
 
-
  if(typeof old==="number"){
-
-  /*
-   Formato antiguo.
-  */
-  if(old!==a && old!==b){
-   return null;
-  }
 
   return {
 
@@ -1202,13 +659,14 @@ function getMatch(a,b){
 
  }
 
-
  return old;
 
 }
 
 
-/* RESULTADO */
+/* ---------------------------------------------------------
+   RESULTADO PARTIDO
+   --------------------------------------------------------- */
 
 function setMatch(
  a,
@@ -1223,10 +681,6 @@ function setMatch(
   String(result||"").trim();
 
 
- /*
-  PENDIENTE = borrar completamente el resultado.
-  Por tanto NO suma ningún punto.
- */
  if(!result){
 
   delete state.matches[key];
@@ -1275,13 +729,14 @@ function setMatch(
 
 
  save();
-
  renderAll();
 
 }
 
 
-/* TIE-BREAK */
+/* ---------------------------------------------------------
+   TIE-BREAK
+   --------------------------------------------------------- */
 
 function setTieBreak(
  a,
@@ -1298,8 +753,7 @@ function setTieBreak(
  if(!match)return;
 
  value=
-  String(value||"")
-  .trim();
+  String(value||"").trim();
 
 
  if(!value){
@@ -1364,11 +818,7 @@ function setTieBreak(
   );
 
 
- if(!validTie){
-
-  return;
-
- }
+ if(!validTie)return;
 
 
  match.tieBreak={
@@ -1382,13 +832,14 @@ function setTieBreak(
  state.matches[key]=match;
 
  save();
-
  renderAll();
 
 }
 
 
-/* ESTADÍSTICAS GRUPO */
+/* ---------------------------------------------------------
+   ESTADÍSTICAS GRUPO
+   --------------------------------------------------------- */
 
 function groupStats(
  pair,
@@ -1410,10 +861,7 @@ function groupStats(
  .forEach(
   opponent=>{
 
-   if(
-    opponent===pair
-   )return;
-
+   if(opponent===pair)return;
 
    const match=
     getMatch(
@@ -1421,36 +869,14 @@ function groupStats(
      opponent
     );
 
-
-   /*
-    MUY IMPORTANTE:
-
-    Si no existe resultado real,
-    no se contabiliza absolutamente nada.
-   */
    if(!match)return;
-
-
-   if(
-    typeof match.winner!=="number"
-   ){
-    return;
-   }
-
 
    played++;
 
-
-   if(
-    +match.winner===pair
-   ){
-
+   if(+match.winner===pair){
     wins++;
-
    }else{
-
     losses++;
-
    }
 
 
@@ -1477,10 +903,6 @@ function groupStats(
 
    }
 
-
-   /*
-    Tie-break únicamente en 2-1 / 1-2.
-   */
 
    if(
     (
@@ -1554,7 +976,9 @@ function groupStats(
 }
 
 
-/* CLASIFICACIÓN GRUPO */
+/* ---------------------------------------------------------
+   CLASIFICACIÓN GRUPO
+   --------------------------------------------------------- */
 
 function groupStandings(group){
 
@@ -1591,7 +1015,9 @@ function groupStandings(group){
 }
 
 
-/* PARTIDOS */
+/* ---------------------------------------------------------
+   RENDER PARTIDOS
+   --------------------------------------------------------- */
 
 function renderMatches(){
 
@@ -1888,7 +1314,9 @@ ${
 }
 
 
-/* CLASIFICACIÓN GRUPO */
+/* ---------------------------------------------------------
+   CLASIFICACIÓN GRUPO
+   --------------------------------------------------------- */
 
 function renderGroupRanking(group){
 
@@ -1930,37 +1358,18 @@ ${index+1}
 ${pairLabel(r.pair)}
 </td>
 
-<td class="num">
-${r.played}
-</td>
-
-<td class="num">
-${r.wins}
-</td>
-
-<td class="num">
-${r.losses}
-</td>
-
-<td class="num">
-${r.gamesFor}
-</td>
-
-<td class="num">
-${r.gamesAgainst}
-</td>
+<td class="num">${r.played}</td>
+<td class="num">${r.wins}</td>
+<td class="num">${r.losses}</td>
+<td class="num">${r.gamesFor}</td>
+<td class="num">${r.gamesAgainst}</td>
 
 <td class="num">
 ${r.difference>0?"+":""}${r.difference}
 </td>
 
 <td class="num">
-${
- r.tieDifference>0
- ?"+"
- :""
-}
-${r.tieDifference}
+${r.tieDifference>0?"+":""}${r.tieDifference}
 </td>
 
 <td class="num">
@@ -1993,23 +1402,14 @@ ${r.tieDifference}
 <tr>
 
 <th>#</th>
-
 <th>Pareja</th>
-
 <th>PJ</th>
-
 <th>PG</th>
-
 <th>PP</th>
-
 <th>GF</th>
-
 <th>GC</th>
-
 <th>Dif.</th>
-
 <th>TB Dif.</th>
-
 <th>Puntos</th>
 
 </tr>
@@ -2026,16 +1426,10 @@ ${rows}
 
 <p class="hint">
 
-<strong>Criterios de clasificación:</strong>
-
+<strong>Criterios:</strong>
 partidos ganados → diferencia de juegos →
 juegos a favor → diferencia del tie-break →
 puntos de tie-break a favor.
-
-<br><br>
-
-El tie-break solo se utiliza cuando el resultado
-del partido es 2-1 o 1-2.
 
 </p>
 
@@ -2046,7 +1440,9 @@ del partido es 2-1 o 1-2.
 }
 
 
-/* PUNTOS GRUPO */
+/* ---------------------------------------------------------
+   PUNTOS DE GRUPO
+   --------------------------------------------------------- */
 
 function groupPoints(pair){
 
@@ -2072,18 +1468,13 @@ function groupPoints(pair){
     a!==pair &&
     b!==pair
    ){
+
     return;
+
    }
 
 
-   /*
-    Nunca contar una entrada vacía,
-    corrupta o pendiente.
-   */
-
-   if(!match){
-    return;
-   }
+   if(!match)return;
 
 
    const winner=
@@ -2092,11 +1483,19 @@ function groupPoints(pair){
     :match.winner;
 
 
+   /*
+    SOLO resultados reales.
+    Si está pendiente no suma absolutamente nada.
+   */
+
    if(
-    winner!==a &&
-    winner!==b
+    winner===undefined ||
+    winner===null ||
+    winner===""
    ){
+
     return;
+
    }
 
 
@@ -2114,7 +1513,9 @@ function groupPoints(pair){
 }
 
 
-/* SEMIFINALES */
+/* ---------------------------------------------------------
+   SEMIFINALES
+   --------------------------------------------------------- */
 
 function renderSemis(){
 
@@ -2258,6 +1659,15 @@ function semiPoints(pair){
  .forEach(
   ([key,winner])=>{
 
+   if(
+    !winner
+   ){
+
+    return;
+
+   }
+
+
    const [
     a,
     b
@@ -2268,29 +1678,16 @@ function semiPoints(pair){
 
 
    if(
-    a!==pair &&
-    b!==pair
+    a===pair ||
+    b===pair
    ){
-    return;
+
+    total+=
+     +winner===pair
+     ?3
+     :1;
+
    }
-
-
-   /*
-    Si la semifinal está pendiente,
-    no suma nada.
-   */
-   if(
-    winner!==a &&
-    winner!==b
-   ){
-    return;
-   }
-
-
-   total+=
-    +winner===pair
-    ?3
-    :1;
 
   }
  );
@@ -2313,7 +1710,9 @@ function semiWinners(){
 }
 
 
-/* FINAL */
+/* ---------------------------------------------------------
+   FINAL
+   --------------------------------------------------------- */
 
 function renderFinal(){
 
@@ -2406,49 +1805,34 @@ Gana · ${pairNames(b)} · 6 pt
 }
 
 
-/* PUNTOS TORNEO */
+/* ---------------------------------------------------------
+   PUNTOS TORNEO
+   --------------------------------------------------------- */
 
 function tournamentPoints(pair){
 
- let total=0;
-
- /*
-  Solo resultados reales.
- */
- total+=
+ let total=
   groupPoints(pair);
 
- /*
-  Solo semifinales con ganador.
- */
+
  total+=
   semiPoints(pair);
 
 
- /*
-  Solo final realmente jugada.
- */
  if(state.final){
 
   const winners=
    semiWinners();
 
 
-  if(winners.includes(pair)){
+  if(
+   winners.includes(pair)
+  ){
 
-   if(
+   total+=
     +state.final===pair
-   ){
-
-    total+=6;
-
-   }else if(
-    winners.includes(+state.final)
-   ){
-
-    total+=2;
-
-   }
+    ?6
+    :2;
 
   }
 
@@ -2460,7 +1844,9 @@ function tournamentPoints(pair){
 }
 
 
-/* TOTAL PAREJA */
+/* ---------------------------------------------------------
+   TOTAL PAREJA
+   --------------------------------------------------------- */
 
 function pairTotal(pair){
 
@@ -2494,7 +1880,9 @@ function pairTotal(pair){
 }
 
 
-/* CLASIFICACIÓN GENERAL */
+/* ---------------------------------------------------------
+   CLASIFICACIÓN GENERAL
+   --------------------------------------------------------- */
 
 function renderRanking(){
 
@@ -2622,15 +2010,10 @@ ${r.total.toFixed(1)}
 <tr>
 
 <th>#</th>
-
 <th>Pareja</th>
-
 <th>Habilidades individuales</th>
-
 <th>Prueba pareja</th>
-
 <th>Torneo</th>
-
 <th>TOTAL</th>
 
 </tr>
@@ -2650,11 +2033,11 @@ ${rows}
 }
 
 
-/* RENDER */
+/* ---------------------------------------------------------
+   RENDER GENERAL
+   --------------------------------------------------------- */
 
 function renderAll(){
-
- cleanStoredResults();
 
  renderParticipants();
 
@@ -2671,7 +2054,9 @@ function renderAll(){
 }
 
 
-/* BORRAR TODO */
+/* ---------------------------------------------------------
+   BORRAR TODO
+   --------------------------------------------------------- */
 
 function resetAll(){
 
@@ -2682,6 +2067,10 @@ function resetAll(){
  ){
 
   localStorage.removeItem(KEY);
+
+  localStorage.removeItem(
+   V17_RESET_KEY
+  );
 
   state={
    participants:[],
@@ -2697,7 +2086,9 @@ function resetAll(){
 }
 
 
-/* NAVEGACIÓN */
+/* ---------------------------------------------------------
+   NAVEGACIÓN
+   --------------------------------------------------------- */
 
 document
 .querySelectorAll(
@@ -2751,13 +2142,10 @@ document
 );
 
 
-/* INICIO */
-
-cleanStoredResults();
+/* ---------------------------------------------------------
+   INICIO
+   --------------------------------------------------------- */
 
 renderAll();
 
 </script>
-
-</body>
-</html>
