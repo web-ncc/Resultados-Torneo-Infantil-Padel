@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PÁDEL INFANTIL JEMENUÑO V1.5</title>
+<title>PÁDEL INFANTIL JEMENUÑO V1.6</title>
 
 <style>
 :root{
@@ -269,14 +269,14 @@ th{
 
 <header>
 
-<h1>🎾 PÁDEL INFANTIL JEMENUÑO V1.5</h1>
+<h1>🎾 PÁDEL INFANTIL JEMENUÑO V1.6</h1>
 
 <p>
 Control de habilidades · parejas · torneo · clasificación general
 </p>
 
 <div class="version">
-V1.5 · tie-break en partidos 2-1 / 1-2
+V1.6 · corrección de resultados pendientes y puntos antiguos
 </div>
 
 <nav>
@@ -361,7 +361,9 @@ Introduce directamente los puntos obtenidos.
 <h2>🏆 Fase de grupos</h2>
 
 <p class="hint">
+
 8 parejas · 2 grupos de 4 · cada pareja juega 3 partidos.
+
 <br><br>
 
 Introduce el resultado del partido:
@@ -372,6 +374,7 @@ Introduce el resultado del partido:
 Si el partido termina <strong>2-1 o 1-2</strong>,
 aparecerá automáticamente el campo para introducir
 el <strong>tie-break a 5 puntos</strong>.
+
 </p>
 
 <div>
@@ -503,6 +506,137 @@ JSON.parse(
 };
 
 
+/*
+====================================================
+NORMALIZACIÓN DE DATOS
+====================================================
+
+No borra participantes ni habilidades.
+
+Solo evita que resultados antiguos o incompletos
+puedan sumar puntos si ya no corresponden a
+partidos válidos entre las parejas actuales.
+*/
+
+function cleanStoredResults(){
+
+ if(!state.matches){
+  state.matches={};
+ }
+
+ if(!state.semis){
+  state.semis={};
+ }
+
+ /*
+  Solo mantenemos resultados de partidos donde
+  ambas parejas existen actualmente y tienen
+  exactamente dos jugadores.
+ */
+ Object.keys(state.matches).forEach(key=>{
+
+  const parts=
+   key.split("-").map(Number);
+
+  if(parts.length!==2){
+   delete state.matches[key];
+   return;
+  }
+
+  const a=parts[0];
+  const b=parts[1];
+
+  const aMembers=
+   participantsOfPair(a);
+
+  const bMembers=
+   participantsOfPair(b);
+
+  /*
+   Si una de las parejas ya no existe o no tiene
+   dos participantes, ese resultado antiguo no
+   puede afectar a la clasificación.
+  */
+  if(
+   aMembers.length!==2 ||
+   bMembers.length!==2
+  ){
+   delete state.matches[key];
+   return;
+  }
+
+  const match=state.matches[key];
+
+  /*
+   El formato antiguo numérico se conserva
+   correctamente si todavía corresponde a una
+   pareja válida.
+  */
+  if(typeof match==="number"){
+
+   if(match!==a && match!==b){
+    delete state.matches[key];
+    return;
+   }
+
+   return;
+  }
+
+  /*
+   Un resultado nuevo solo puede ser 2-0,
+   2-1, 0-2 o 1-2.
+  */
+  if(
+   !match ||
+   !(
+    (
+     match.aGames===2 &&
+     (match.bGames===0 || match.bGames===1)
+    )
+    ||
+    (
+     match.bGames===2 &&
+     (match.aGames===0 || match.aGames===1)
+    )
+   )
+  ){
+
+   delete state.matches[key];
+   return;
+
+  }
+
+  /*
+   Si no es 2-1 / 1-2 no debe existir tie-break.
+  */
+  if(
+   !(
+    (
+     match.aGames===2 &&
+     match.bGames===1
+    )
+    ||
+    (
+     match.aGames===1 &&
+     match.bGames===2
+    )
+   )
+  ){
+
+   match.tieBreak=null;
+
+  }
+
+ });
+
+
+ save();
+
+}
+
+
+/* GUARDAR */
+
 function save(){
 
  localStorage.setItem(
@@ -512,6 +646,8 @@ function save(){
 
 }
 
+
+/* ESCAPE */
 
 function esc(s){
 
@@ -531,6 +667,8 @@ function esc(s){
 
 }
 
+
+/* PAREJAS */
 
 function pairs(){
 
@@ -581,6 +719,7 @@ function pairLabel(pair){
  <div class="team-name">
  ${pairNames(pair)}
  </div>
+
  <div class="small">
  Pareja ${pair}
  </div>
@@ -647,6 +786,13 @@ function updateParticipant(
   ?+val
   :val;
 
+ /*
+  Al cambiar una pareja, los resultados antiguos
+  pueden dejar de corresponder a ese enfrentamiento.
+  Se limpian únicamente los resultados afectados.
+ */
+ cleanStoredResults();
+
  save();
  renderAll();
 
@@ -659,6 +805,8 @@ function removeParticipant(id){
  state.participants.filter(
   x=>x.id!==id
  );
+
+ cleanStoredResults();
 
  save();
  renderAll();
@@ -838,6 +986,12 @@ function skillTotal(p){
 
 function pairSkill(pair){
 
+ /*
+  La prueba de pareja cuenta una sola vez.
+  Si hay dos jugadores, utilizamos el valor de
+  la prueba de pareja asociado a cualquiera de ellos.
+  Normalmente ambos tendrán el mismo valor.
+ */
  return participantsOfPair(pair)
  .reduce(
   (total,p)=>
@@ -965,7 +1119,9 @@ ${head}
 </thead>
 
 <tbody>
+
 ${rows}
+
 </tbody>
 
 </table>
@@ -982,7 +1138,7 @@ y cuenta una sola vez.
 }
 
 
-/* PARTIDOS */
+/* GRUPOS */
 
 function groupPairs(group){
 
@@ -1019,6 +1175,13 @@ function getMatch(a,b){
 
  if(typeof old==="number"){
 
+  /*
+   Formato antiguo.
+  */
+  if(old!==a && old!==b){
+   return null;
+  }
+
   return {
 
    winner:old,
@@ -1045,7 +1208,7 @@ function getMatch(a,b){
 }
 
 
-/* RESULTADO DEL PARTIDO */
+/* RESULTADO */
 
 function setMatch(
  a,
@@ -1060,6 +1223,10 @@ function setMatch(
   String(result||"").trim();
 
 
+ /*
+  PENDIENTE = borrar completamente el resultado.
+  Por tanto NO suma ningún punto.
+ */
  if(!result){
 
   delete state.matches[key];
@@ -1092,13 +1259,6 @@ function setMatch(
  const scoreB=parts[1];
 
 
- /*
-  IMPORTANTE:
-
-  El tie-break aparece SOLO cuando
-  el partido termina 2-1 o 1-2.
- */
-
  state.matches[key]={
 
   winner:
@@ -1109,17 +1269,7 @@ function setMatch(
   aGames:scoreA,
   bGames:scoreB,
 
-  tieBreak:
-   (
-    scoreA===2 &&
-    scoreB===1
-   ) ||
-   (
-    scoreA===1 &&
-    scoreB===2
-   )
-   ?null
-   :null
+  tieBreak:null
 
  };
 
@@ -1202,11 +1352,6 @@ function setTieBreak(
  }
 
 
- /*
-  Solo puede existir tie-break
-  en partidos 2-1 o 1-2.
- */
-
  const validTie=
   (
    match.aGames===2 &&
@@ -1243,7 +1388,7 @@ function setTieBreak(
 }
 
 
-/* ESTADÍSTICAS */
+/* ESTADÍSTICAS GRUPO */
 
 function groupStats(
  pair,
@@ -1277,7 +1422,20 @@ function groupStats(
     );
 
 
+   /*
+    MUY IMPORTANTE:
+
+    Si no existe resultado real,
+    no se contabiliza absolutamente nada.
+   */
    if(!match)return;
+
+
+   if(
+    typeof match.winner!=="number"
+   ){
+    return;
+   }
 
 
    played++;
@@ -1321,8 +1479,7 @@ function groupStats(
 
 
    /*
-    SOLO se tiene en cuenta el tie-break
-    cuando el resultado ha sido 2-1 o 1-2.
+    Tie-break únicamente en 2-1 / 1-2.
    */
 
    if(
@@ -1397,15 +1554,7 @@ function groupStats(
 }
 
 
-/*
- CRITERIOS:
-
- 1. Partidos ganados
- 2. Diferencia de juegos
- 3. Juegos a favor
- 4. Diferencia de puntos de tie-break
- 5. Puntos de tie-break a favor
-*/
+/* CLASIFICACIÓN GRUPO */
 
 function groupStandings(group){
 
@@ -1595,125 +1744,95 @@ setTieBreak(
 Pendiente
 </option>
 
-<option
-value="5-0"
+<option value="5-0"
 ${
  match.tieBreak &&
  match.tieBreak.a===5 &&
  match.tieBreak.b===0
  ?"selected":""
 }
->
-5-0
-</option>
+>5-0</option>
 
-<option
-value="5-1"
+<option value="5-1"
 ${
  match.tieBreak &&
  match.tieBreak.a===5 &&
  match.tieBreak.b===1
  ?"selected":""
 }
->
-5-1
-</option>
+>5-1</option>
 
-<option
-value="5-2"
+<option value="5-2"
 ${
  match.tieBreak &&
  match.tieBreak.a===5 &&
  match.tieBreak.b===2
  ?"selected":""
 }
->
-5-2
-</option>
+>5-2</option>
 
-<option
-value="5-3"
+<option value="5-3"
 ${
  match.tieBreak &&
  match.tieBreak.a===5 &&
  match.tieBreak.b===3
  ?"selected":""
 }
->
-5-3
-</option>
+>5-3</option>
 
-<option
-value="5-4"
+<option value="5-4"
 ${
  match.tieBreak &&
  match.tieBreak.a===5 &&
  match.tieBreak.b===4
  ?"selected":""
 }
->
-5-4
-</option>
+>5-4</option>
 
-<option
-value="4-5"
+<option value="4-5"
 ${
  match.tieBreak &&
  match.tieBreak.a===4 &&
  match.tieBreak.b===5
  ?"selected":""
 }
->
-4-5
-</option>
+>4-5</option>
 
-<option
-value="3-5"
+<option value="3-5"
 ${
  match.tieBreak &&
  match.tieBreak.a===3 &&
  match.tieBreak.b===5
  ?"selected":""
 }
->
-3-5
-</option>
+>3-5</option>
 
-<option
-value="2-5"
+<option value="2-5"
 ${
  match.tieBreak &&
  match.tieBreak.a===2 &&
  match.tieBreak.b===5
  ?"selected":""
 }
->
-2-5
-</option>
+>2-5</option>
 
-<option
-value="1-5"
+<option value="1-5"
 ${
  match.tieBreak &&
  match.tieBreak.a===1 &&
  match.tieBreak.b===5
  ?"selected":""
 }
->
-1-5
-</option>
+>1-5</option>
 
-<option
-value="0-5"
+<option value="0-5"
 ${
  match.tieBreak &&
  match.tieBreak.a===0 &&
  match.tieBreak.b===5
  ?"selected":""
 }
->
-0-5
-</option>
+>0-5</option>
 
 </select>
 
@@ -1950,22 +2069,41 @@ function groupPoints(pair){
 
 
    if(
-    a===pair ||
-    b===pair
+    a!==pair &&
+    b!==pair
    ){
-
-    const winner=
-     typeof match==="number"
-     ?match
-     :match.winner;
-
-
-    total+=
-     +winner===pair
-     ?2
-     :1;
-
+    return;
    }
+
+
+   /*
+    Nunca contar una entrada vacía,
+    corrupta o pendiente.
+   */
+
+   if(!match){
+    return;
+   }
+
+
+   const winner=
+    typeof match==="number"
+    ?match
+    :match.winner;
+
+
+   if(
+    winner!==a &&
+    winner!==b
+   ){
+    return;
+   }
+
+
+   total+=
+    +winner===pair
+    ?2
+    :1;
 
   }
  );
@@ -1976,7 +2114,7 @@ function groupPoints(pair){
 }
 
 
-/* SEMIS */
+/* SEMIFINALES */
 
 function renderSemis(){
 
@@ -2130,16 +2268,29 @@ function semiPoints(pair){
 
 
    if(
-    a===pair ||
-    b===pair
+    a!==pair &&
+    b!==pair
    ){
-
-    total+=
-     +winner===pair
-     ?3
-     :1;
-
+    return;
    }
+
+
+   /*
+    Si la semifinal está pendiente,
+    no suma nada.
+   */
+   if(
+    winner!==a &&
+    winner!==b
+   ){
+    return;
+   }
+
+
+   total+=
+    +winner===pair
+    ?3
+    :1;
 
   }
  );
@@ -2259,14 +2410,24 @@ Gana · ${pairNames(b)} · 6 pt
 
 function tournamentPoints(pair){
 
- let total=
+ let total=0;
+
+ /*
+  Solo resultados reales.
+ */
+ total+=
   groupPoints(pair);
 
-
+ /*
+  Solo semifinales con ganador.
+ */
  total+=
   semiPoints(pair);
 
 
+ /*
+  Solo final realmente jugada.
+ */
  if(state.final){
 
   const winners=
@@ -2275,10 +2436,19 @@ function tournamentPoints(pair){
 
   if(winners.includes(pair)){
 
-   total+=
+   if(
     +state.final===pair
-    ?6
-    :2;
+   ){
+
+    total+=6;
+
+   }else if(
+    winners.includes(+state.final)
+   ){
+
+    total+=2;
+
+   }
 
   }
 
@@ -2468,7 +2638,9 @@ ${r.total.toFixed(1)}
 </thead>
 
 <tbody>
+
 ${rows}
+
 </tbody>
 
 </table>
@@ -2481,6 +2653,8 @@ ${rows}
 /* RENDER */
 
 function renderAll(){
+
+ cleanStoredResults();
 
  renderParticipants();
 
@@ -2497,7 +2671,7 @@ function renderAll(){
 }
 
 
-/* BORRAR */
+/* BORRAR TODO */
 
 function resetAll(){
 
@@ -2578,6 +2752,8 @@ document
 
 
 /* INICIO */
+
+cleanStoredResults();
 
 renderAll();
 
