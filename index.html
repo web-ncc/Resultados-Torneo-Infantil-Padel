@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PÁDEL INFANTIL JEMENUÑO V1.4</title>
+<title>PÁDEL INFANTIL JEMENUÑO V1.5</title>
 
 <style>
 :root{
@@ -269,14 +269,14 @@ th{
 
 <header>
 
-<h1>🎾 PÁDEL INFANTIL JEMENUÑO V1.4</h1>
+<h1>🎾 PÁDEL INFANTIL JEMENUÑO V1.5</h1>
 
 <p>
 Control de habilidades · parejas · torneo · clasificación general
 </p>
 
 <div class="version">
-V1.4 · tie-break en partidos 1-1
+V1.5 · tie-break en partidos 2-1 / 1-2
 </div>
 
 <nav>
@@ -302,8 +302,6 @@ Clasificación
 </header>
 
 <main>
-
-<!-- PARTICIPANTES -->
 
 <section id="participantes" class="view active">
 
@@ -339,8 +337,6 @@ Borrar todo
 </section>
 
 
-<!-- HABILIDADES -->
-
 <section id="habilidades" class="view">
 
 <div class="card">
@@ -358,8 +354,6 @@ Introduce directamente los puntos obtenidos.
 </section>
 
 
-<!-- TORNEO -->
-
 <section id="torneo" class="view">
 
 <div class="card">
@@ -368,14 +362,17 @@ Introduce directamente los puntos obtenidos.
 
 <p class="hint">
 8 parejas · 2 grupos de 4 · cada pareja juega 3 partidos.
-Introduce el resultado como <strong>2-0</strong>, <strong>2-1</strong>,
-<strong>0-2</strong> o <strong>1-2</strong>.
 <br><br>
-Si el partido queda <strong>1-1</strong>, aparecerá automáticamente
-el tie-break a 5 puntos.
-</p>
 
-<div class="grid">
+Introduce el resultado del partido:
+<strong>2-0, 2-1, 0-2 o 1-2</strong>.
+
+<br><br>
+
+Si el partido termina <strong>2-1 o 1-2</strong>,
+aparecerá automáticamente el campo para introducir
+el <strong>tie-break a 5 puntos</strong>.
+</p>
 
 <div>
 
@@ -387,8 +384,6 @@ el tie-break a 5 puntos.
 <option value="B">Grupo B</option>
 
 </select>
-
-</div>
 
 </div>
 
@@ -428,8 +423,6 @@ Ganador = 6 puntos · perdedor = 2 puntos.
 </section>
 
 
-<!-- CLASIFICACIÓN -->
-
 <section id="clasificacion" class="view">
 
 <div class="card">
@@ -459,10 +452,6 @@ la prueba de pareja y todos los puntos obtenidos en el torneo.
 
 
 <script>
-
-/* =================================
-   CONFIGURACIÓN
-================================= */
 
 const KEY="padelJemenuno2026";
 
@@ -514,10 +503,6 @@ JSON.parse(
 };
 
 
-/* =================================
-   GUARDAR
-================================= */
-
 function save(){
 
  localStorage.setItem(
@@ -527,10 +512,6 @@ function save(){
 
 }
 
-
-/* =================================
-   ESCAPAR
-================================= */
 
 function esc(s){
 
@@ -550,10 +531,6 @@ function esc(s){
 
 }
 
-
-/* =================================
-   PAREJAS
-================================= */
 
 function pairs(){
 
@@ -612,9 +589,7 @@ function pairLabel(pair){
 }
 
 
-/* =================================
-   PARTICIPANTES
-================================= */
+/* PARTICIPANTES */
 
 function addParticipant(){
 
@@ -805,9 +780,7 @@ ${rows}
 }
 
 
-/* =================================
-   HABILIDADES
-================================= */
+/* HABILIDADES */
 
 function updateSkill(
  id,
@@ -1009,9 +982,7 @@ y cuenta una sola vez.
 }
 
 
-/* =================================
-   PARTIDOS
-================================= */
+/* PARTIDOS */
 
 function groupPairs(group){
 
@@ -1034,16 +1005,6 @@ function matchKey(a,b){
 
 }
 
-
-/*
- Lee un partido.
-
- Las versiones anteriores guardaban
- solamente el ganador como número.
-
- Seguimos aceptando ese formato para
- no perder los datos anteriores.
-*/
 
 function getMatch(a,b){
 
@@ -1084,9 +1045,7 @@ function getMatch(a,b){
 }
 
 
-/* =================================
-   CAMBIO DE RESULTADO
-================================= */
+/* RESULTADO DEL PARTIDO */
 
 function setMatch(
  a,
@@ -1133,6 +1092,13 @@ function setMatch(
  const scoreB=parts[1];
 
 
+ /*
+  IMPORTANTE:
+
+  El tie-break aparece SOLO cuando
+  el partido termina 2-1 o 1-2.
+ */
+
  state.matches[key]={
 
   winner:
@@ -1144,8 +1110,14 @@ function setMatch(
   bGames:scoreB,
 
   tieBreak:
-   scoreA===1 &&
-   scoreB===1
+   (
+    scoreA===2 &&
+    scoreB===1
+   ) ||
+   (
+    scoreA===1 &&
+    scoreB===2
+   )
    ?null
    :null
 
@@ -1159,9 +1131,7 @@ function setMatch(
 }
 
 
-/* =================================
-   TIE-BREAK
-================================= */
+/* TIE-BREAK */
 
 function setTieBreak(
  a,
@@ -1233,14 +1203,23 @@ function setTieBreak(
 
 
  /*
-  Solo puede existir tie-break cuando
-  el partido está 1-1.
+  Solo puede existir tie-break
+  en partidos 2-1 o 1-2.
  */
 
- if(
-  match.aGames!==1 ||
-  match.bGames!==1
- ){
+ const validTie=
+  (
+   match.aGames===2 &&
+   match.bGames===1
+  )
+  ||
+  (
+   match.aGames===1 &&
+   match.bGames===2
+  );
+
+
+ if(!validTie){
 
   return;
 
@@ -1255,17 +1234,6 @@ function setTieBreak(
  };
 
 
- /*
-  El ganador del partido pasa a ser
-  el ganador del tie-break.
- */
-
- match.winner=
-  tbA>tbB
-  ?a
-  :b;
-
-
  state.matches[key]=match;
 
  save();
@@ -1275,9 +1243,7 @@ function setTieBreak(
 }
 
 
-/* =================================
-   ESTADÍSTICAS DEL GRUPO
-================================= */
+/* ESTADÍSTICAS */
 
 function groupStats(
  pair,
@@ -1330,10 +1296,6 @@ function groupStats(
    }
 
 
-   /*
-    Juegos normales
-   */
-
    if(
     pair===Math.min(
      pair,
@@ -1359,36 +1321,46 @@ function groupStats(
 
 
    /*
-    El tie-break SOLO se usa
-    como criterio de desempate.
+    SOLO se tiene en cuenta el tie-break
+    cuando el resultado ha sido 2-1 o 1-2.
    */
 
    if(
-    match.aGames===1 &&
-    match.bGames===1 &&
-    match.tieBreak
+    (
+     match.aGames===2 &&
+     match.bGames===1
+    )
+    ||
+    (
+     match.aGames===1 &&
+     match.bGames===2
+    )
    ){
 
-    if(
-     pair===Math.min(
-      pair,
-      opponent
-     )
-    ){
+    if(match.tieBreak){
 
-     tieFor+=
-      +match.tieBreak.a;
+     if(
+      pair===Math.min(
+       pair,
+       opponent
+      )
+     ){
 
-     tieAgainst+=
-      +match.tieBreak.b;
+      tieFor+=
+       +match.tieBreak.a;
 
-    }else{
+      tieAgainst+=
+       +match.tieBreak.b;
 
-     tieFor+=
-      +match.tieBreak.b;
+     }else{
 
-     tieAgainst+=
-      +match.tieBreak.a;
+      tieFor+=
+       +match.tieBreak.b;
+
+      tieAgainst+=
+       +match.tieBreak.a;
+
+     }
 
     }
 
@@ -1426,14 +1398,13 @@ function groupStats(
 
 
 /*
- ORDEN:
+ CRITERIOS:
 
  1. Partidos ganados
  2. Diferencia de juegos
  3. Juegos a favor
  4. Diferencia de puntos de tie-break
- 5. Juegos de tie-break a favor
- 6. Pareja
+ 5. Puntos de tie-break a favor
 */
 
 function groupStandings(group){
@@ -1471,9 +1442,7 @@ function groupStandings(group){
 }
 
 
-/* =================================
-   RENDER PARTIDOS
-================================= */
+/* PARTIDOS */
 
 function renderMatches(){
 
@@ -1516,6 +1485,21 @@ function renderMatches(){
      `${match.aGames}-${match.bGames}`;
 
    }
+
+
+   const needsTie=
+    match &&
+    (
+     (
+      match.aGames===2 &&
+      match.bGames===1
+     )
+     ||
+     (
+      match.aGames===1 &&
+      match.bGames===2
+     )
+    );
 
 
    html+=`
@@ -1583,9 +1567,7 @@ ${value==="1-2"?"selected":""}
 
 
 ${
- match &&
- match.aGames===1 &&
- match.bGames===1
+ needsTie
  ?
 
 `
@@ -1615,7 +1597,8 @@ Pendiente
 
 <option
 value="5-0"
-${match.tieBreak &&
+${
+ match.tieBreak &&
  match.tieBreak.a===5 &&
  match.tieBreak.b===0
  ?"selected":""
@@ -1626,7 +1609,8 @@ ${match.tieBreak &&
 
 <option
 value="5-1"
-${match.tieBreak &&
+${
+ match.tieBreak &&
  match.tieBreak.a===5 &&
  match.tieBreak.b===1
  ?"selected":""
@@ -1637,7 +1621,8 @@ ${match.tieBreak &&
 
 <option
 value="5-2"
-${match.tieBreak &&
+${
+ match.tieBreak &&
  match.tieBreak.a===5 &&
  match.tieBreak.b===2
  ?"selected":""
@@ -1648,7 +1633,8 @@ ${match.tieBreak &&
 
 <option
 value="5-3"
-${match.tieBreak &&
+${
+ match.tieBreak &&
  match.tieBreak.a===5 &&
  match.tieBreak.b===3
  ?"selected":""
@@ -1659,7 +1645,8 @@ ${match.tieBreak &&
 
 <option
 value="5-4"
-${match.tieBreak &&
+${
+ match.tieBreak &&
  match.tieBreak.a===5 &&
  match.tieBreak.b===4
  ?"selected":""
@@ -1670,7 +1657,8 @@ ${match.tieBreak &&
 
 <option
 value="4-5"
-${match.tieBreak &&
+${
+ match.tieBreak &&
  match.tieBreak.a===4 &&
  match.tieBreak.b===5
  ?"selected":""
@@ -1681,7 +1669,8 @@ ${match.tieBreak &&
 
 <option
 value="3-5"
-${match.tieBreak &&
+${
+ match.tieBreak &&
  match.tieBreak.a===3 &&
  match.tieBreak.b===5
  ?"selected":""
@@ -1692,7 +1681,8 @@ ${match.tieBreak &&
 
 <option
 value="2-5"
-${match.tieBreak &&
+${
+ match.tieBreak &&
  match.tieBreak.a===2 &&
  match.tieBreak.b===5
  ?"selected":""
@@ -1703,7 +1693,8 @@ ${match.tieBreak &&
 
 <option
 value="1-5"
-${match.tieBreak &&
+${
+ match.tieBreak &&
  match.tieBreak.a===1 &&
  match.tieBreak.b===5
  ?"selected":""
@@ -1714,7 +1705,8 @@ ${match.tieBreak &&
 
 <option
 value="0-5"
-${match.tieBreak &&
+${
+ match.tieBreak &&
  match.tieBreak.a===0 &&
  match.tieBreak.b===5
  ?"selected":""
@@ -1777,9 +1769,7 @@ ${
 }
 
 
-/* =================================
-   CLASIFICACIÓN GRUPO
-================================= */
+/* CLASIFICACIÓN GRUPO */
 
 function renderGroupRanking(group){
 
@@ -1925,8 +1915,8 @@ puntos de tie-break a favor.
 
 <br><br>
 
-El tie-break solo aparece y se tiene en cuenta
-cuando el partido terminó 1-1.
+El tie-break solo se utiliza cuando el resultado
+del partido es 2-1 o 1-2.
 
 </p>
 
@@ -1937,9 +1927,7 @@ cuando el partido terminó 1-1.
 }
 
 
-/* =================================
-   PUNTOS DE GRUPO
-================================= */
+/* PUNTOS GRUPO */
 
 function groupPoints(pair){
 
@@ -1988,9 +1976,7 @@ function groupPoints(pair){
 }
 
 
-/* =================================
-   SEMIFINALES
-================================= */
+/* SEMIS */
 
 function renderSemis(){
 
@@ -2123,10 +2109,6 @@ ${html}
 }
 
 
-/* =================================
-   PUNTOS SEMIS
-================================= */
-
 function semiPoints(pair){
 
  let total=0;
@@ -2180,9 +2162,7 @@ function semiWinners(){
 }
 
 
-/* =================================
-   FINAL
-================================= */
+/* FINAL */
 
 function renderFinal(){
 
@@ -2275,9 +2255,7 @@ Gana · ${pairNames(b)} · 6 pt
 }
 
 
-/* =================================
-   PUNTOS TORNEO
-================================= */
+/* PUNTOS TORNEO */
 
 function tournamentPoints(pair){
 
@@ -2312,9 +2290,7 @@ function tournamentPoints(pair){
 }
 
 
-/* =================================
-   TOTAL PAREJA
-================================= */
+/* TOTAL PAREJA */
 
 function pairTotal(pair){
 
@@ -2348,9 +2324,7 @@ function pairTotal(pair){
 }
 
 
-/* =================================
-   CLASIFICACIÓN GENERAL
-================================= */
+/* CLASIFICACIÓN GENERAL */
 
 function renderRanking(){
 
@@ -2504,9 +2478,7 @@ ${rows}
 }
 
 
-/* =================================
-   RENDER GENERAL
-================================= */
+/* RENDER */
 
 function renderAll(){
 
@@ -2525,9 +2497,7 @@ function renderAll(){
 }
 
 
-/* =================================
-   BORRAR
-================================= */
+/* BORRAR */
 
 function resetAll(){
 
@@ -2553,9 +2523,7 @@ function resetAll(){
 }
 
 
-/* =================================
-   NAVEGACIÓN
-================================= */
+/* NAVEGACIÓN */
 
 document
 .querySelectorAll(
@@ -2609,9 +2577,7 @@ document
 );
 
 
-/* =================================
-   INICIO
-================================= */
+/* INICIO */
 
 renderAll();
 
