@@ -19,7 +19,7 @@ body{
  margin:0;
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
  background:var(--light);
- color:#172033
+ color:#172033;
 }
 
 header{
@@ -28,31 +28,31 @@ header{
  padding:22px 18px 18px;
  position:sticky;
  top:0;
- z-index:5
+ z-index:5;
 }
 
 header h1{
  margin:0;
- font-size:23px
+ font-size:23px;
 }
 
 header p{
  margin:5px 0 0;
  opacity:.85;
- font-size:13px
+ font-size:13px;
 }
 
 .version{
  font-size:10px;
  opacity:.65;
- margin-top:5px
+ margin-top:5px;
 }
 
 nav{
  display:flex;
  gap:7px;
  overflow:auto;
- margin-top:15px
+ margin-top:15px;
 }
 
 nav button{
@@ -63,18 +63,18 @@ nav button{
  padding:10px 13px;
  font-weight:700;
  cursor:pointer;
- white-space:nowrap
+ white-space:nowrap;
 }
 
 nav button.active{
  background:var(--green);
- border-color:var(--green)
+ border-color:var(--green);
 }
 
 main{
  max-width:1150px;
  margin:auto;
- padding:16px
+ padding:16px;
 }
 
 .view{display:none}
@@ -86,19 +86,19 @@ main{
  border-radius:15px;
  padding:16px;
  margin-bottom:14px;
- box-shadow:0 2px 8px #102b570b
+ box-shadow:0 2px 8px #102b570b;
 }
 
 h2{
  margin:0 0 12px;
  color:var(--navy);
- font-size:20px
+ font-size:20px;
 }
 
 h3{
  margin:16px 0 8px;
  color:var(--navy);
- font-size:16px
+ font-size:16px;
 }
 
 label{
@@ -106,7 +106,7 @@ label{
  font-weight:700;
  color:#526174;
  display:block;
- margin-bottom:4px
+ margin-bottom:4px;
 }
 
 input,select{
@@ -115,36 +115,36 @@ input,select{
  border:1px solid #cbd5e1;
  border-radius:9px;
  font-size:15px;
- background:#fff
+ background:#fff;
 }
 
 table{
  width:100%;
  border-collapse:collapse;
- font-size:13px
+ font-size:13px;
 }
 
 th,td{
  padding:9px 7px;
  border-bottom:1px solid var(--line);
- text-align:left
+ text-align:left;
 }
 
 th{
  color:#526174;
  background:#f8fafc;
  position:sticky;
- top:117px
+ top:117px;
 }
 
 .num{
  text-align:center;
- font-weight:800
+ font-weight:800;
 }
 
 .total{
  font-size:18px;
- color:var(--navy)
+ color:var(--navy);
 }
 
 .btn{
@@ -154,80 +154,80 @@ th{
  font-weight:700;
  cursor:pointer;
  background:var(--navy);
- color:#fff
+ color:#fff;
 }
 
 .btn.green{background:var(--green)}
 .btn.red{background:#d94848}
 .btn.light{
  background:#edf2f7;
- color:var(--navy)
+ color:var(--navy);
 }
 
 .actions{
  display:flex;
  gap:8px;
- flex-wrap:wrap
+ flex-wrap:wrap;
 }
 
 .hint{
  font-size:12px;
- color:#66758a
+ color:#66758a;
 }
 
 .empty{
  padding:25px;
  text-align:center;
- color:#718096
+ color:#718096;
 }
 
 .score-input{
  width:75px;
  text-align:center;
- padding:7px
+ padding:7px;
 }
 
 .match-grid{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
- gap:10px
+ gap:10px;
 }
 
 .match{
  border:1px solid var(--line);
  border-radius:12px;
- padding:12px
+ padding:12px;
 }
 
 .match strong{
- color:var(--navy)
+ color:var(--navy);
 }
 
 .small{
  font-size:11px;
- color:#6b7280
+ color:#6b7280;
 }
 
 .team-name{
  font-weight:800;
  color:var(--navy);
- font-size:15px
+ font-size:15px;
 }
 
 .group-ranking{
  margin-top:18px;
  border-top:2px solid var(--line);
- padding-top:12px
+ padding-top:12px;
 }
 
 .group-ranking h3{
- margin-top:0
+ margin-top:0;
 }
 
 .position{
  width:32px;
  text-align:center;
- font-weight:800
+ font-weight:800;
 }
 
 .rank1{background:#fff9df}
@@ -239,14 +239,14 @@ th{
  padding:10px;
  background:#fff9df;
  border:1px solid #f0d878;
- border-radius:10px
+ border-radius:10px;
 }
 
 .tie-break-title{
  font-size:12px;
  font-weight:800;
  color:#8a6500;
- margin-bottom:5px
+ margin-bottom:5px;
 }
 
 @media(max-width:650px){
@@ -276,7 +276,7 @@ Control de habilidades · parejas · torneo · clasificación general
 </p>
 
 <div class="version">
-V1.7 · reinicio de puntos antiguos del torneo manteniendo participantes y habilidades
+V1.7 · corrección definitiva de resultados y puntos antiguos
 </div>
 
 <nav>
@@ -366,18 +366,17 @@ Introduce directamente los puntos obtenidos.
 
 <br><br>
 
-Introduce el resultado del partido:
+Introduce el resultado:
+
 <strong>2-0, 2-1, 0-2 o 1-2</strong>.
 
 <br><br>
 
-Si el partido termina <strong>2-1 o 1-2</strong>,
-aparecerá automáticamente el campo para introducir
-el <strong>tie-break a 5 puntos</strong>.
+Si termina <strong>2-1 o 1-2</strong>,
+aparecerá el campo para introducir el
+<strong>tie-break a 5 puntos</strong>.
 
 </p>
-
-<div>
 
 <label>Grupo</label>
 
@@ -387,8 +386,6 @@ el <strong>tie-break a 5 puntos</strong>.
 <option value="B">Grupo B</option>
 
 </select>
-
-</div>
 
 <div id="matches"></div>
 
@@ -434,9 +431,7 @@ Ganador = 6 puntos · perdedor = 2 puntos.
 
 <p class="hint">
 
-<strong>
-Clasificación exclusivamente por parejas.
-</strong>
+<strong>Clasificación exclusivamente por parejas.</strong>
 
 <br><br>
 
@@ -459,34 +454,12 @@ la prueba de pareja y todos los puntos obtenidos en el torneo.
 const KEY="padelJemenuno2026";
 
 /*
-=========================================================
-V1.7
-=========================================================
-
-IMPORTANTE:
-
-Los participantes y sus habilidades se conservan.
-
-Los resultados antiguos del torneo se borran UNA SOLA VEZ
-al actualizar desde versiones anteriores.
-
-Esto elimina:
-- partidos antiguos
-- puntos de grupos antiguos
-- semifinales antiguas
-- final antigua
-
-Pero NO elimina:
-- participantes
-- nombres
-- parejas
-- habilidades individuales
-
-=========================================================
+ V1.7
+ Limpia UNA SOLA VEZ los resultados antiguos del torneo.
+ NO borra participantes ni habilidades.
 */
 
-const DATA_VERSION=7;
-
+const MIGRATION_KEY="padelJemenuno2026_v17_reset";
 
 const skillDefs=[
 
@@ -523,58 +496,46 @@ const skillDefs=[
 ];
 
 
-const defaultState={
-
- participants:[],
-
- matches:{},
-
- semis:{},
-
- final:null,
-
- dataVersion:DATA_VERSION
-
-};
+let state=
+ JSON.parse(
+  localStorage.getItem(KEY)||"null"
+ )
+ ||
+ {
+  participants:[],
+  matches:{},
+  semis:{},
+  final:null
+ };
 
 
-let savedData=null;
+/*
+ LIMPIEZA ÚNICA DE DATOS ANTIGUOS
+ Mantiene participantes y habilidades.
+*/
 
-try{
+if(
+ !localStorage.getItem(MIGRATION_KEY)
+){
 
- savedData=
-  JSON.parse(
-   localStorage.getItem(KEY)||"null"
-  );
+ state.matches={};
+ state.semis={};
+ state.final=null;
 
-}catch(e){
+ localStorage.setItem(
+  MIGRATION_KEY,
+  "1"
+ );
 
- savedData=null;
+ localStorage.setItem(
+  KEY,
+  JSON.stringify(state)
+ );
 
 }
 
 
-let state=
- savedData
- ||
- JSON.parse(
-  JSON.stringify(defaultState)
- );
-
-
-/*
-=========================================================
-MIGRACIÓN V1.7
-=========================================================
-
-Si existe información de versiones anteriores,
-mantenemos participantes/habilidades pero eliminamos
-todo lo relacionado con el torneo.
-
-Así se corrigen los puntos antiguos que estaban apareciendo
-aunque los partidos estuvieran visualmente pendientes.
-=========================================================
-*/
+/* GUARDAR */
 
 function save(){
 
@@ -586,42 +547,7 @@ function save(){
 }
 
 
-if(
- savedData &&
- savedData.dataVersion!==DATA_VERSION
-){
-
- state.matches={};
-
- state.semis={};
-
- state.final=null;
-
- state.dataVersion=DATA_VERSION;
-
- save();
-
-}
-
-
-/*
-Si no había datos, inicializamos normalmente.
-*/
-
-if(!state.dataVersion){
-
- state.dataVersion=DATA_VERSION;
-
- save();
-
-}
-
-
-/*
-=========================================================
-UTILIDADES
-=========================================================
-*/
+/* ESCAPAR TEXTO */
 
 function esc(s){
 
@@ -641,6 +567,8 @@ function esc(s){
 
 }
 
+
+/* PAREJAS */
 
 function pairs(){
 
@@ -673,9 +601,7 @@ function pairNames(pair){
   participantsOfPair(pair);
 
  if(!members.length){
-
   return "Pareja "+pair;
-
  }
 
  return members
@@ -690,40 +616,31 @@ function pairNames(pair){
 function pairLabel(pair){
 
  return `
+ <div class="team-name">
+ ${pairNames(pair)}
+ </div>
 
-<div class="team-name">
-${pairNames(pair)}
-</div>
-
-<div class="small">
-Pareja ${pair}
-</div>
-
-`;
+ <div class="small">
+ Pareja ${pair}
+ </div>
+ `;
 
 }
 
 
-/*
-=========================================================
-PARTICIPANTES
-=========================================================
-*/
+/* =========================
+   PARTICIPANTES
+========================= */
 
 function addParticipant(){
 
- if(
-  state.participants.length>=16
- ){
+ if(state.participants.length>=16){
 
-  alert(
-   "Máximo 16 participantes."
-  );
+  alert("Máximo 16 participantes.");
 
   return;
 
  }
-
 
  state.participants.push({
 
@@ -738,20 +655,16 @@ function addParticipant(){
    ),
 
   skills:{
-
    toques:0,
    pared:0,
    coloca:0,
    globo:0,
    red:0
-
   }
 
  });
 
-
  save();
-
  renderAll();
 
 }
@@ -770,15 +683,12 @@ function updateParticipant(
 
  if(!p)return;
 
-
  p[field]=
   field==="pair"
   ?+val
   :val;
 
-
  save();
-
  renderAll();
 
 }
@@ -791,9 +701,7 @@ function removeParticipant(id){
   x=>x.id!==id
  );
 
-
  save();
-
  renderAll();
 
 }
@@ -801,20 +709,16 @@ function removeParticipant(id){
 
 function renderParticipants(){
 
- if(
-  !state.participants.length
- ){
+ if(!state.participants.length){
 
   document.getElementById(
    "participantsTable"
   ).innerHTML=
-
   '<div class="empty">Añade participantes para empezar.</div>';
 
   return;
 
  }
-
 
  const rows=
  state.participants
@@ -823,9 +727,7 @@ function renderParticipants(){
 
 <tr>
 
-<td>
-${i+1}
-</td>
+<td>${i+1}</td>
 
 <td>
 
@@ -896,40 +798,32 @@ onclick="removeParticipant(${p.id})">
  ).innerHTML=
 
 `
-
 <table>
 
 <thead>
 
 <tr>
-
 <th>#</th>
 <th>Nombre</th>
 <th>Pareja</th>
 <th></th>
-
 </tr>
 
 </thead>
 
 <tbody>
-
 ${rows}
-
 </tbody>
 
 </table>
-
 `;
 
 }
 
 
-/*
-=========================================================
-HABILIDADES
-=========================================================
-*/
+/* =========================
+   HABILIDADES
+========================= */
 
 function updateSkill(
  id,
@@ -944,16 +838,13 @@ function updateSkill(
 
  if(!p)return;
 
-
  const def=
   skillDefs.find(
    x=>x.key===key
   );
 
-
  let number=
   parseFloat(val)||0;
-
 
  number=
   Math.max(
@@ -964,11 +855,9 @@ function updateSkill(
    )
   );
 
-
  p.skills[key]=number;
 
  save();
-
  renderAll();
 
 }
@@ -977,11 +866,9 @@ function updateSkill(
 function skillTotal(p){
 
  return skillDefs
-
  .filter(
   x=>x.key!=="red"
  )
-
  .reduce(
   (total,x)=>
    total+
@@ -994,13 +881,22 @@ function skillTotal(p){
 
 function pairSkill(pair){
 
- return participantsOfPair(pair)
+ /*
+  La prueba "Peloteamos en la red"
+  cuenta una sola vez por pareja.
+  Si hay dos jugadores, utilizamos
+  la puntuación introducida en la pareja.
+ */
 
- .reduce(
-  (total,p)=>
-   total+
-   (+p.skills.red||0),
-  0
+ const members=
+  participantsOfPair(pair);
+
+ if(!members.length)return 0;
+
+ return Math.max(
+  ...members.map(
+   p=>+p.skills.red||0
+  )
  );
 
 }
@@ -1008,48 +904,37 @@ function pairSkill(pair){
 
 function renderSkills(){
 
- if(
-  !state.participants.length
- ){
+ if(!state.participants.length){
 
   document.getElementById(
    "skillsTable"
   ).innerHTML=
-
   '<div class="empty">Primero añade participantes.</div>';
 
   return;
 
  }
 
-
  const head=
  skillDefs
-
  .map(
   s=>`
 
 <th>
-
 ${s.name}
-
 <br>
-
 <span class="small">
 Máx. ${s.max}
 </span>
-
 </th>
 
 `
  )
-
  .join("");
 
 
  const rows=
  state.participants
-
  .map(
   p=>`
 
@@ -1071,26 +956,18 @@ Pareja ${p.pair}
 
 ${
  skillDefs
-
  .map(
   s=>`
 
 <td class="num">
 
 <input
-
 class="score-input"
-
 type="number"
-
 min="0"
-
 max="${s.max}"
-
 step="0.5"
-
 value="${p.skills[s.key]||0}"
-
 onchange="
 updateSkill(
  ${p.id},
@@ -1103,21 +980,17 @@ updateSkill(
 
 `
  )
-
  .join("")
 }
 
 <td class="total">
-
 ${skillTotal(p).toFixed(1)}
-
 </td>
 
 </tr>
 
 `
  )
-
  .join("");
 
 
@@ -1126,31 +999,24 @@ ${skillTotal(p).toFixed(1)}
  ).innerHTML=
 
 `
-
 <table>
 
 <thead>
 
 <tr>
 
-<th>
-Participante
-</th>
+<th>Participante</th>
 
 ${head}
 
-<th>
-Total individual
-</th>
+<th>Total individual</th>
 
 </tr>
 
 </thead>
 
 <tbody>
-
 ${rows}
-
 </tbody>
 
 </table>
@@ -1159,30 +1025,25 @@ ${rows}
 
 Las cuatro primeras pruebas son individuales.
 "Peloteamos en la red" es una prueba de pareja
-y cuenta para la pareja.
+y cuenta una sola vez.
 
 </p>
-
 `;
 
 }
 
 
-/*
-=========================================================
-PARTIDOS
-=========================================================
-*/
+/* =========================
+   PARTIDOS
+========================= */
 
 function groupPairs(group){
 
  return pairs().filter(
-
   p=>
    group==="A"
    ?p<=4
    :p>=5
-
  );
 
 }
@@ -1191,10 +1052,8 @@ function groupPairs(group){
 function matchKey(a,b){
 
  return [
-
   Math.min(a,b),
   Math.max(a,b)
-
  ].join("-");
 
 }
@@ -1208,63 +1067,31 @@ function getMatch(a,b){
  const old=
   state.matches[key];
 
-
  if(!old)return null;
 
-
  /*
- Compatibilidad con posibles datos antiguos.
- */
-
- if(typeof old==="number"){
-
-  return {
-
-   winner:old,
-
-   aGames:
-    old===a
-    ?2
-    :0,
-
-   bGames:
-    old===b
-    ?2
-    :0,
-
-   tieBreak:null
-
-  };
-
- }
-
-
- /*
- Validamos que el partido realmente tenga
- un resultado válido.
+  Ignorar cualquier formato antiguo
+  que no sea un objeto válido.
  */
 
  if(
-  !old.aGames ||
-  !old.bGames ||
-  !old.winner
+  typeof old!=="object" ||
+  old===null ||
+  !("winner" in old)
  ){
 
   return null;
 
  }
 
-
  return old;
 
 }
 
 
-/*
-=========================================================
-RESULTADO DEL PARTIDO
-=========================================================
-*/
+/* =========================
+   RESULTADO DEL PARTIDO
+========================= */
 
 function setMatch(
  a,
@@ -1272,16 +1099,15 @@ function setMatch(
  result
 ){
 
- const key=
-  matchKey(a,b);
-
  result=
   String(result||"").trim();
 
+ const key=
+  matchKey(a,b);
+
 
  /*
- Pendiente = eliminar completamente el partido
- del Local Storage.
+  PENDIENTE
  */
 
  if(!result){
@@ -1290,12 +1116,19 @@ function setMatch(
 
   save();
 
-  renderAll();
+  renderMatches();
+  renderSemis();
+  renderFinal();
+  renderRanking();
 
   return;
 
  }
 
+
+ /*
+  RESULTADO VÁLIDO
+ */
 
  if(
   !/^(2-0|2-1|0-2|1-2)$/.test(result)
@@ -1311,14 +1144,17 @@ function setMatch(
 
 
  const parts=
-  result
-  .split("-")
-  .map(Number);
-
+  result.split("-").map(Number);
 
  const scoreA=parts[0];
  const scoreB=parts[1];
 
+
+ /*
+  Si cambiamos un partido
+  de 2-1 a 2-0, eliminamos
+  el tie-break anterior.
+ */
 
  state.matches[key]={
 
@@ -1338,16 +1174,26 @@ function setMatch(
 
  save();
 
- renderAll();
+
+ /*
+  IMPORTANTE:
+  No hacemos renderAll().
+  Solo actualizamos las zonas
+  necesarias. Así el selector
+  no se resetea.
+ */
+
+ renderMatches();
+ renderSemis();
+ renderFinal();
+ renderRanking();
 
 }
 
 
-/*
-=========================================================
-TIE-BREAK
-=========================================================
-*/
+/* =========================
+   TIE-BREAK
+========================= */
 
 function setTieBreak(
  a,
@@ -1361,13 +1207,10 @@ function setTieBreak(
  const match=
   getMatch(a,b);
 
-
  if(!match)return;
 
-
  value=
-  String(value||"")
-  .trim();
+  String(value||"").trim();
 
 
  if(!value){
@@ -1378,7 +1221,10 @@ function setTieBreak(
 
   save();
 
-  renderAll();
+  renderMatches();
+  renderSemis();
+  renderFinal();
+  renderRanking();
 
   return;
 
@@ -1421,20 +1267,12 @@ function setTieBreak(
  }
 
 
- /*
- Solo existe tie-break si el partido
- terminó 2-1 o 1-2.
- */
-
  const validTie=
-
   (
    match.aGames===2 &&
    match.bGames===1
   )
-
   ||
-
   (
    match.aGames===1 &&
    match.bGames===2
@@ -1442,6 +1280,10 @@ function setTieBreak(
 
 
  if(!validTie){
+
+  alert(
+   "Este partido no necesita tie-break."
+  );
 
   return;
 
@@ -1451,7 +1293,6 @@ function setTieBreak(
  match.tieBreak={
 
   a:tbA,
-
   b:tbB
 
  };
@@ -1461,16 +1302,17 @@ function setTieBreak(
 
  save();
 
- renderAll();
+ renderMatches();
+ renderSemis();
+ renderFinal();
+ renderRanking();
 
 }
 
 
-/*
-=========================================================
-ESTADÍSTICAS GRUPO
-=========================================================
-*/
+/* =========================
+   ESTADÍSTICAS GRUPO
+========================= */
 
 function groupStats(
  pair,
@@ -1478,22 +1320,17 @@ function groupStats(
 ){
 
  let played=0;
-
  let wins=0;
-
  let losses=0;
 
  let gamesFor=0;
-
  let gamesAgainst=0;
 
  let tieFor=0;
-
  let tieAgainst=0;
 
 
  groupPairs(group)
-
  .forEach(
   opponent=>{
 
@@ -1510,56 +1347,12 @@ function groupStats(
 
 
    /*
-   Si está pendiente, NO SUMA ABSOLUTAMENTE NADA.
+    MUY IMPORTANTE:
+    Si no hay resultado,
+    NO suma absolutamente nada.
    */
 
    if(!match)return;
-
-
-   /*
-   Seguridad adicional:
-   solo resultados válidos.
-   */
-
-   if(
-    !(
-     (
-      match.aGames===2 &&
-      (
-       match.bGames===0 ||
-       match.bGames===1
-      )
-     )
-
-     ||
-
-     (
-      match.aGames===0 &&
-      (
-       match.bGames===2 ||
-       match.bGames===1
-      )
-     )
-
-     ||
-
-     (
-      match.aGames===1 &&
-      match.bGames===2
-     )
-
-     ||
-
-     (
-      match.aGames===2 &&
-      match.bGames===1
-     )
-    )
-   ){
-
-    return;
-
-   }
 
 
    played++;
@@ -1603,18 +1396,15 @@ function groupStats(
 
 
    /*
-   Tie-break SOLO cuando el partido es 2-1 / 1-2.
+    Tie-break SOLO en 2-1 / 1-2
    */
 
    const hasTie=
-
     (
      match.aGames===2 &&
      match.bGames===1
     )
-
     ||
-
     (
      match.aGames===1 &&
      match.bGames===2
@@ -1687,22 +1477,18 @@ function groupStats(
 
 
 /*
-=========================================================
-CRITERIOS CLASIFICACIÓN GRUPO
-=========================================================
+ CRITERIOS DE CLASIFICACIÓN:
 
-1. Partidos ganados
-2. Diferencia de juegos
-3. Juegos a favor
-4. Diferencia tie-break
-5. Puntos tie-break a favor
-=========================================================
+ 1. Partidos ganados
+ 2. Diferencia de juegos
+ 3. Juegos a favor
+ 4. Diferencia tie-break
+ 5. Puntos tie-break a favor
 */
 
 function groupStandings(group){
 
  return groupPairs(group)
-
  .map(
   pair=>({
 
@@ -1715,9 +1501,7 @@ function groupStandings(group){
 
   })
  )
-
  .sort(
-
   (a,b)=>
 
    b.wins-a.wins ||
@@ -1737,23 +1521,24 @@ function groupStandings(group){
 }
 
 
-/*
-=========================================================
-RENDER PARTIDOS
-=========================================================
-*/
+/* =========================
+   RENDER PARTIDOS
+========================= */
 
 function renderMatches(){
 
- const group=
+ const selector=
   document.getElementById(
    "selectedGroup"
-  ).value;
+  );
 
+ if(!selector)return;
+
+ const group=
+  selector.value;
 
  const ps=
   groupPairs(group);
-
 
  let html="";
 
@@ -1771,16 +1556,12 @@ function renderMatches(){
   ){
 
    const a=ps[i];
-
    const b=ps[j];
-
 
    const match=
     getMatch(a,b);
 
-
    let value="";
-
 
    if(match){
 
@@ -1791,23 +1572,17 @@ function renderMatches(){
 
 
    const needsTie=
-
     match &&
-
     (
-
      (
       match.aGames===2 &&
       match.bGames===1
      )
-
      ||
-
      (
       match.aGames===1 &&
       match.bGames===2
      )
-
     );
 
 
@@ -1838,7 +1613,10 @@ setMatch(
 )
 ">
 
-<option value="">
+<option
+value=""
+${!match?"selected":""}
+>
 Pendiente
 </option>
 
@@ -2028,43 +1806,25 @@ ${
 
 ${
  match.tieBreak
-
  ?
-
-`
-
-<div
-class="small"
-style="margin-top:5px"
->
-
-Diferencia tie-break:
-
-<strong>
-${Math.abs(
- match.tieBreak.a-
- match.tieBreak.b
-)}
-puntos
-</strong>
-
-</div>
-
-`
-
+ `<div class="small" style="margin-top:5px">
+ Diferencia tie-break:
+ <strong>
+ ${Math.abs(
+   match.tieBreak.a-
+   match.tieBreak.b
+ )} puntos
+ </strong>
+ </div>`
  :
-
  ""
-
 }
 
 </div>
 
 `
 
- :
-
- ""
+: ""
 
 }
 
@@ -2082,7 +1842,6 @@ puntos
  ).innerHTML=
 
  html
-
  ?
 
  `<div class="match-grid">${html}</div>`
@@ -2097,11 +1856,9 @@ puntos
 }
 
 
-/*
-=========================================================
-CLASIFICACIÓN GRUPO
-=========================================================
-*/
+/* =========================
+   CLASIFICACIÓN GRUPO
+========================= */
 
 function renderGroupRanking(group){
 
@@ -2122,7 +1879,6 @@ function renderGroupRanking(group){
 
  const rows=
  ranking
-
  .map(
   (r,index)=>`
 
@@ -2165,42 +1921,21 @@ ${r.gamesAgainst}
 </td>
 
 <td class="num">
-
-${
- r.difference>0
- ?"+"
- :""
-}
-
-${r.difference}
-
+${r.difference>0?"+":""}${r.difference}
 </td>
 
 <td class="num">
-
-${
- r.tieDifference>0
- ?"+"
- :""
-}
-
-${r.tieDifference}
-
+${r.tieDifference>0?"+":""}${r.tieDifference}
 </td>
 
 <td class="num">
-
-<strong>
-${r.points}
-</strong>
-
+<strong>${r.points}</strong>
 </td>
 
 </tr>
 
 `
  )
-
  .join("");
 
 
@@ -2223,23 +1958,14 @@ ${r.points}
 <tr>
 
 <th>#</th>
-
 <th>Pareja</th>
-
 <th>PJ</th>
-
 <th>PG</th>
-
 <th>PP</th>
-
 <th>GF</th>
-
 <th>GC</th>
-
 <th>Dif.</th>
-
 <th>TB Dif.</th>
-
 <th>Puntos</th>
 
 </tr>
@@ -2247,18 +1973,14 @@ ${r.points}
 </thead>
 
 <tbody>
-
 ${rows}
-
 </tbody>
 
 </table>
 
 <p class="hint">
 
-<strong>
-Criterios de clasificación:
-</strong>
+<strong>Criterios:</strong>
 
 partidos ganados → diferencia de juegos →
 juegos a favor → diferencia del tie-break →
@@ -2266,12 +1988,9 @@ puntos de tie-break a favor.
 
 <br><br>
 
-El tie-break solo se utiliza cuando el resultado
-del partido es 2-1 o 1-2.
+Un partido pendiente NO suma ningún punto.
 
-<br><br>
-
-Los partidos pendientes no suman ningún punto.
+El tie-break solo cuenta en partidos 2-1 o 1-2.
 
 </p>
 
@@ -2282,31 +2001,24 @@ Los partidos pendientes no suman ningún punto.
 }
 
 
-/*
-=========================================================
-PUNTOS DE GRUPO
-=========================================================
-*/
+/* =========================
+   PUNTOS DE GRUPO
+========================= */
 
 function groupPoints(pair){
 
  let total=0;
 
-
- Object.entries(
+ Object.values(
   state.matches
  )
-
  .forEach(
-  ([key,match])=>{
-
-   /*
-   Nunca contar formatos antiguos numéricos.
-   */
+  match=>{
 
    if(
+    !match ||
     typeof match!=="object" ||
-    !match
+    !match.winner
    ){
 
     return;
@@ -2315,25 +2027,43 @@ function groupPoints(pair){
 
 
    /*
-   Solo resultados válidos.
+    Solo resultado válido.
    */
 
-   if(
-    !match.winner ||
-    !match.aGames ||
-    !match.bGames
-   ){
+   const winner=
+    +match.winner;
 
-    return;
 
-   }
+   const involved=
+    Object.keys(state.matches)
+    .find(
+     key=>{
+
+      const [
+       a,
+       b
+      ]=
+       key
+       .split("-")
+       .map(Number);
+
+      return(
+       a===pair ||
+       b===pair
+      );
+
+     }
+    );
+
+
+   if(!involved)return;
 
 
    const [
     a,
     b
    ]=
-    key
+    involved
     .split("-")
     .map(Number);
 
@@ -2344,8 +2074,7 @@ function groupPoints(pair){
    ){
 
     total+=
-
-     +match.winner===pair
+     winner===pair
      ?2
      :1;
 
@@ -2355,22 +2084,56 @@ function groupPoints(pair){
  );
 
 
+ /*
+  Recalculamos de forma segura
+  directamente con los grupos.
+ */
+
+ total=0;
+
+ ["A","B"].forEach(
+  group=>{
+
+   groupPairs(group)
+   .forEach(
+    opponent=>{
+
+     if(
+      opponent===pair
+     )return;
+
+     const match=
+      getMatch(
+       pair,
+       opponent
+      );
+
+     if(!match)return;
+
+     total+=
+      +match.winner===pair
+      ?2
+      :1;
+
+    }
+   );
+
+  }
+ );
+
  return total;
 
 }
 
 
-/*
-=========================================================
-SEMIFINALES
-=========================================================
-*/
+/* =========================
+   SEMIFINALES
+========================= */
 
 function renderSemis(){
 
  const a=
   groupStandings("A");
-
 
  const b=
   groupStandings("B");
@@ -2384,7 +2147,6 @@ function renderSemis(){
   document.getElementById(
    "semis"
   ).innerHTML=
-
   '<div class="empty">Completa al menos los participantes de ambos grupos para generar las semifinales.</div>';
 
   return;
@@ -2418,7 +2180,6 @@ function renderSemis(){
      m[0],
      m[1]
     );
-
 
    const winner=
     state.semis[key]||"";
@@ -2456,7 +2217,9 @@ state.final=null;
 
 save();
 
-renderAll();
+renderSemis();
+renderFinal();
+renderRanking();
 ">
 
 <option value="">
@@ -2492,13 +2255,9 @@ Gana · ${pairNames(m[1])} · 3 pt
  ).innerHTML=
 
 `
-
 <div class="match-grid">
-
 ${html}
-
 </div>
-
 `;
 
 }
@@ -2508,16 +2267,13 @@ function semiPoints(pair){
 
  let total=0;
 
-
  Object.entries(
   state.semis
  )
-
  .forEach(
   ([key,winner])=>{
 
    if(!winner)return;
-
 
    const [
     a,
@@ -2526,7 +2282,6 @@ function semiPoints(pair){
     key
     .split("-")
     .map(Number);
-
 
    if(
     a===pair ||
@@ -2543,7 +2298,6 @@ function semiPoints(pair){
   }
  );
 
-
  return total;
 
 }
@@ -2552,23 +2306,18 @@ function semiPoints(pair){
 function semiWinners(){
 
  return Object
-
  .values(
   state.semis
  )
-
  .filter(Boolean)
-
  .map(Number);
 
 }
 
 
-/*
-=========================================================
-FINAL
-=========================================================
-*/
+/* =========================
+   FINAL
+========================= */
 
 function renderFinal(){
 
@@ -2583,7 +2332,6 @@ function renderFinal(){
   document.getElementById(
    "final"
   ).innerHTML=
-
   '<div class="empty">Completa las dos semifinales para generar la final.</div>';
 
   return;
@@ -2592,9 +2340,7 @@ function renderFinal(){
 
 
  const a=winners[0];
-
  const b=winners[1];
-
 
  const winner=
   state.final||"";
@@ -2634,7 +2380,8 @@ this.value
 
 save();
 
-renderAll();
+renderFinal();
+renderRanking();
 ">
 
 <option value="">
@@ -2664,39 +2411,18 @@ Gana · ${pairNames(b)} · 6 pt
 }
 
 
-/*
-=========================================================
-PUNTOS TORNEO
-=========================================================
-*/
+/* =========================
+   PUNTOS TORNEO
+========================= */
 
 function tournamentPoints(pair){
 
- let total=0;
-
-
- /*
- Puntos de fase de grupos
- */
-
- total+=
+ let total=
   groupPoints(pair);
-
-
- /*
- Puntos de semifinales
- */
 
  total+=
   semiPoints(pair);
 
-
- /*
- Puntos de final
-
- SOLO se suman si la pareja ha llegado
- realmente a la final.
- */
 
  if(state.final){
 
@@ -2709,7 +2435,6 @@ function tournamentPoints(pair){
   ){
 
    total+=
-
     +state.final===pair
     ?6
     :2;
@@ -2724,22 +2449,15 @@ function tournamentPoints(pair){
 }
 
 
-/*
-=========================================================
-TOTAL PAREJA
-=========================================================
-*/
+/* =========================
+   TOTAL PAREJA
+========================= */
 
 function pairTotal(pair){
 
  const members=
   participantsOfPair(pair);
 
-
- /*
- Suma de habilidades individuales
- de los DOS jugadores.
- */
 
  const individual=
   members.reduce(
@@ -2750,45 +2468,31 @@ function pairTotal(pair){
   );
 
 
- /*
- Prueba de pareja.
- */
-
  const pairTest=
   pairSkill(pair);
 
-
- /*
- Torneo.
- */
 
  const tournament=
   tournamentPoints(pair);
 
 
  return(
-
   individual+
   pairTest+
   tournament
-
  );
 
 }
 
 
-/*
-=========================================================
-CLASIFICACIÓN GENERAL
-=========================================================
-*/
+/* =========================
+   CLASIFICACIÓN GENERAL
+========================= */
 
 function renderRanking(){
 
  const ranking=
-
   pairs()
-
   .map(
    pair=>({
 
@@ -2799,7 +2503,6 @@ function renderRanking(){
 
     individual:
      participantsOfPair(pair)
-
      .reduce(
       (total,p)=>
        total+
@@ -2818,26 +2521,18 @@ function renderRanking(){
 
    })
   )
-
   .sort(
-
    (a,b)=>
-
     b.total-a.total ||
-
     a.pair-b.pair
-
   );
 
 
- if(
-  !ranking.length
- ){
+ if(!ranking.length){
 
   document.getElementById(
    "ranking"
   ).innerHTML=
-
   '<div class="empty">Añade participantes para ver la clasificación.</div>';
 
   return;
@@ -2846,9 +2541,7 @@ function renderRanking(){
 
 
  const rows=
-
  ranking
-
  .map(
   (r,index)=>`
 
@@ -2863,11 +2556,7 @@ function renderRanking(){
 }">
 
 <td class="position">
-
-<strong>
-${index+1}
-</strong>
-
+<strong>${index+1}</strong>
 </td>
 
 <td>
@@ -2876,55 +2565,40 @@ ${index+1}
 
 ${
  r.members
-
  .map(
-  p=>
-   esc(p.name)||"Sin nombre"
+  p=>esc(p.name)||"Sin nombre"
  )
-
  .join(" · ")
-
 }
 
 </div>
 
 <div class="small">
-
 Pareja ${r.pair}
-
 </div>
 
 </td>
 
 <td class="num">
-
 ${r.individual.toFixed(1)}
-
 </td>
 
 <td class="num">
-
 ${r.pairTest.toFixed(1)}
-
 </td>
 
 <td class="num">
-
 ${r.tournament}
-
 </td>
 
 <td class="num total">
-
 ${r.total.toFixed(1)}
-
 </td>
 
 </tr>
 
 `
  )
-
  .join("");
 
 
@@ -2957,9 +2631,7 @@ ${r.total.toFixed(1)}
 </thead>
 
 <tbody>
-
 ${rows}
-
 </tbody>
 
 </table>
@@ -2969,11 +2641,9 @@ ${rows}
 }
 
 
-/*
-=========================================================
-RENDER GENERAL
-=========================================================
-*/
+/* =========================
+   RENDER GENERAL
+========================= */
 
 function renderAll(){
 
@@ -2992,39 +2662,30 @@ function renderAll(){
 }
 
 
-/*
-=========================================================
-BORRAR TODO
-=========================================================
-*/
+/* =========================
+   BORRAR TODO
+========================= */
 
 function resetAll(){
 
  if(
-
   confirm(
    "¿Borrar todos los participantes, puntos y resultados?"
   )
-
  ){
 
   localStorage.removeItem(KEY);
 
+  localStorage.removeItem(
+   MIGRATION_KEY
+  );
 
   state={
-
    participants:[],
-
    matches:{},
-
    semis:{},
-
-   final:null,
-
-   dataVersion:DATA_VERSION
-
+   final:null
   };
-
 
   renderAll();
 
@@ -3033,18 +2694,14 @@ function resetAll(){
 }
 
 
-/*
-=========================================================
-NAVEGACIÓN
-=========================================================
-*/
+/* =========================
+   NAVEGACIÓN
+========================= */
 
 document
-
 .querySelectorAll(
  "nav button"
 )
-
 .forEach(
  button=>{
 
@@ -3052,11 +2709,9 @@ document
   function(){
 
    document
-
    .querySelectorAll(
     "nav button"
    )
-
    .forEach(
     b=>
      b.classList.remove(
@@ -3064,13 +2719,10 @@ document
      )
    );
 
-
    document
-
    .querySelectorAll(
     ".view"
    )
-
    .forEach(
     v=>
      v.classList.remove(
@@ -3078,22 +2730,17 @@ document
      )
    );
 
-
    button.classList.add(
     "active"
    );
 
-
    document
-
    .getElementById(
     button.dataset.view
    )
-
    .classList.add(
     "active"
    );
-
 
    renderAll();
 
@@ -3103,11 +2750,9 @@ document
 );
 
 
-/*
-=========================================================
-INICIO
-=========================================================
-*/
+/* =========================
+   INICIO
+========================= */
 
 renderAll();
 
