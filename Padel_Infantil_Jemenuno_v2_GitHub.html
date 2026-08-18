@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Padel Infantil Jemenuño · Control de puntos v2</title>
+<style>
+:root{--navy:#102b57;--green:#64b526;--light:#f5f7fa;--line:#dce3eb;--orange:#f59e0b}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--light);color:#172033}
+header{background:linear-gradient(135deg,#102b57,#183c72);color:#fff;padding:22px 18px 18px;position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:23px} header p{margin:5px 0 0;opacity:.85;font-size:13px}
+nav{display:flex;gap:7px;overflow:auto;margin-top:15px}button,.tab{border:0;border-radius:10px;padding:10px 13px;font-weight:700;cursor:pointer}
+nav button{background:#fff1;color:#fff;border:1px solid #ffffff33;white-space:nowrap}.active{background:var(--green)!important;border-color:var(--green)!important}
+main{max-width:1150px;margin:auto;padding:16px}.view{display:none}.view.active{display:block}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px #102b570b}
+h2{margin:0 0 12px;color:var(--navy);font-size:20px}h3{margin:16px 0 8px;color:var(--navy);font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+label{font-size:12px;font-weight:700;color:#526174;display:block;margin-bottom:4px}
+input,select{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:9px;font-size:15px;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px 7px;border-bottom:1px solid var(--line);text-align:left}th{color:#526174;background:#f8fafc;position:sticky;top:117px}
+.num{text-align:center;font-weight:800}.total{font-size:18px;color:var(--navy)}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#e9f5dd;color:#397c14;font-size:11px;font-weight:800}
+.btn{background:var(--navy);color:#fff}.btn.green{background:var(--green)}.btn.red{background:#d94848}.btn.light{background:#edf2f7;color:var(--navy)}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.hint{font-size:12px;color:#66758a}.empty{padding:25px;text-align:center;color:#718096}
+.score-input{width:75px;text-align:center;padding:7px}.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.rank1{background:#fff9df}.rank2{background:#f5f7fa}.rank3{background:#fff3e8}
+.match-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.match{border:1px solid var(--line);border-radius:12px;padding:12px}.match strong{color:var(--navy)}
+.small{font-size:11px;color:#6b7280}.danger{color:#b91c1c}.success{color:#3f7d18}
+@media(max-width:650px){main{padding:10px}header{padding:16px 12px}th{top:113px}table{font-size:12px}.score-input{width:62px}}
+.version{font-size:10px;opacity:.65;margin-top:5px}\n</style>
+</head>
+<body>
+<header>
+  <h1>🎾 PÁDEL INFANTIL · JEMENUÑO</h1>
+  <p>Control de habilidades · parejas · torneo · clasificación general</p><div class="version">v2 · preparada para GitHub Pages</div>
+  <nav>
+    <button class="active" data-view="participantes">Participantes</button>
+    <button data-view="parejas">Parejas</button><button data-view="habilidades">Habilidades</button>
+    <button data-view="torneo">Torneo</button>
+    <button data-view="clasificacion">Clasificación</button>
+  </nav>
+</header>
+<main>
+<section id="participantes" class="view active">
+<div class="card">
+ <div class="section-title"><h2>👥 Participantes y parejas</h2><button class="btn green" onclick="addParticipant()">+ Participante</button></div>
+ <p class="hint">Crea hasta 16 participantes y asigna cada uno a una de las 8 parejas. Los datos se guardan automáticamente en este dispositivo.</p>
+ <div id="participantsTable"></div>
+</div>
+<div class="card">
+ <div class="actions">
+ <button class="btn light" onclick="loadDemo()">Cargar ejemplo</button>
+ <button class="btn light" onclick="exportData()">💾 Guardar copia</button>
+ <button class="btn light" onclick="document.getElementById("importFile").click()">📂 Recuperar copia</button>
+ <input id="importFile" type="file" accept=".json" style="display:none" onchange="importData(this.files[0])">
+ <button class="btn red" onclick="resetAll()">Borrar todo</button>
+</div>
+<p class="hint">La copia permite recuperar el torneo si cambias de dispositivo o borras los datos del navegador.</p>
+</div>
+</section>
+
+
+<section id="parejas" class="view">
+<div class="card">
+ <div class="section-title"><h2>👥 Parejas</h2><span class="badge">Editable en todo momento</span></div>
+ <p class="hint">Puedes cambiar a cualquier participante de pareja. El grupo se calcula automáticamente: parejas 1-4 → Grupo A · parejas 5-8 → Grupo B.</p>
+ <div id="pairsEditor"></div>
+</div>
+<div class="card">
+ <h2>🔄 Cambiar una pareja</h2>
+ <p class="hint">Si durante el torneo necesitas corregir una pareja, simplemente cambia el número del participante en la pestaña Participantes. Los resultados ya introducidos se mantienen hasta que decidas modificarlos.</p>
+</div>
+</section>
+<section id="habilidades" class="view">
+<div class="card">
+ <h2>🎯 Pruebas de habilidad</h2>
+ <p class="hint">Introduce directamente los puntos obtenidos. La aplicación controla los máximos de cada prueba.</p>
+ <div id="skillsTable"></div>
+</div>
+</section>
+
+<section id="torneo" class="view">
+<div class="card">
+ <h2>🏆 Fase de grupos</h2>
+ <p class="hint">8 parejas · 2 grupos de 4 · cada pareja juega 3 partidos. Introduce el resultado (0-2, 1-2, 2-0 o 2-1). La aplicación determina automáticamente ganador y puntos.</p>
+ <div class="grid">
+  <div><label>Pareja</label><select id="selectedPair" onchange="renderMatches()"></select></div>
+  <div><label>Grupo</label><select id="selectedGroup" onchange="renderMatches()"><option value="A">Grupo A</option><option value="B">Grupo B</option></select></div>
+ </div>
+ <div id="matches"></div>
+</div>
+<div class="card">
+ <h2>🥇 Semifinales</h2>
+ <p class="hint">Se generan automáticamente con los 2 primeros de cada grupo: 1ºA vs 2ºB y 2ºB vs 1ºA. Introduce el ganador. Ganador = 3 puntos · perdedor = 1 punto.</p>
+ <div id="semis"></div>
+</div>
+<div class="card">
+ <h2>🏆 Gran final</h2>
+ <p class="hint">Ganador = 6 puntos · perdedor = 2 puntos.</p>
+ <div id="final"></div>
+</div>
+</section>
+
+<section id="clasificacion" class="view">
+<div class="card">
+ <div class="section-title"><h2>📊 Clasificación general</h2><button class="btn green" onclick="renderAll()">Actualizar</button></div>
+ <p class="hint">Total = puntos individuales de habilidades + puntos de la pareja en la prueba de red + puntos obtenidos en el torneo.</p>
+ <div id="ranking"></div>
+</div>
+<div class="card">
+ <h2>🏅 Clasificación por parejas</h2>
+ <div id="pairRanking"></div>
+</div>
+</section>
+</main>
+
+<script>
+const KEY="padelJemenuno2026";
+const skillDefs=[
+ {key:"toques",name:"Toques",max:5,help:"1-4=1 · 5-12=3 · +12=5"},
+ {key:"pared",name:"Juego con pared",max:6,help:"3 pelotas · 2 puntos cada una"},
+ {key:"coloca",name:"Colocamos la bola",max:7.5,help:"3 pelotas · 2,5 puntos cada una"},
+ {key:"globo",name:"Despejamos con globo",max:7.5,help:"3 pelotas · 2,5 puntos cada una"},
+ {key:"red",name:"Peloteamos en la red",max:10,help:"Pareja · 1-5=2 · 6-15=5 · +15=10"}
+];
+let state=JSON.parse(localStorage.getItem(KEY)||"null")||{participants:[],matches:{},semis:{},final:null};
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function pairName(p){return p?"Pareja "+p:"Sin pareja"}
+function pairs(){return [...new Set(state.participants.map(x=>+x.pair).filter(x=>x>0))].sort((a,b)=>a-b)}
+function participantsOfPair(p){return state.participants.filter(x=>+x.pair===+p)}
+function addParticipant(){
+ if(state.participants.length>=16)return alert("Máximo 16 participantes.");
+ state.participants.push({id:Date.now(),name:"",pair:Math.min(8,state.participants.length+1),skills:{toques:0,pared:0,coloca:0,globo:0,red:0}});
+ save();renderAll();
+}
+function updateParticipant(id,field,val){let p=state.participants.find(x=>x.id===id);if(!p)return;p[field]=field==="pair"?+val:val;save();renderAll()}
+function updateSkill(id,key,val){
+ let p=state.participants.find(x=>x.id===id); if(!p)return;
+ val=Math.max(0,Math.min(skillDefs.find(s=>s.key===key).max,parseFloat(val)||0));p.skills[key]=val;save();renderAll();
+}
+function removeParticipant(id){state.participants=state.participants.filter(x=>x.id!==id);save();renderAll()}
+function renderParticipants(){
+ if(!state.participants.length){document.getElementById("participantsTable").innerHTML='<div class="empty">Añade participantes para empezar.</div>';return}
+ let rows=state.participants.map((p,i)=>`<tr><td>${i+1}</td><td><input value="${esc(p.name)}" placeholder="Nombre" onchange="updateParticipant(${p.id},'name',this.value)"></td><td><select onchange="updateParticipant(${p.id},'pair',this.value)">${Array.from({length:8},(_,i)=>`<option value="${i+1}" ${+p.pair===i+1?"selected":""}>P${i+1} · ${i<4?"Grupo A":"Grupo B"}</option>`).join("")}</select></td><td><button class="btn red" onclick="removeParticipant(${p.id})">×</button></td></tr>`).join("");
+ document.getElementById("participantsTable").innerHTML=`<table><thead><tr><th>#</th><th>Nombre</th><th>Pareja</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderPairs(){
+ const ps=Array.from({length:8},(_,i)=>i+1);
+ document.getElementById("pairsEditor").innerHTML=ps.map(p=>{
+   const members=participantsOfPair(p);
+   return `<div class="card" style="margin:8px 0;border-left:5px solid ${p<=4?"#64b526":"#102b57"}">
+     <div class="section-title"><strong>Pareja ${p}</strong><span class="badge">${p<=4?"Grupo A":"Grupo B"}</span></div>
+     <div class="grid" style="margin-top:8px">
+       ${[0,1].map(slot=>`<div><label>Jugador ${slot+1}</label>
+       <select onchange="setPairMember(${p},${slot},this.value)">
+         <option value="">— Vacío —</option>
+         ${state.participants.map(x=>`<option value="${x.id}" ${members[slot]&&members[slot].id===x.id?"selected":""}>${esc(x.name)||"Sin nombre"}</option>`).join("")}
+       </select></div>`).join("")}
+     </div>
+   </div>`
+ }).join("");
+}
+function setPairMember(pair,slot,id){
+ const chosen=state.participants.find(x=>String(x.id)===String(id));
+ const current=participantsOfPair(pair);
+ if(chosen){
+   // Move selected participant to this pair.
+   chosen.pair=pair;
+ }
+ // If the slot was cleared, move that member to pair 8 only if there is no explicit replacement.
+ // Keep the simple participant editor as the authoritative way to remove/reassign.
+ save();renderAll();
+}
+
+function renderSkills(){
+ if(!state.participants.length){document.getElementById("skillsTable").innerHTML='<div class="empty">Primero añade participantes.</div>';return}
+ let head=skillDefs.map(s=>`<th>${s.name}<br><span class="small">máx. ${s.max}</span></th>`).join("");
+ let rows=state.participants.map(p=>`<tr><td><strong>${esc(p.name)||"Sin nombre"}</strong><br><span class="small">P${p.pair}</span></td>${skillDefs.map(s=>`<td class="num"><input class="score-input" type="number" min="0" max="${s.max}" step="0.5" value="${p.skills[s.key]||0}" onchange="updateSkill(${p.id},'${s.key}',this.value)" title="${s.help}"></td>`).join("")}<td class="total">${skillTotal(p).toFixed(1)}</td></tr>`).join("");
+ document.getElementById("skillsTable").innerHTML=`<table><thead><tr><th>Participante</th>${head}<th>Total</th></tr></thead><tbody>${rows}</tbody></table><p class="hint">Toques: introduce el resultado ya convertido a puntos. La prueba de red es de pareja y debe introducirse en ambos integrantes si quieres que aparezca en su total individual.</p>`;
+}
+function skillTotal(p){return skillDefs.filter(s=>s.key!=="red").reduce((a,s)=>a+(+p.skills[s.key]||0),0)}
+function pairSkill(p){return participantsOfPair(p).reduce((a,x)=>Math.max(a,+x.skills.red||0),0)}
+function groupPairs(g){let ps=pairs();return ps.filter(p=>g==="A"?p<=4:p>=5)}
+function matchKey(a,b){return [Math.min(a,b),Math.max(a,b)].join("-")}
+function setMatch(a,b,score){
+ let k=matchKey(a,b);
+ score=String(score||"").trim();
+ if(!score){delete state.matches[k];}
+ else{
+   const m=score.match(/^([012])-([012])$/);
+   if(!m || Math.abs(+m[1]-+m[2])===0 || Math.max(+m[1],+m[2])!==2 || Math.min(+m[1],+m[2])>1){
+     return alert("Resultado no válido. Usa 2-0, 2-1, 0-2 o 1-2.");
+   }
+   const sa=+m[1], sb=+m[2];
+   state.matches[k]={aScore:sa,bScore:sb,winner:sa>sb?a:b};
+ }
+ save();renderAll()
+}
+function renderMatches(){
+ let ps=groupPairs(document.getElementById("selectedGroup").value);
+ let html="";
+ for(let i=0;i<ps.length;i++)for(let j=i+1;j<ps.length;j++){
+   let a=ps[i],b=ps[j],k=matchKey(a,b),m=state.matches[k]||null;
+   let value=m&&typeof m==="object"?`${m.aScore}-${m.bScore}`:"";
+   html+=`<div class="match">
+      <strong>${pairName(a)} vs ${pairName(b)}</strong>
+      <div class="small" style="margin:4px 0 8px">${participantsOfPair(a).map(x=>esc(x.name)||"Sin nombre").join(" + ")} · ${participantsOfPair(b).map(x=>esc(x.name)||"Sin nombre").join(" + ")}</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input class="score-input" style="width:100px" placeholder="2-1" value="${value}" onchange="setMatch(${a},${b},this.value)">
+        <button class="btn light" onclick="setMatch(${a},${b},'')">Borrar</button>
+      </div>
+    </div>`;
+ }
+ document.getElementById("matches").innerHTML=`<div class="match-grid">${html||'<div class="empty">Necesitas tener parejas asignadas al grupo.</div>'}</div>`;
+}
+function groupPoints(p){
+ let pts=0;
+ Object.entries(state.matches).forEach(([k,m])=>{
+   let [a,b]=k.split("-").map(Number);
+   if(typeof m==="number"){ if(a===p||b===p) pts += (m===p?2:1); return; }
+   if(!m || typeof m!=="object") return;
+   if(a===p||b===p) pts += (m.winner===p ? 2 : 1);
+ });
+ return pts
+}
+function standings(g){
+ return groupPairs(g).map(p=>({p,pts:groupPoints(p)})).sort((a,b)=>b.pts-a.pts||a.p-b.p)
+}
+function renderSemis(){
+ let a=standings("A"),b=standings("B");
+ let pairings=a.length>=2&&b.length>=2?[[a[0].p,b[1].p],[b[0].p,a[1].p]]:[];
+ let html=pairings.map((m,i)=>{let k=`${m[0]}-${m[1]}`,w=state.semis[k]||"";return `<div class="match"><strong>Semifinal ${i+1}: P${m[0]} vs P${m[1]}</strong><div style="margin-top:8px"><select onchange="state.semis['${k}']=this.value?+this.value:null;state.final=null;save();renderAll()"><option value="">Pendiente</option><option value="${m[0]}" ${+w===m[0]?"selected":""}>Gana P${m[0]} · 3 pt</option><option value="${m[1]}" ${+w===m[1]?"selected":""}>Gana P${m[1]} · 3 pt</option></select></div></div>`}).join("");
+ document.getElementById("semis").innerHTML=html?`<div class="match-grid">${html}</div>`:'<div class="empty">Completa la clasificación de grupos para generar las semifinales.</div>';
+}
+function semiLoserPoints(p){
+ let pts=0;
+ Object.entries(state.semis).forEach(([k,w])=>{let [a,b]=k.split("-").map(Number);if(a===p||b===p)pts+=(+w===p?3:1)});
+ return pts
+}
+function semiWinners(){return Object.values(state.semis).filter(Boolean).map(Number)}
+function renderFinal(){
+ let ws=semiWinners();
+ if(ws.length<2){document.getElementById("final").innerHTML='<div class="empty">Completa las dos semifinales para generar la final.</div>';return}
+ let a=ws[0],b=ws[1],w=state.final||"",k=`${a}-${b}`;
+ document.getElementById("final").innerHTML=`<div class="match"><strong>Final: P${a} vs P${b}</strong><div style="margin-top:8px"><select onchange="state.final=this.value?+this.value:null;save();renderAll()"><option value="">Pendiente</option><option value="${a}" ${+w===a?"selected":""}>Gana P${a} · 6 pt</option><option value="${b}" ${+w===b?"selected":""}>Gana P${b} · 6 pt</option></select></div></div>`;
+}
+function tournamentPoints(p){
+ let pts=groupPoints(p);
+ pts+=semiLoserPoints(p);
+ if(state.final){
+   let ws=semiWinners();
+   if(ws.includes(p)) pts+=(+state.final===p?6:2);
+ }
+ return pts
+}
+function totalParticipant(p){return skillTotal(p)+pairSkill(p)+tournamentPoints(+p.pair)}
+function renderRanking(){
+ let arr=[...state.participants].sort((a,b)=>totalParticipant(b)-totalParticipant(a));
+ if(!arr.length){document.getElementById("ranking").innerHTML='<div class="empty">Añade participantes para ver la clasificación.</div>';return}
+ let rows=arr.map((p,i)=>`<tr class="${i===0?"rank1":i===1?"rank2":i===2?"rank3":""}"><td><strong>${i+1}</strong></td><td>${esc(p.name)||"Sin nombre"}<br><span class="small">Pareja ${p.pair}</span></td><td class="num">${skillTotal(p).toFixed(1)}</td><td class="num">${pairSkill(p).toFixed(1)}</td><td class="num">${tournamentPoints(+p.pair)}</td><td class="num total">${totalParticipant(p).toFixed(1)}</td></tr>`).join("");
+ document.getElementById("ranking").innerHTML=`<table><thead><tr><th>#</th><th>Participante</th><th>Habilidades</th><th>Pareja</th><th>Torneo</th><th>TOTAL</th></tr></thead><tbody>${rows}</tbody></table>`;
+ let prs=pairs().map(p=>({p,total:participantsOfPair(p).reduce((a,x)=>a+skillTotal(x),0)+pairSkill(p)*participantsOfPair(p).length+tournamentPoints(p)})).sort((a,b)=>b.total-a.total);
+ document.getElementById("pairRanking").innerHTML=`<table><thead><tr><th>#</th><th>Pareja</th><th>Participantes</th><th>Puntos torneo</th><th>Total pareja</th></tr></thead><tbody>${prs.map((x,i)=>`<tr><td>${i+1}</td><td><strong>Pareja ${x.p}</strong></td><td>${participantsOfPair(x.p).map(y=>esc(y.name)||"Sin nombre").join(" · ")}</td><td class="num">${tournamentPoints(x.p)}</td><td class="num total">${x.total.toFixed(1)}</td></tr>`).join("")}</tbody></table>`;
+}
+function renderAll(){
+ renderParticipants();renderPairs();renderSkills();
+ let sp=document.getElementById("selectedPair"), old=sp.value;sp.innerHTML=pairs().map(p=>`<option value="${p}">Pareja ${p}</option>`).join("");if(old)sp.value=old;
+ renderMatches();renderSemis();renderFinal();renderRanking();
+}
+
+function exportData(){
+ const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="padel-jemenuno-copia.json";a.click();URL.revokeObjectURL(a.href);
+}
+function importData(file){
+ if(!file)return;
+ const r=new FileReader();
+ r.onload=()=>{try{
+   const data=JSON.parse(r.result);
+   if(!data.participants)throw new Error();
+   state=data;save();renderAll();alert("Torneo recuperado correctamente.");
+ }catch(e){alert("La copia no es válida.");}};
+ r.readAsText(file);
+}
+
+function loadDemo(){
+ state.participants=[];
+ for(let i=1;i<=16;i++)state.participants.push({id:Date.now()+i,name:"Jugador "+i,pair:Math.ceil(i/2),skills:{toques:[1,3,5][i%3],pared:(i%4)*2,coloca:(i%4)*2.5,globo:(i%4)*2.5,red:[2,5,10][i%3]}});
+ state.matches={};state.semis={};state.final=null;save();renderAll();
+}
+function resetAll(){if(confirm("¿Borrar todos los participantes, puntos y resultados?")){localStorage.removeItem(KEY);state={participants:[],matches:{},semis:{},final:null};renderAll()}}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.view).classList.add("active");renderAll()});
+renderAll();
+</script>
+</body>
+</html>
