@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PÁDEL INFANTIL JEMENUÑO V1.1</title>
+<title>PÁDEL INFANTIL JEMENUÑO V1.2</title>
 
 <style>
 :root{
@@ -11,237 +11,282 @@
  --green:#64b526;
  --light:#f5f7fa;
  --line:#dce3eb;
+ --orange:#f59e0b
 }
 
-*{box-sizing:border-box}
+*{
+ box-sizing:border-box
+}
 
 body{
  margin:0;
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
  background:var(--light);
- color:#172033;
+ color:#172033
 }
 
 header{
  background:linear-gradient(135deg,#102b57,#183c72);
  color:#fff;
- padding:18px 14px;
+ padding:22px 18px 18px;
  position:sticky;
  top:0;
- z-index:5;
+ z-index:5
 }
 
 header h1{
  margin:0;
- font-size:22px;
+ font-size:23px
 }
 
 header p{
  margin:5px 0 0;
- font-size:12px;
  opacity:.85;
+ font-size:13px
 }
 
 .version{
  font-size:10px;
  opacity:.65;
- margin-top:5px;
+ margin-top:5px
 }
 
 nav{
  display:flex;
- gap:6px;
+ gap:7px;
  overflow:auto;
- margin-top:14px;
+ margin-top:15px
+}
+
+button,
+.tab{
+ border:0;
+ border-radius:10px;
+ padding:10px 13px;
+ font-weight:700;
+ cursor:pointer
 }
 
 nav button{
- border:1px solid #ffffff44;
- background:#ffffff12;
+ background:#fff1;
  color:#fff;
- border-radius:9px;
- padding:9px 11px;
- font-weight:700;
- white-space:nowrap;
+ border:1px solid #ffffff33;
+ white-space:nowrap
 }
 
-nav button.active{
- background:var(--green);
- border-color:var(--green);
+.active{
+ background:var(--green)!important;
+ border-color:var(--green)!important
 }
 
 main{
- max-width:1100px;
+ max-width:1150px;
  margin:auto;
- padding:12px;
+ padding:16px
 }
 
 .view{
- display:none;
+ display:none
 }
 
 .view.active{
- display:block;
+ display:block
 }
 
 .card{
  background:#fff;
  border:1px solid var(--line);
- border-radius:14px;
- padding:14px;
- margin-bottom:12px;
- box-shadow:0 2px 8px #102b5710;
+ border-radius:15px;
+ padding:16px;
+ margin-bottom:14px;
+ box-shadow:0 2px 8px #102b570b
 }
 
 h2{
+ margin:0 0 12px;
  color:var(--navy);
- font-size:19px;
- margin:0 0 10px;
+ font-size:20px
+}
+
+h3{
+ margin:16px 0 8px;
+ color:var(--navy);
+ font-size:16px
 }
 
 .grid{
  display:grid;
- grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
- gap:9px;
+ grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+ gap:10px
 }
 
 label{
- display:block;
- font-size:11px;
+ font-size:12px;
  font-weight:700;
  color:#526174;
- margin-bottom:4px;
+ display:block;
+ margin-bottom:4px
 }
 
 input,
 select{
  width:100%;
- padding:9px;
+ padding:10px;
  border:1px solid #cbd5e1;
- border-radius:8px;
- background:#fff;
- font-size:14px;
-}
-
-button{
- cursor:pointer;
-}
-
-.btn{
- border:0;
  border-radius:9px;
- padding:9px 12px;
- font-weight:700;
- background:var(--navy);
- color:#fff;
-}
-
-.btn.green{
- background:var(--green);
-}
-
-.btn.red{
- background:#d94848;
-}
-
-.btn.light{
- background:#edf2f7;
- color:var(--navy);
-}
-
-.actions{
- display:flex;
- gap:7px;
- flex-wrap:wrap;
-}
-
-.hint,
-.small{
- font-size:11px;
- color:#66758a;
-}
-
-.empty{
- text-align:center;
- padding:20px;
- color:#718096;
+ font-size:15px;
+ background:#fff
 }
 
 table{
  width:100%;
  border-collapse:collapse;
- font-size:12px;
+ font-size:13px
 }
 
 th,
 td{
- padding:8px 6px;
+ padding:9px 7px;
  border-bottom:1px solid var(--line);
- text-align:left;
+ text-align:left
 }
 
 th{
- background:#f8fafc;
  color:#526174;
+ background:#f8fafc;
+ position:sticky;
+ top:117px
 }
 
 .num{
  text-align:center;
- font-weight:800;
+ font-weight:800
 }
 
 .total{
- font-size:17px;
- color:var(--navy);
-}
-
-.score-input{
- width:70px;
- text-align:center;
+ font-size:18px;
+ color:var(--navy)
 }
 
 .badge{
  display:inline-block;
+ padding:4px 8px;
+ border-radius:999px;
  background:#e9f5dd;
  color:#397c14;
- border-radius:99px;
- padding:3px 7px;
- font-size:10px;
- font-weight:800;
+ font-size:11px;
+ font-weight:800
 }
 
-.matches{
+.btn{
+ background:var(--navy);
+ color:#fff
+}
+
+.btn.green{
+ background:var(--green)
+}
+
+.btn.red{
+ background:#d94848
+}
+
+.btn.light{
+ background:#edf2f7;
+ color:var(--navy)
+}
+
+.actions{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap
+}
+
+.hint{
+ font-size:12px;
+ color:#66758a
+}
+
+.empty{
+ padding:25px;
+ text-align:center;
+ color:#718096
+}
+
+.score-input{
+ width:75px;
+ text-align:center;
+ padding:7px
+}
+
+.section-title{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px
+}
+
+.rank1{
+ background:#fff9df
+}
+
+.rank2{
+ background:#f5f7fa
+}
+
+.rank3{
+ background:#fff3e8
+}
+
+.match-grid{
  display:grid;
- grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
- gap:9px;
+ grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+ gap:10px
 }
 
 .match{
  border:1px solid var(--line);
- border-radius:11px;
- padding:11px;
+ border-radius:12px;
+ padding:12px
 }
 
-.rank1{
- background:#fff9df;
+.match strong{
+ color:var(--navy)
 }
 
-.rank2{
- background:#f5f7fa;
+.small{
+ font-size:11px;
+ color:#6b7280
 }
 
-.rank3{
- background:#fff3e8;
+.danger{
+ color:#b91c1c
 }
 
-@media(max-width:600px){
+.success{
+ color:#3f7d18
+}
 
- table{
-  font-size:11px;
- }
+@media(max-width:650px){
 
  main{
-  padding:8px;
+  padding:10px
+ }
+
+ header{
+  padding:16px 12px
+ }
+
+ th{
+  top:113px
+ }
+
+ table{
+  font-size:12px
+ }
+
+ .score-input{
+  width:62px
  }
 
 }
@@ -252,14 +297,14 @@ th{
 
 <header>
 
-<h1>🎾 PÁDEL INFANTIL JEMENUÑO V1.1</h1>
+<h1>🎾 PÁDEL INFANTIL JEMENUÑO V1.2</h1>
 
 <p>
-Habilidades · parejas · torneo · clasificación
+Control de habilidades · parejas · torneo · clasificación general
 </p>
 
 <div class="version">
-V1.1 · clasificación por parejas · preparada para GitHub Pages
+V1.2 · clasificación final por parejas
 </div>
 
 <nav>
@@ -268,11 +313,6 @@ V1.1 · clasificación por parejas · preparada para GitHub Pages
 class="active"
 data-view="participantes">
 Participantes
-</button>
-
-<button
-data-view="parejas">
-Parejas
 </button>
 
 <button
@@ -298,7 +338,9 @@ Clasificación
 <main>
 
 
-<!-- PARTICIPANTES -->
+<!-- ================================
+     PARTICIPANTES
+================================ -->
 
 <section
 id="participantes"
@@ -306,10 +348,25 @@ class="view active">
 
 <div class="card">
 
-<h2>👥 Participantes</h2>
+<div class="section-title">
+
+<h2>
+👥 Participantes y parejas
+</h2>
+
+<button
+class="btn green"
+onclick="addParticipant()">
++ Participante
+</button>
+
+</div>
 
 <p class="hint">
-Las 8 parejas están precargadas. Puedes cambiar cualquier participante de pareja.
+
+Crea hasta 16 participantes y asigna cada uno a una de las 8 parejas.
+Los datos se guardan automáticamente en este dispositivo.
+
 </p>
 
 <div id="participantsTable"></div>
@@ -322,29 +379,10 @@ Las 8 parejas están precargadas. Puedes cambiar cualquier participante de parej
 <div class="actions">
 
 <button
-class="btn green"
-onclick="addParticipant()">
-+ Participante
-</button>
-
-<button
 class="btn light"
-onclick="exportData()">
-💾 Guardar copia
+onclick="loadDemo()">
+Cargar ejemplo
 </button>
-
-<button
-class="btn light"
-onclick="document.getElementById('importFile').click()">
-📂 Recuperar copia
-</button>
-
-<input
-id="importFile"
-type="file"
-accept=".json"
-style="display:none"
-onchange="importData(this.files[0])">
 
 <button
 class="btn red"
@@ -354,38 +392,14 @@ Borrar todo
 
 </div>
 
-<p class="hint">
-La copia permite recuperar el torneo si cambias de dispositivo o borras los datos del navegador.
-</p>
-
 </div>
 
 </section>
 
 
-<!-- PAREJAS -->
-
-<section
-id="parejas"
-class="view">
-
-<div class="card">
-
-<h2>👥 Parejas</h2>
-
-<p class="hint">
-Parejas 1-4 = Grupo A · Parejas 5-8 = Grupo B.
-Puedes cambiar los participantes en cualquier momento.
-</p>
-
-<div id="pairsEditor"></div>
-
-</div>
-
-</section>
-
-
-<!-- HABILIDADES -->
+<!-- ================================
+     HABILIDADES
+================================ -->
 
 <section
 id="habilidades"
@@ -393,10 +407,15 @@ class="view">
 
 <div class="card">
 
-<h2>🎯 Pruebas de habilidad</h2>
+<h2>
+🎯 Pruebas de habilidad
+</h2>
 
 <p class="hint">
+
 Introduce directamente los puntos obtenidos.
+La aplicación controla los máximos de cada prueba.
+
 </p>
 
 <div id="skillsTable"></div>
@@ -406,7 +425,9 @@ Introduce directamente los puntos obtenidos.
 </section>
 
 
-<!-- TORNEO -->
+<!-- ================================
+     TORNEO
+================================ -->
 
 <section
 id="torneo"
@@ -414,19 +435,38 @@ class="view">
 
 <div class="card">
 
-<h2>🏆 Fase de grupos</h2>
+<h2>
+🏆 Fase de grupos
+</h2>
 
 <p class="hint">
-8 parejas · 2 grupos de 4 · 3 partidos por pareja.
+
+8 parejas · 2 grupos de 4 · cada pareja juega 3 partidos.
 Victoria = 2 puntos · derrota = 1 punto.
-Introduce el resultado: 2-0, 2-1, 0-2 o 1-2.
+
 </p>
 
 <div class="grid">
 
 <div>
 
-<label>Grupo</label>
+<label>
+Pareja
+</label>
+
+<select
+id="selectedPair"
+onchange="renderMatches()">
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+Grupo
+</label>
 
 <select
 id="selectedGroup"
@@ -446,37 +486,41 @@ Grupo B
 
 </div>
 
-<div
-id="matches"
-class="matches">
-</div>
+<div id="matches"></div>
 
 </div>
 
 
 <div class="card">
 
-<h2>🥇 Semifinales</h2>
+<h2>
+🥇 Semifinales
+</h2>
 
 <p class="hint">
+
+Se generan automáticamente con los 2 primeros de cada grupo:
 1ºA vs 2ºB y 1ºB vs 2ºA.
+
 Ganador = 3 puntos · perdedor = 1 punto.
+
 </p>
 
-<div
-id="semis"
-class="matches">
-</div>
+<div id="semis"></div>
 
 </div>
 
 
 <div class="card">
 
-<h2>🏆 Gran final</h2>
+<h2>
+🏆 Gran final
+</h2>
 
 <p class="hint">
+
 Ganador = 6 puntos · perdedor = 2 puntos.
+
 </p>
 
 <div id="final"></div>
@@ -486,7 +530,9 @@ Ganador = 6 puntos · perdedor = 2 puntos.
 </section>
 
 
-<!-- CLASIFICACION -->
+<!-- ================================
+     CLASIFICACIÓN
+================================ -->
 
 <section
 id="clasificacion"
@@ -494,12 +540,44 @@ class="view">
 
 <div class="card">
 
-<h2>📊 Clasificación general por parejas</h2>
+<div class="section-title">
+
+<h2>
+📊 Clasificación general
+</h2>
+
+<button
+class="btn green"
+onclick="renderAll()">
+Actualizar
+</button>
+
+</div>
 
 <p class="hint">
-La clasificación es por parejas.
-Se suman las habilidades individuales de los dos jugadores,
-la prueba de pareja y los puntos obtenidos por la pareja en el torneo.
+
+<strong>
+Clasificación exclusivamente por parejas.
+</strong>
+
+Cada pareja suma:
+
+<br><br>
+
+• Habilidades individuales del jugador 1
+<br>
+• Habilidades individuales del jugador 2
+<br>
+• Puntos de "Peloteamos en la red" de la pareja
+<br>
+• Puntos obtenidos por la pareja en el torneo
+
+<br><br>
+
+La prueba de red se suma
+<strong>una sola vez</strong>
+por pareja.
+
 </p>
 
 <div id="ranking"></div>
@@ -515,11 +593,11 @@ la prueba de pareja y los puntos obtenidos por la pareja en el torneo.
 <script>
 
 
-/* ================================
+/* =================================
    CONFIGURACIÓN
-================================ */
+================================= */
 
-const STORAGE_KEY="padelJemenuno2026";
+const KEY="padelJemenuno2026";
 
 
 const skillDefs=[
@@ -527,64 +605,44 @@ const skillDefs=[
  {
   key:"toques",
   name:"Toques",
-  max:5
+  max:5,
+  help:"1-4=1 · 5-12=3 · +12=5"
  },
 
  {
   key:"pared",
-  name:"Pared",
-  max:6
+  name:"Juego con pared",
+  max:6,
+  help:"3 pelotas · 2 puntos cada una"
  },
 
  {
   key:"coloca",
-  name:"Colocamos",
-  max:7.5
+  name:"Colocamos la bola",
+  max:7.5,
+  help:"3 pelotas · 2,5 puntos cada una"
  },
 
  {
   key:"globo",
-  name:"Globo",
-  max:7.5
+  name:"Despejamos con globo",
+  max:7.5,
+  help:"3 pelotas · 2,5 puntos cada una"
  },
 
  {
   key:"red",
-  name:"Red",
-  max:10
+  name:"Peloteamos en la red",
+  max:10,
+  help:"Pareja · 1-5=2 · 6-15=5 · +15=10"
  }
 
 ];
 
 
-const PRELOADED_PAIRS=[
-
- ["Héctor","Mario"],
-
- ["Rodrigo","Marta"],
-
- ["Iria","Marina"],
-
- ["Iñigo","Miguel"],
-
- ["Alex","Guille"],
-
- ["Marco","Iker"],
-
- ["Naia","Candela"],
-
- ["Xabier","Timur"]
-
-];
-
-
-/* ================================
-   ESTADO
-================================ */
-
 let state=
 JSON.parse(
- localStorage.getItem(STORAGE_KEY)||"null"
+ localStorage.getItem(KEY)||"null"
 )
 ||
 {
@@ -595,110 +653,63 @@ JSON.parse(
 };
 
 
-/* ================================
-   PRECARGA
-================================ */
-
-function ensurePreloaded(){
-
- if(state.participants.length>0){
-  return;
- }
-
- PRELOADED_PAIRS.forEach(
-  (pair,pairIndex)=>{
-
-   pair.forEach(
-    (name,playerIndex)=>{
-
-     state.participants.push({
-
-      id:
-       Date.now()+
-       pairIndex*10+
-       playerIndex,
-
-      name:name,
-
-      pair:pairIndex+1,
-
-      skills:{
-       toques:0,
-       pared:0,
-       coloca:0,
-       globo:0,
-       red:0
-      }
-
-     });
-
-    }
-   );
-
-  }
- );
-
- save();
-
-}
-
-
-/* ================================
+/* =================================
    GUARDAR
-================================ */
+================================= */
 
 function save(){
 
  localStorage.setItem(
-  STORAGE_KEY,
+  KEY,
   JSON.stringify(state)
  );
 
 }
 
 
-/* ================================
-   ESCAPE HTML
-================================ */
+/* =================================
+   ESCAPAR TEXTO
+================================= */
 
-function esc(value){
+function esc(s){
 
- return String(value??"")
+ return String(s??"")
  .replace(
   /[&<>"']/g,
-  function(match){
+  m=>({
 
-   return {
+   "&":"&amp;",
+   "<":"&lt;",
+   ">":"&gt;",
+   '"':"&quot;",
+   "'":"&#039;"
 
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-
-   }[match];
-
-  }
+  }[m])
  );
 
 }
 
 
-/* ================================
+/* =================================
    PAREJAS
-================================ */
+================================= */
+
+function pairName(p){
+
+ return p
+  ? "Pareja "+p
+  : "Sin pareja";
+
+}
+
 
 function pairs(){
 
  return [
   ...new Set(
    state.participants
-   .map(
-    p=>+p.pair
-   )
-   .filter(
-    p=>p>0
-   )
+   .map(x=>+x.pair)
+   .filter(x=>x>0)
   )
  ]
  .sort(
@@ -711,19 +722,21 @@ function pairs(){
 function participantsOfPair(pair){
 
  return state.participants.filter(
-  p=>+p.pair===+pair
+  x=>+x.pair===+pair
  );
 
 }
 
 
-/* ================================
+/* =================================
    PARTICIPANTES
-================================ */
+================================= */
 
 function addParticipant(){
 
- if(state.participants.length>=16){
+ if(
+  state.participants.length>=16
+ ){
 
   alert(
    "Máximo 16 participantes."
@@ -733,23 +746,35 @@ function addParticipant(){
 
  }
 
+
  state.participants.push({
 
   id:Date.now(),
 
   name:"",
 
-  pair:1,
+  pair:
+   Math.min(
+    8,
+    state.participants.length+1
+   ),
 
   skills:{
+
    toques:0,
+
    pared:0,
+
    coloca:0,
+
    globo:0,
+
    red:0
+
   }
 
  });
+
 
  save();
 
@@ -761,27 +786,25 @@ function addParticipant(){
 function updateParticipant(
  id,
  field,
- value
+ val
 ){
 
- const participant=
- state.participants.find(
-  p=>p.id===id
- );
+ let p=
+  state.participants.find(
+   x=>x.id===id
+  );
 
- if(!participant){
+
+ if(!p){
   return;
  }
 
- if(field==="pair"){
 
-  participant.pair=+value;
+ p[field]=
+  field==="pair"
+  ?+val
+  :val;
 
- }else{
-
-  participant[field]=value;
-
- }
 
  save();
 
@@ -790,74 +813,13 @@ function updateParticipant(
 }
 
 
-/* ================================
-   PUNTOS INDIVIDUALES
-================================ */
+function removeParticipant(id){
 
-function skillTotal(participant){
+ state.participants=
+  state.participants.filter(
+   x=>x.id!==id
+  );
 
- return skillDefs
- .filter(
-  skill=>skill.key!=="red"
- )
- .reduce(
-  (total,skill)=>
-   total+
-   (+participant.skills[skill.key]||0),
-  0
- );
-
-}
-
-
-function pairSkill(pair){
-
- return participantsOfPair(pair)
- .reduce(
-  (maximum,participant)=>
-   Math.max(
-    maximum,
-    +participant.skills.red||0
-   ),
-  0
- );
-
-}
-
-
-function updateSkill(
- id,
- key,
- value
-){
-
- const participant=
- state.participants.find(
-  p=>p.id===id
- );
-
- if(!participant){
-  return;
- }
-
- const definition=
- skillDefs.find(
-  s=>s.key===key
- );
-
- let number=
- parseFloat(value)||0;
-
- number=
- Math.max(
-  0,
-  Math.min(
-   definition.max,
-   number
-  )
- );
-
- participant.skills[key]=number;
 
  save();
 
@@ -865,37 +827,34 @@ function updateSkill(
 
 }
 
-
-/* ================================
-   TABLA PARTICIPANTES
-================================ */
 
 function renderParticipants(){
 
  if(
-  state.participants.length===0
+  !state.participants.length
  ){
 
   document.getElementById(
    "participantsTable"
   ).innerHTML=
-   '<div class="empty">Añade participantes.</div>';
+   '<div class="empty">Añade participantes para empezar.</div>';
 
   return;
 
  }
 
 
- const rows=
- state.participants
- .map(
-  (p,index)=>`
+ let rows=
+  state.participants
+  .map(
+   (p,i)=>`
 
 <tr>
 
 <td>
-${index+1}
+${i+1}
 </td>
+
 
 <td>
 
@@ -912,6 +871,7 @@ updateParticipant(
 
 </td>
 
+
 <td>
 
 <select
@@ -926,14 +886,13 @@ updateParticipant(
 ${
  Array.from(
   {length:8},
-  (_,index)=>`
+  (_,i)=>`
 
 <option
-value="${index+1}"
-${+p.pair===index+1?"selected":""}
+value="${i+1}"
+${+p.pair===i+1?"selected":""}
 >
-Pareja ${index+1} ·
-Grupo ${index<4?"A":"B"}
+Pareja ${i+1}
 </option>
 
 `
@@ -944,11 +903,26 @@ Grupo ${index<4?"A":"B"}
 
 </td>
 
+
+<td>
+
+<button
+class="btn red"
+onclick="
+removeParticipant(
+ ${p.id}
+)
+">
+×
+</button>
+
+</td>
+
 </tr>
 
 `
- )
- .join("");
+  )
+  .join("");
 
 
  document.getElementById(
@@ -956,15 +930,27 @@ Grupo ${index<4?"A":"B"}
  ).innerHTML=
 
 `
+
 <table>
 
 <thead>
 
 <tr>
 
-<th>#</th>
-<th>Nombre</th>
-<th>Pareja</th>
+<th>
+#
+</th>
+
+<th>
+Nombre
+</th>
+
+<th>
+Pareja
+</th>
+
+<th>
+</th>
 
 </tr>
 
@@ -977,171 +963,51 @@ ${rows}
 </tbody>
 
 </table>
-`;
-
-}
-
-
-/* ================================
-   EDITOR PAREJAS
-================================ */
-
-function renderPairs(){
-
- const html=
- Array.from(
-  {length:8},
-  (_,index)=>{
-
-   const pair=index+1;
-
-   const members=
-    participantsOfPair(pair);
-
-   return `
-
-<div class="card">
-
-<div>
-
-<strong>
-Pareja ${pair}
-</strong>
-
-<span class="badge">
-Grupo ${pair<=4?"A":"B"}
-</span>
-
-</div>
-
-<div
-class="grid"
-style="margin-top:10px"
->
-
-<div>
-
-<label>
-Jugador 1
-</label>
-
-<select
-onchange="
-setPairMember(
- ${pair},
- this.value
-)
-"
->
-
-<option value="">
-— Vacío —
-</option>
-
-${
- state.participants
- .map(
-  participant=>`
-
-<option
-value="${participant.id}"
-${
- members[0] &&
- members[0].id===participant.id
- ?"selected"
- :""
-}
->
-${esc(participant.name)||"Sin nombre"}
-</option>
-
-`
- )
- .join("")
-}
-
-</select>
-
-</div>
-
-
-<div>
-
-<label>
-Jugador 2
-</label>
-
-<select
-onchange="
-setPairMember(
- ${pair},
- this.value
-)
-"
->
-
-<option value="">
-— Vacío —
-</option>
-
-${
- state.participants
- .map(
-  participant=>`
-
-<option
-value="${participant.id}"
-${
- members[1] &&
- members[1].id===participant.id
- ?"selected"
- :""
-}
->
-${esc(participant.name)||"Sin nombre"}
-</option>
-
-`
- )
- .join("")
-}
-
-</select>
-
-</div>
-
-</div>
-
-</div>
 
 `;
 
-  }
- ).join("");
-
-
- document.getElementById(
-  "pairsEditor"
- ).innerHTML=html;
-
 }
 
 
-function setPairMember(
- pair,
- participantId
+/* =================================
+   HABILIDADES
+================================= */
+
+function updateSkill(
+ id,
+ key,
+ val
 ){
 
- const participant=
- state.participants.find(
-  p=>String(p.id)===String(participantId)
- );
+ let p=
+  state.participants.find(
+   x=>x.id===id
+  );
 
- if(!participant){
+
+ if(!p){
   return;
  }
 
- participant.pair=pair;
+
+ const definition=
+  skillDefs.find(
+   s=>s.key===key
+  );
+
+
+ val=
+  Math.max(
+   0,
+   Math.min(
+    definition.max,
+    parseFloat(val)||0
+   )
+  );
+
+
+ p.skills[key]=val;
+
 
  save();
 
@@ -1150,14 +1016,52 @@ function setPairMember(
 }
 
 
-/* ================================
-   HABILIDADES
-================================ */
+function skillTotal(p){
+
+ return skillDefs
+ .filter(
+  s=>s.key!=="red"
+ )
+ .reduce(
+  (a,s)=>
+   a+
+   (+p.skills[s.key]||0),
+  0
+ );
+
+}
+
+
+/*
+   Puntos de la prueba de pareja.
+
+   Se toma una sola vez por pareja.
+   Si se ha introducido en uno de los
+   integrantes, se utiliza ese valor.
+
+   Si está introducido en ambos,
+   se utiliza el mayor.
+*/
+
+function pairSkill(p){
+
+ return participantsOfPair(p)
+ .reduce(
+  (a,x)=>
+   Math.max(
+    a,
+    +x.skills.red||0
+   ),
+  0
+ );
+
+}
+
 
 function renderSkills(){
 
  if(
-  state.participants.length===0
+  !state.participants.length
  ){
 
   document.getElementById(
@@ -1170,45 +1074,45 @@ function renderSkills(){
  }
 
 
- const headers=
- skillDefs
- .map(
-  skill=>`
+ let head=
+  skillDefs
+  .map(
+   s=>`
 
 <th>
 
-${skill.name}
+${s.name}
 
 <br>
 
 <span class="small">
-Máx. ${skill.max}
+máx. ${s.max}
 </span>
 
 </th>
 
 `
- )
- .join("");
+  )
+  .join("");
 
 
- const rows=
- state.participants
- .map(
-  participant=>`
+ let rows=
+  state.participants
+  .map(
+   p=>`
 
 <tr>
 
 <td>
 
 <strong>
-${esc(participant.name)||"Sin nombre"}
+${esc(p.name)||"Sin nombre"}
 </strong>
 
 <br>
 
 <span class="small">
-Pareja ${participant.pair}
+P${p.pair}
 </span>
 
 </td>
@@ -1217,7 +1121,7 @@ Pareja ${participant.pair}
 ${
  skillDefs
  .map(
-  skill=>`
+  s=>`
 
 <td class="num">
 
@@ -1225,16 +1129,18 @@ ${
 class="score-input"
 type="number"
 min="0"
-max="${skill.max}"
+max="${s.max}"
 step="0.5"
-value="${participant.skills[skill.key]||0}"
+value="${p.skills[s.key]||0}"
 onchange="
 updateSkill(
- ${participant.id},
- '${skill.key}',
+ ${p.id},
+ '${s.key}',
  this.value
 )
-">
+"
+title="${s.help}"
+>
 
 </td>
 
@@ -1244,17 +1150,17 @@ updateSkill(
 }
 
 
-<td class="num total">
+<td class="total">
 
-${skillTotal(participant).toFixed(1)}
+${skillTotal(p).toFixed(1)}
 
 </td>
 
 </tr>
 
 `
- )
- .join("");
+  )
+  .join("");
 
 
  document.getElementById(
@@ -1262,6 +1168,7 @@ ${skillTotal(participant).toFixed(1)}
  ).innerHTML=
 
 `
+
 <table>
 
 <thead>
@@ -1272,7 +1179,7 @@ ${skillTotal(participant).toFixed(1)}
 Participante
 </th>
 
-${headers}
+${head}
 
 <th>
 Total individual
@@ -1290,20 +1197,50 @@ ${rows}
 
 </table>
 
+
 <p class="hint">
 
-La prueba "Peloteamos en la red" es una prueba de pareja
-y cuenta una sola vez en la clasificación de la pareja.
+<strong>
+Pruebas individuales:
+</strong>
+
+Toques + Juego con pared +
+Colocamos la bola + Globo.
+
+<br><br>
+
+<strong>
+Prueba de pareja:
+</strong>
+
+Peloteamos en la red.
+Cuenta una sola vez en la clasificación
+de la pareja.
 
 </p>
+
 `;
 
 }
 
 
-/* ================================
-   PARTIDOS
-================================ */
+/* =================================
+   TORNEO
+================================= */
+
+function groupPairs(g){
+
+ let ps=pairs();
+
+ return ps.filter(
+  p=>
+   g==="A"
+   ?p<=4
+   :p>=5
+ );
+
+}
+
 
 function matchKey(a,b){
 
@@ -1315,77 +1252,25 @@ function matchKey(a,b){
 }
 
 
-function groupPairs(group){
-
- return pairs().filter(
-  pair=>
-   group==="A"
-   ?pair<=4
-   :pair>=5
- );
-
-}
-
-
 function setMatch(
  a,
  b,
- score
+ winner
 ){
 
- score=
- String(score||"").trim();
-
- const key=
- matchKey(a,b);
+ let k=
+  matchKey(a,b);
 
 
- if(!score){
+ if(
+  winner
+ ){
 
-  delete state.matches[key];
+  state.matches[k]=+winner;
 
  }else{
 
-  const match=
-   score.match(
-    /^([012])-([012])$/
-   );
-
-  if(
-   !match ||
-   +match[1]===+match[2] ||
-   Math.max(
-    +match[1],
-    +match[2]
-   )!==2
-  ){
-
-   alert(
-    "Resultado no válido. Usa 2-0, 2-1, 0-2 o 1-2."
-   );
-
-   return;
-
-  }
-
-
-  const scoreA=+match[1];
-
-  const scoreB=+match[2];
-
-
-  state.matches[key]={
-
-   aScore:scoreA,
-
-   bScore:scoreB,
-
-   winner:
-    scoreA>scoreB
-    ?a
-    :b
-
-  };
+  delete state.matches[k];
 
  }
 
@@ -1397,86 +1282,14 @@ function setMatch(
 }
 
 
-/* ================================
-   PUNTOS GRUPOS
-================================ */
-
-function groupPoints(pair){
-
- let points=0;
-
-
- Object.entries(
-  state.matches
- )
- .forEach(
-  ([key,match])=>{
-
-   const [a,b]=
-    key.split("-").map(Number);
-
-
-   if(
-    a===pair ||
-    b===pair
-   ){
-
-    points+=
-     match.winner===pair
-     ?2
-     :1;
-
-   }
-
-  }
- );
-
-
- return points;
-
-}
-
-
-/* ================================
-   CLASIFICACIÓN GRUPOS
-================================ */
-
-function standings(group){
-
- return groupPairs(group)
- .map(
-  pair=>({
-
-   pair:pair,
-
-   points:
-    groupPoints(pair)
-
-  })
- )
- .sort(
-  (a,b)=>
-   b.points-a.points ||
-   a.pair-b.pair
- );
-
-}
-
-
-/* ================================
-   MOSTRAR PARTIDOS
-================================ */
-
 function renderMatches(){
 
- const group=
-  document.getElementById(
-   "selectedGroup"
-  ).value;
-
-
- const groupPairList=
-  groupPairs(group);
+ let ps=
+  groupPairs(
+   document.getElementById(
+    "selectedGroup"
+   ).value
+  );
 
 
  let html="";
@@ -1484,32 +1297,24 @@ function renderMatches(){
 
  for(
   let i=0;
-  i<groupPairList.length;
+  i<ps.length;
   i++
  ){
 
   for(
    let j=i+1;
-   j<groupPairList.length;
+   j<ps.length;
    j++
   ){
 
-   const a=
-    groupPairList[i];
+   let a=ps[i];
 
-   const b=
-    groupPairList[j];
+   let b=ps[j];
 
-   const key=
-    matchKey(a,b);
-
-   const match=
-    state.matches[key];
-
-   const value=
-    match
-    ?`${match.aScore}-${match.bScore}`
-    :"";
+   let w=
+    state.matches[
+     matchKey(a,b)
+    ]||"";
 
 
    html+=`
@@ -1517,45 +1322,19 @@ function renderMatches(){
 <div class="match">
 
 <strong>
-Pareja ${a} vs Pareja ${b}
+
+${pairName(a)}
+vs
+${pairName(b)}
+
 </strong>
-
-<div class="small">
-
-${
- participantsOfPair(a)
- .map(
-  p=>esc(p.name)||"Sin nombre"
- )
- .join(" + ")
-}
-
-&nbsp; — &nbsp;
-
-${
- participantsOfPair(b)
- .map(
-  p=>esc(p.name)||"Sin nombre"
- )
- .join(" + ")
-}
-
-</div>
 
 
 <div
-style="
-display:flex;
-gap:8px;
-align-items:center;
-margin-top:8px;
-"
+style="margin-top:8px"
 >
 
-<input
-class="score-input"
-placeholder="2-1"
-value="${value}"
+<select
 onchange="
 setMatch(
  ${a},
@@ -1565,18 +1344,27 @@ setMatch(
 "
 >
 
-<button
-class="btn light"
-onclick="
-setMatch(
- ${a},
- ${b},
- ''
-)
-"
+<option value="">
+Pendiente
+</option>
+
+
+<option
+value="${a}"
+${+w===a?"selected":""}
 >
-Borrar
-</button>
+Gana P${a}
+</option>
+
+
+<option
+value="${b}"
+${+w===b?"selected":""}
+>
+Gana P${b}
+</option>
+
+</select>
 
 </div>
 
@@ -1592,39 +1380,54 @@ Borrar
  document.getElementById(
   "matches"
  ).innerHTML=
-  html ||
-  '<div class="empty">Necesitas tener las parejas asignadas.</div>';
+
+`
+<div class="match-grid">
+
+${
+ html ||
+ '<div class="empty">Necesitas tener parejas asignadas al grupo.</div>'
+}
+
+</div>
+
+`;
 
 }
 
 
-/* ================================
-   SEMIFINALES
-================================ */
+/* =================================
+   PUNTOS DE GRUPO
+================================= */
 
-function semiPoints(pair){
+function groupPoints(p){
 
- let points=0;
+ let pts=0;
 
 
  Object.entries(
-  state.semis
+  state.matches
  )
  .forEach(
-  ([key,winner])=>{
+  ([k,w])=>{
 
-   const [a,b]=
-    key.split("-").map(Number);
+   let [
+    a,
+    b
+   ]=
+    k
+    .split("-")
+    .map(Number);
 
 
    if(
-    a===pair ||
-    b===pair
+    a===p ||
+    b===p
    ){
 
-    points+=
-     +winner===pair
-     ?3
+    pts+=
+     +w===p
+     ?2
      :1;
 
    }
@@ -1633,91 +1436,101 @@ function semiPoints(pair){
  );
 
 
- return points;
+ return pts;
 
 }
 
 
-function semiWinners(){
+function standings(g){
 
- return Object.values(
-  state.semis
+ return groupPairs(g)
+ .map(
+  p=>({
+
+   p:p,
+
+   pts:
+    groupPoints(p)
+
+  })
  )
- .filter(Boolean)
- .map(Number);
+ .sort(
+  (a,b)=>
+   b.pts-a.pts ||
+   a.p-b.p
+ );
 
 }
 
+
+/* =================================
+   SEMIFINALES
+================================= */
 
 function renderSemis(){
 
- const a=
+ let a=
   standings("A");
 
- const b=
+ let b=
   standings("B");
 
 
- let pairings=[];
-
-
- if(
+ let pairings=
   a.length>=2 &&
   b.length>=2
- ){
-
-  pairings=[
-
+  ?
+  [
    [
-    a[0].pair,
-    b[1].pair
+    a[0].p,
+    b[1].p
    ],
 
    [
-    b[0].pair,
-    a[1].pair
+    b[0].p,
+    a[1].p
    ]
-
-  ];
-
- }
-
-
- let html="";
+  ]
+  :
+  [];
 
 
- pairings.forEach(
-  (match,index)=>{
+ let html=
+  pairings
+  .map(
+   (m,i)=>{
 
-   const a=match[0];
+    let k=
+     `${m[0]}-${m[1]}`;
 
-   const b=match[1];
-
-   const key=
-    matchKey(a,b);
-
-   const winner=
-    state.semis[key]||"";
+    let w=
+     state.semis[k]||"";
 
 
-   html+=`
+    return `
 
 <div class="match">
 
 <strong>
-Semifinal ${index+1}:
-Pareja ${a} vs Pareja ${b}
+
+Semifinal ${i+1}:
+P${m[0]}
+vs
+P${m[1]}
+
 </strong>
 
-<select
+
+<div
 style="margin-top:8px"
+>
+
+<select
 onchange="
-state.semis['${key}']=
+state.semis['${k}']=
 this.value
 ?+this.value
 :null;
-
-state.final=null;
 
 save();
 
@@ -1729,68 +1542,138 @@ renderAll();
 Pendiente
 </option>
 
-<option
-value="${a}"
-${+winner===a?"selected":""}
->
-Gana Pareja ${a}
-</option>
 
 <option
-value="${b}"
-${+winner===b?"selected":""}
+value="${m[0]}"
+${+w===m[0]?"selected":""}
 >
-Gana Pareja ${b}
+Gana P${m[0]} · 3 pt
+</option>
+
+
+<option
+value="${m[1]}"
+${+w===m[1]?"selected":""}
+>
+Gana P${m[1]} · 3 pt
 </option>
 
 </select>
 
 </div>
 
+</div>
+
 `;
 
-  }
- );
+   }
+  )
+  .join("");
 
 
  document.getElementById(
   "semis"
  ).innerHTML=
-  html ||
-  '<div class="empty">Completa la fase de grupos.</div>';
+
+ html
+
+ ?
+
+ `<div class="match-grid">${html}</div>`
+
+ :
+
+ '<div class="empty">Completa la clasificación de grupos para generar las semifinales.</div>';
 
 }
 
 
-/* ================================
+/* =================================
+   PUNTOS SEMIFINALES
+================================= */
+
+function semiLoserPoints(p){
+
+ let pts=0;
+
+
+ Object.entries(
+  state.semis
+ )
+ .forEach(
+  ([k,w])=>{
+
+   let [
+    a,
+    b
+   ]=
+    k
+    .split("-")
+    .map(Number);
+
+
+   if(
+    a===p ||
+    b===p
+   ){
+
+    pts+=
+     +w===p
+     ?3
+     :1;
+
+   }
+
+  }
+ );
+
+
+ return pts;
+
+}
+
+
+function semiWinners(){
+
+ return Object
+ .values(
+  state.semis
+ )
+ .filter(Boolean)
+ .map(Number);
+
+}
+
+
+/* =================================
    FINAL
-================================ */
+================================= */
 
 function renderFinal(){
 
- const winners=
+ let ws=
   semiWinners();
 
 
  if(
-  winners.length<2
+  ws.length<2
  ){
 
   document.getElementById(
    "final"
   ).innerHTML=
-   '<div class="empty">Completa las dos semifinales.</div>';
+   '<div class="empty">Completa las dos semifinales para generar la final.</div>';
 
   return;
 
  }
 
 
- const a=winners[0];
+ let a=ws[0];
 
- const b=winners[1];
+ let b=ws[1];
 
- const current=
+ let w=
   state.final||"";
 
 
@@ -1803,12 +1686,20 @@ function renderFinal(){
 <div class="match">
 
 <strong>
-Gran final:
-Pareja ${a} vs Pareja ${b}
+
+Final:
+P${a}
+vs
+P${b}
+
 </strong>
 
-<select
+
+<div
 style="margin-top:8px"
+>
+
+<select
 onchange="
 state.final=
 this.value
@@ -1825,21 +1716,25 @@ renderAll();
 Pendiente
 </option>
 
+
 <option
 value="${a}"
-${+current===a?"selected":""}
+${+w===a?"selected":""}
 >
-Gana Pareja ${a} · 6 puntos
+Gana P${a} · 6 pt
 </option>
+
 
 <option
 value="${b}"
-${+current===b?"selected":""}
+${+w===b?"selected":""}
 >
-Gana Pareja ${b} · 6 puntos
+Gana P${b} · 6 pt
 </option>
 
 </select>
+
+</div>
 
 </div>
 
@@ -1848,32 +1743,34 @@ Gana Pareja ${b} · 6 puntos
 }
 
 
-/* ================================
-   PUNTOS TORNEO
-================================ */
+/* =================================
+   PUNTOS TOTALES DEL TORNEO
+================================= */
 
-function tournamentPoints(pair){
+function tournamentPoints(p){
 
- let points=
-  groupPoints(pair)
-  +
-  semiPoints(pair);
+ let pts=
+  groupPoints(p);
+
+
+ pts+=
+  semiLoserPoints(p);
 
 
  if(
   state.final
  ){
 
-  const semifinalWinners=
+  let ws=
    semiWinners();
 
 
   if(
-   semifinalWinners.includes(pair)
+   ws.includes(p)
   ){
 
-   points+=
-    +state.final===pair
+   pts+=
+    +state.final===p
     ?6
     :2;
 
@@ -1882,37 +1779,52 @@ function tournamentPoints(pair){
  }
 
 
- return points;
+ return pts;
 
 }
 
 
-/* ================================
+/* =================================
    TOTAL DE PAREJA
-================================ */
+================================= */
+
+/*
+   ESTA ES LA PARTE IMPORTANTE DE V1.2
+
+   Cada pareja suma:
+
+   Jugador 1:
+     Toques
+     Pared
+     Colocamos
+     Globo
+
+   +
+
+   Jugador 2:
+     Toques
+     Pared
+     Colocamos
+     Globo
+
+   +
+
+   Peloteamos en la red
+   UNA SOLA VEZ
+
+   +
+
+   Puntos del torneo
+*/
+
 
 function pairTotal(pair){
 
- const members=
+ let members=
   participantsOfPair(pair);
 
 
- /*
-    IMPORTANTE:
-
-    Cada jugador suma sus propias
-    pruebas individuales.
-
-    Después se añade una sola vez
-    la prueba de pareja.
-
-    Finalmente se añaden los puntos
-    conseguidos por la pareja
-    durante el torneo.
- */
-
-
- const individualSkills=
+ let individualPoints=
   members.reduce(
    (total,participant)=>
     total+
@@ -1921,41 +1833,41 @@ function pairTotal(pair){
   );
 
 
- const pairSkillPoints=
+ let pairTestPoints=
   pairSkill(pair);
 
 
- const tournament=
+ let tournamentPointsTotal=
   tournamentPoints(pair);
 
 
  return(
-  individualSkills+
-  pairSkillPoints+
-  tournament
+  individualPoints+
+  pairTestPoints+
+  tournamentPointsTotal
  );
 
 }
 
 
-/* ================================
-   CLASIFICACIÓN
-================================ */
+/* =================================
+   CLASIFICACIÓN FINAL
+================================= */
 
 function renderRanking(){
 
- const ranking=
+ let ranking=
   pairs()
   .map(
-   pair=>({
+   p=>({
 
-    pair:pair,
+    p:p,
 
-    members:
-     participantsOfPair(pair),
+    participants:
+     participantsOfPair(p),
 
-    individualSkills:
-     participantsOfPair(pair)
+    individual:
+     participantsOfPair(p)
      .reduce(
       (total,participant)=>
        total+
@@ -1963,39 +1875,39 @@ function renderRanking(){
       0
      ),
 
-    pairSkill:
-     pairSkill(pair),
+    pairTest:
+     pairSkill(p),
 
     tournament:
-     tournamentPoints(pair),
+     tournamentPoints(p),
 
     total:
-     pairTotal(pair)
+     pairTotal(p)
 
    })
   )
   .sort(
    (a,b)=>
     b.total-a.total ||
-    a.pair-b.pair
+    a.p-b.p
   );
 
 
  if(
-  ranking.length===0
+  !ranking.length
  ){
 
   document.getElementById(
    "ranking"
   ).innerHTML=
-   '<div class="empty">No hay parejas.</div>';
+   '<div class="empty">Añade participantes para ver la clasificación.</div>';
 
   return;
 
  }
 
 
- const rows=
+ let rows=
   ranking
   .map(
    (row,index)=>`
@@ -2024,7 +1936,7 @@ ${index+1}
 <td>
 
 <strong>
-Pareja ${row.pair}
+Pareja ${row.p}
 </strong>
 
 <br>
@@ -2032,11 +1944,12 @@ Pareja ${row.pair}
 <span class="small">
 
 ${
- row.members
+ row.participants
  .map(
-  p=>esc(p.name)||"Sin nombre"
+  p=>
+   esc(p.name)||"Sin nombre"
  )
- .join(" – ")
+ .join(" · ")
 }
 
 </span>
@@ -2046,14 +1959,14 @@ ${
 
 <td class="num">
 
-${row.individualSkills.toFixed(1)}
+${row.individual.toFixed(1)}
 
 </td>
 
 
 <td class="num">
 
-${row.pairSkill.toFixed(1)}
+${row.pairTest.toFixed(1)}
 
 </td>
 
@@ -2103,7 +2016,7 @@ Habilidades individuales
 </th>
 
 <th>
-Prueba pareja
+Prueba de pareja
 </th>
 
 <th>
@@ -2118,6 +2031,7 @@ TOTAL
 
 </thead>
 
+
 <tbody>
 
 ${rows}
@@ -2131,109 +2045,121 @@ ${rows}
 }
 
 
-/* ================================
-   COPIA DE SEGURIDAD
-================================ */
+/* =================================
+   RENDER GENERAL
+================================= */
 
-function exportData(){
+function renderAll(){
 
- const blob=
-  new Blob(
-   [
-    JSON.stringify(
-     state,
-     null,
-     2
-    )
-   ],
-   {
-    type:"application/json"
-   }
+ renderParticipants();
+
+ renderSkills();
+
+
+ let sp=
+  document.getElementById(
+   "selectedPair"
   );
 
 
- const link=
-  document.createElement("a");
+ let old=
+  sp.value;
 
 
- link.href=
-  URL.createObjectURL(blob);
+ sp.innerHTML=
+  pairs()
+  .map(
+   p=>
+    `<option value="${p}">
+     Pareja ${p}
+    </option>`
+  )
+  .join("");
 
 
- link.download=
-  "padel-jemenuno-copia.json";
-
-
- link.click();
-
-
- URL.revokeObjectURL(
-  link.href
- );
-
-}
-
-
-function importData(file){
-
- if(!file){
-  return;
+ if(old){
+  sp.value=old;
  }
 
 
- const reader=
-  new FileReader();
+ renderMatches();
 
+ renderSemis();
 
- reader.onload=
-  function(){
+ renderFinal();
 
-   try{
-
-    const data=
-     JSON.parse(
-      reader.result
-     );
-
-
-    if(
-     !data.participants
-    ){
-
-     throw new Error();
-
-    }
-
-
-    state=data;
-
-    save();
-
-    renderAll();
-
-    alert(
-     "Torneo recuperado correctamente."
-    );
-
-   }catch(error){
-
-    alert(
-     "La copia no es válida."
-    );
-
-   }
-
-  };
-
-
- reader.readAsText(file);
+ renderRanking();
 
 }
 
 
-/* ================================
+/* =================================
+   CARGAR EJEMPLO
+================================= */
+
+function loadDemo(){
+
+ state.participants=[];
+
+
+ for(
+  let i=1;
+  i<=16;
+  i++
+ ){
+
+  state.participants.push({
+
+   id:
+    Date.now()+i,
+
+   name:
+    "Jugador "+i,
+
+   pair:
+    Math.ceil(i/2),
+
+   skills:{
+
+    toques:
+     [1,3,5][i%3],
+
+    pared:
+     (i%4)*2,
+
+    coloca:
+     (i%4)*2.5,
+
+    globo:
+     (i%4)*2.5,
+
+    red:
+     [2,5,10][i%3]
+
+   }
+
+  });
+
+ }
+
+
+ state.matches={};
+
+ state.semis={};
+
+ state.final=null;
+
+
+ save();
+
+ renderAll();
+
+}
+
+
+/* =================================
    BORRAR TODO
-================================ */
+================================= */
 
 function resetAll(){
 
@@ -2243,70 +2169,85 @@ function resetAll(){
   )
  ){
 
-  localStorage.removeItem(
-   STORAGE_KEY
-  );
+  localStorage.removeItem(KEY);
 
-  location.reload();
+
+  state={
+   participants:[],
+   matches:{},
+   semis:{},
+   final:null
+  };
+
+
+  renderAll();
 
  }
 
 }
 
 
-/* ================================
+/* =================================
    NAVEGACIÓN
-================================ */
+================================= */
 
 document
-.querySelectorAll("nav button")
+.querySelectorAll(
+ "nav button"
+)
 .forEach(
- button=>{
+ b=>
 
-  button.onclick=
-   function(){
+ b.onclick=
+ function(){
 
-    document
-    .querySelectorAll("nav button")
-    .forEach(
-     b=>b.classList.remove("active")
-    );
-
-
-    document
-    .querySelectorAll(".view")
-    .forEach(
-     view=>view.classList.remove("active")
-    );
-
-
-    button.classList.add(
+  document
+  .querySelectorAll(
+   "nav button"
+  )
+  .forEach(
+   x=>
+    x.classList.remove(
      "active"
-    );
-
-
-    document
-    .getElementById(
-     button.dataset.view
     )
-    .classList.add(
+  );
+
+
+  document
+  .querySelectorAll(
+   ".view"
+  )
+  .forEach(
+   x=>
+    x.classList.remove(
      "active"
-    );
+    )
+  );
 
 
-    renderAll();
+  b.classList.add(
+   "active"
+  );
 
-   };
+
+  document
+  .getElementById(
+   b.dataset.view
+  )
+  .classList.add(
+   "active"
+  );
+
+
+  renderAll();
 
  }
 );
 
 
-/* ================================
-   RENDER INICIAL
-================================ */
-
-ensurePreloaded();
+/* =================================
+   INICIO
+================================= */
 
 renderAll();
 
